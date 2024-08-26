@@ -27,7 +27,7 @@ const Dashboard = () => {
                         src="/images/default-dashboard.png"
                     />
                     
-                    <CardFooter className="flex justify-between items-center bg-white/20 backdrop-blur-md border rounded-b-xl shadow-xl p-4 w-full">
+                    <CardFooter className="flex justify-between items-center bg-white/20  border rounded-b-xl shadow-xl p-4 w-full">
                         <p className="text-md text-white/80">Ground 1</p>
                         <Button 
                             className="text-xs text-white bg-black/30 transition-colors duration-300 hover:bg-black/50 hover:text-white" 
