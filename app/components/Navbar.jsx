@@ -35,7 +35,7 @@ function Navbar() {
   };
 
   return (
-    <header className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-80 bg-gradient-to-r from-blue-500 to-purple-600 p-1 rounded-full shadow-2xl backdrop-blur-lg border border-gray-200">
+    <header className="fixed z-50 bottom-0 left-1/2 transform -translate-x-1/2 w-80 bg-gradient-to-r from-blue-500 to-purple-600 p-1 rounded-full shadow-2xl backdrop-blur-lg border border-gray-200">
       <nav className="relative flex justify-around items-center p-3 bg-white/20 backdrop-blur-md rounded-full shadow-xl">
         <div
           className="absolute bottom-0 h-2 bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-300 ease-in-out rounded-full"
