@@ -29,9 +29,9 @@ const Dashboard = () => {
     };
 
     return (
-        <>
-            <div className="mx-auto p-5 sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
-                <h1 className="text-center text-xl md:text-3xl text-white mb-8">Dashboard</h1>
+        <div className='min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600'>
+            <div className="mx-auto p-1 sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3">
+                <h1 className="text-center text-xl md:text-2xl text-white mb-8">Dashboard</h1>
 
                 {/* Render all dashboards */}
                 {dashboards.map((dashboard, index) => (
@@ -47,7 +47,7 @@ const Dashboard = () => {
                 <Card
                     onClick={handleOpen}
                     radius="lg"
-                    className="border-none bg-white/10 backdrop-blur-md shadow-xl rounded-xl hover:bg-white/20 border-gray-300  p-4 flex items-center justify-center animate-slide-up w-11/12 transform transition-transform duration-300 hover:scale-105 cursor-pointer"
+                    className="mx-auto w-80 md:w-96 border-none bg-white/10 backdrop-blur-md shadow-xl rounded-xl hover:bg-white/20 border-gray-300  p-4 flex items-center justify-center animate-slide-up transform transition-transform duration-300 hover:scale-105 cursor-pointer"
                     isPressable
                 >
                     <div className='flex items-center space-x-3'>
@@ -55,7 +55,7 @@ const Dashboard = () => {
                         <p className="text-lg text-white/80 transition-colors duration-300 hover:text-white">Create Dashboard</p>
                     </div>
                 </Card>
-            </div>
+            
 
             <InputModal 
             isOpen={isOpen} 
@@ -64,8 +64,8 @@ const Dashboard = () => {
             dashboardTitle="Create a Dashboard" // Ensure this prop matches
             onSave={handleSave} // Pass the save handler
             />
-
-        </>
+            </div>
+        </div>
     );
 }
 

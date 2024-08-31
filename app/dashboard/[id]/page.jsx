@@ -49,19 +49,19 @@ const CircularProgressBar = ({ percentage }) => {
 
 const VisualizationCard = ({ title, percentage }) => {
   return (
-    <div className="bg-white/10 backdrop-blur-md pb-3 rounded-lg shadow-lg flex flex-col items-center">
+    <div className="bg-white/10 mx-auto w-[150px] backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center">
       <CircularProgressBar percentage={percentage} />
-      <h2 className="text-sm font-semibold text-white mb-2">{title}</h2>
+      <h2 className="text-sm font-semibold text-white pb-3">{title}</h2>
     </div>
   );
-};
-
+};                                                                                                      
+                                                             
 const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
   return (
-    <div>
+    <div >
       
       {percentage <= 40 && (
-        <div className="bg-red-400/50 mx-auto w-80 text-white text-sm p-3 rounded-lg shadow-md backdrop-blur-md ">
+        <div className="bg-red-400/50 w-72 text-white text-sm p-2 rounded-lg shadow-md backdrop-blur-md ">
           {alertMessage || 'Warning: Soil Moisture is critically low!'}
         </div>
       )}
@@ -71,28 +71,30 @@ const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
 
 const Profile = () => {
   return (
-    <div className="mx-auto p-3 pt-1 sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
-      <h1 className="text-center text-md md:text-3xl text-white mb-10">
-        Dashboard-1 / <span className="text-white/50">Device-1</span>
-      </h1>
+    <div className='min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600'>
+        <div className="mx-auto  pt-1 w-80 md:96">
+          <h1 className="text-center text-md md:text-3xl text-white mb-10">
+            Dashboard-1 / <span className="text-white/50">Device-1</span>
+          </h1>
 
-      <div className="mb-10">
-        <h1 className="text-white/90 mb-2 ml-2">Visualization data:</h1>
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
-          <VisualizationCard title="Soil Moisture" percentage={30} />
-          <VisualizationCard title="Water Level" percentage={60} />
-          <VisualizationCard title="Enhanced Yield" percentage={70} />
-          <VisualizationCard title="Humidity" percentage={90} />
-        </div>
-      </div>
+          <div className="mx-auto w-80 mb-8">
+            <h1 className="text-white/90 mb-2 ml-2">Visualization data:</h1>
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 ">
+              <VisualizationCard title="Soil Moisture" percentage={30} />
+              <VisualizationCard title="Water Level" percentage={60} />
+              <VisualizationCard title="Enhanced Yield" percentage={70} />
+              <VisualizationCard title="Humidity" percentage={90} />
+            </div>
+          </div>
 
-      <div>
-        <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
-        <div className="bg-white/10 backdrop-blur-md p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
-        <AiAnalyzeCard title="Soil Moisture Analysis" percentage={30} alertMessage="Soil Moisture is below optimal level." />
-        <AiAnalyzeCard title="Humidity Analysis" percentage={30} alertMessage="Humidity is high optimal level." />
+          <div className='mx-auto w-80 md:w-96'>
+            <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
+            <div className="bg-white/10 mx-auto w-80 md:w-96 backdrop-blur-md p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+            <AiAnalyzeCard title="Soil Moisture Analysis" percentage={30} alertMessage="Soil Moisture is below optimal level." />
+            <AiAnalyzeCard title="Humidity Analysis" percentage={30} alertMessage="Humidity is high optimal level." />
+            </div>
+          </div>
         </div>
-      </div>
     </div>
     
   );

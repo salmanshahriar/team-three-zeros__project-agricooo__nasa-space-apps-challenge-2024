@@ -73,7 +73,7 @@ function Weather() {
   };
 
   return (
-    <div className="relative w-full p-4">
+    <div className="relative mx-auto w-80 md:w-96 p-4">
       {showPermissionUI && (
         <div className="absolute top-0 left-0 right-0 bg-white/10 backdrop-blur-md  border-gray-300 p-4 rounded z-50 shadow-lg flex justify-between items-center slide-down w-11/12">
           <div className="text-white">
@@ -95,7 +95,7 @@ function Weather() {
       )}
 
       {weatherData && !locationError && (
-        <div className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl rounded-lg p-6 w-full">
+        <div className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl rounded-lg p-5 w-full">
           <h2 className="font-bold text-gray-900 text-lg dark:text-gray-100">
             {formattedDateDisplay(new Date())}
           </h2>
