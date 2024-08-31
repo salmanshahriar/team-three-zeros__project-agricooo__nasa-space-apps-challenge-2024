@@ -61,7 +61,7 @@ const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
     <div>
       
       {percentage <= 40 && (
-        <div className="bg-red-500/30 w-72 text-white text-sm text-center p-3 rounded-lg shadow-md backdrop-blur-md ">
+        <div className="bg-red-400/50 mx-auto w-80 text-white text-sm p-3 rounded-lg shadow-md backdrop-blur-md ">
           {alertMessage || 'Warning: Soil Moisture is critically low!'}
         </div>
       )}
