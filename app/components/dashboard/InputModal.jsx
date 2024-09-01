@@ -40,7 +40,7 @@ const InputModal = ({ isOpen, onOpenChange, onClose, dashboardTitle, onSave }) =
       isDismissable={false}
       placement="center"
       isKeyboardDismissDisabled={true}
-      className="w-80 md:w-96 rounded-xl border border-gray-300 backdrop-blur-md shadow-2xl mt-0"
+      className="w-80 md:w-[500px] rounded-xl border border-gray-300 backdrop-blur-md shadow-2xl mt-0"
     >
       <ModalContent className="w-10/12 bg-white/10 border border-gray-300 backdrop-blur-md shadow-2xl rounded-xl">
         {(onClose) => (

@@ -8,7 +8,7 @@ const DashBoardCard = ({ img, name, onClick, deviceName }) => {
     onClick={onClick} 
     isPressable
     radius="lg"
-    className="relative mx-auto w-80 md:w-96 border-none bg-white/10 shadow-xl animate-slide-up rounded-xl flex flex-col transform transition-transform duration-300 hover:scale-105 mb-7 h-52"
+    className="relative mx-auto w-80 md:w-[500px] border-none bg-white/10 shadow-xl animate-slide-up rounded-xl flex flex-col transform transition-transform duration-300 hover:scale-105 mb-7 h-52"
 >
     <Image
         alt="Dashboard background"
