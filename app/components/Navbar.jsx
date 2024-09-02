@@ -2,9 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/router';
 import React, { useState, useEffect, useRef } from 'react';
-
 
 function Navbar() {
   const pathname = usePathname();
@@ -13,9 +11,11 @@ function Navbar() {
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
   useEffect(() => {
-    const initialIndex = pathname === '/' ? 0 :
-                         pathname === '/dashboard' ? 1 :
-                         pathname === '/ai-assistant' ? 2 : 3;
+    const initialIndex =
+      pathname === '/' ? 0 :
+      pathname === '/dashboard' ? 1 :
+      pathname === '/ai-assistant' ? 2 :
+      pathname === '/market' ? 3 : 4;
     setActiveIndex(initialIndex);
   }, [pathname]);
 
@@ -23,9 +23,12 @@ function Navbar() {
     if (menuRef.current) {
       const menuItems = menuRef.current.children;
       const activeItem = menuItems[activeIndex];
+      const sliderWidth = 40; // Fixed width for the slider
+      const sliderOffset = activeItem.offsetLeft + (activeItem.clientWidth / 2) - (sliderWidth / 2);
       setIndicatorStyle({
-        left: `${activeItem.offsetLeft}px`,
-        width: `${activeItem.clientWidth}px`,
+        left: `${sliderOffset}px`,
+        width: `${sliderWidth}px`,
+        height: '5px',  // Adjusted height for better visibility
       });
     }
   }, [activeIndex]);
@@ -35,47 +38,71 @@ function Navbar() {
   };
 
   return (
-    <header className="fixed z-50 md:w-[400px] bottom-0 left-1/2 transform -translate-x-1/2 w-80 bg-gradient-to-r from-blue-500 to-purple-600 p-1 rounded-full shadow-2xl backdrop-blur-lg border border-gray-200">
-      <nav className="relative flex sm:justify-around items-center p-3 bg-white/20 backdrop-blur-md rounded-full shadow-xl">
+    <header className="fixed z-50 w-full md:w-[400px] md:rounded-xl bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl backdrop-blur-lg hover:shadow-3xl transition-shadow duration-300">
+      <nav className="relative flex sm:justify-around items-center p-3 rounded-lg bg-white/20 backdrop-blur-md shadow-xl">
         <div
-          className="absolute bottom-0 h-2 bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-300 ease-in-out rounded-full"
-          style={indicatorStyle}
+          className="absolute bottom-0 h-4 bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-300 ease-in-out rounded-full"
+          style={{ ...indicatorStyle, transition: 'all 0.5s ease' }}
         />
         <ul ref={menuRef} className="flex space-x-4 w-full justify-around items-center">
           <li>
             <Link
               href="/"
               onClick={() => handleMenuClick(0)}
-              className={`text-center text-gray-900 dark:text-gray-100 transition-colors duration-200 ${activeIndex === 0 ? 'font-bold' : ''}`}
+              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+                activeIndex === 0 ? 'scale-105 font-bold' : 'hover:scale-105'
+              }`}
             >
-              <i className='bx bxs-home text-3xl'></i>
+              <i className="bx bxs-home text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Home</span>
             </Link>
           </li>
           <li>
             <Link
               href="/dashboard"
               onClick={() => handleMenuClick(1)}
-              className={`text-center text-gray-900 dark:text-gray-100 transition-colors duration-200 ${activeIndex === 1 ? 'font-bold' : ''}`}
+              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+                activeIndex === 1 ? 'scale-105 font-bold' : 'hover:scale-105'
+              }`}
             >
-              <i className='bx bxs-dashboard text-3xl'></i>
+              <i className="bx bxs-dashboard text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Dashboard</span>
             </Link>
           </li>
           <li>
             <Link
               href="/ai-assistant"
               onClick={() => handleMenuClick(2)}
-              className={`text-center text-gray-900 dark:text-gray-100 transition-colors duration-200 ${activeIndex === 2 ? 'font-bold' : ''}`}
+              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+                activeIndex === 2 ? 'scale-105 font-bold' : 'hover:scale-105'
+              }`}
             >
-              <i className='bx bxs-message-square-dots text-3xl'></i>
+              <i className="bx bxs-message-square-dots text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Assistant</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/market"
+              onClick={() => handleMenuClick(3)}
+              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+                activeIndex === 3 ? 'scale-105 font-bold' : 'hover:scale-105'
+              }`}
+            >
+              <i className="bx bxs-store text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Market</span>
             </Link>
           </li>
           <li>
             <Link
               href="/profile"
-              onClick={() => handleMenuClick(3)}
-              className={`text-center text-gray-900 dark:text-gray-100 transition-colors duration-200 ${activeIndex === 3 ? 'font-bold' : ''}`}
+              onClick={() => handleMenuClick(4)}
+              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+                activeIndex === 4 ? 'scale-105 font-bold' : 'hover:scale-105'
+              }`}
             >
-              <i className='bx bxs-user-rectangle text-3xl'></i>
+              <i className="bx bxs-user-rectangle text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Profile</span>
             </Link>
           </li>
         </ul>
