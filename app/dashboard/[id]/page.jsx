@@ -94,7 +94,7 @@ const defaultContent =
             <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
               {title}
             </div>
-            <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/5 backdrop-blur-md">
+            <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/10 ">
               <Accordion
                 bordered
                 className="w-full"
