@@ -80,7 +80,7 @@ const VisualizationCard = ({ title, percentage }) => {
 // TemperatureCard component
 const TemperatureCard = ({ temperature }) => {
   return (
-    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center py-4">
+    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center justify-center py-4">
       <div className="text-white text-lg font-bold">{temperature}°C</div>
       <h2 className="text-sm font-semibold text-white pb-2">Temperature</h2>
     </div>
@@ -90,7 +90,7 @@ const TemperatureCard = ({ temperature }) => {
 // WindSpeedCard component
 const WindSpeedCard = ({ windSpeed }) => {
   return (
-    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center py-4">
+    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center justify-center py-4">
       <div className="text-white text-lg font-bold">{windSpeed} km/h</div>
       <h2 className="text-sm font-semibold text-white pb-2">Wind Speed</h2>
     </div>
