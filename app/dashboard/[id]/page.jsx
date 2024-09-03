@@ -116,7 +116,7 @@ const defaultContent =
               >
                 <AccordionItem
                   
-                  title={<div className='text-center w-64'><span className="text-red-300 text-center text-sm -mr-7 ">{alertMessage}</span></div>}
+                  title={<div className='text-center w-64'><span className="text-red-300 text-center text-sm -mr-7 md:-mr-44 ">{alertMessage}</span></div>}
                 >
                   <p className="p-4">{defaultContent}</p>
                 </AccordionItem>
@@ -142,7 +142,7 @@ const UtilizationCard = ({ title }) => {
   <div>
     <h2 className="text-white text-md font-semibold">{title}</h2>
   </div>
-  <div className="absolute top-0 left-[200px]">
+  <div className="absolute top-0 left-[200px] md:left-[375px]">
     {isOn ? (
       <span><span className='text-tiny text-white'>System is </span><span className="text-green-300 text-tiny">ON</span></span>
     ) : (
