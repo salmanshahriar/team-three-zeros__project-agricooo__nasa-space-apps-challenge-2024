@@ -6,7 +6,7 @@ import InputModal from '../components/dashboard/InputModal';
 import DashBoardCard from '../components/dashboard/DashBoardCard';
 import { useRouter } from 'next/navigation';
 
-const Dashboard = () => {
+const Dashboard = ({dashboardName, device}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [dashboards, setDashboards] = useState([]);
     const router = useRouter();

@@ -38,7 +38,7 @@ function Navbar() {
   };
 
   return (
-    <header className="fixed z-50 w-full md:w-[400px] md:rounded-xl bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl backdrop-blur-lg hover:shadow-3xl transition-shadow duration-300">
+    <header className="fixed z-30 w-full md:w-[400px] md:rounded-xl bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl backdrop-blur-lg hover:shadow-3xl transition-shadow duration-300">
       <nav className="relative flex sm:justify-around items-center p-3 rounded-lg bg-white/20 backdrop-blur-md shadow-xl">
         <div
           className="absolute bottom-0 h-4 bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-300 ease-in-out rounded-full"
@@ -95,7 +95,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              href="/profile"
+              href="/auth"
               onClick={() => handleMenuClick(4)}
               className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
                 activeIndex === 4 ? 'scale-105 font-bold' : 'hover:scale-105'
