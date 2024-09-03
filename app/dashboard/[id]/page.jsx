@@ -5,15 +5,25 @@ import { useRouter } from 'next/navigation';
 import {Card, Switch, Accordion, AccordionItem } from '@nextui-org/react';
 
 
-const DashboardInfo = ({ }) => {
+const DashboardInfo = ({ dashboardName, deviceId ,deviceHealth, deviceConnection }) => {
   return (
     <>
-      {percentage <= 40 && (
-        <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white text-sm rounded-lg shadow-xl">
-
-          
+        <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white rounded-lg shadow-xl bg-white/10 flex flex-col p-4 mb-8 font-sans">
+          <div className='text-xs'>
+            <span className='font-bold'>Dashboard Name:</span> <span>{dashboardName}</span>
+          </div>
+          <div className='text-xs'>
+            <span className='font-bold'>Device ID:</span> <span>{deviceId}</span>
+          </div>
+          <div className='text-xs'>
+            <span className='font-bold'>Device Health:</span> <span className='text-green-300'>{deviceHealth}</span>
+          </div>
+          <div className='text-xs'>
+            <span className='font-bold'>Device Connection:</span> <span className='text-green-300'>{deviceConnection}</span>
+          </div>
+         
         </div>
-      )}
+ 
     </>
   );
 };
@@ -72,7 +82,7 @@ const VisualizationCard = ({ title, percentage }) => {
   return (
     <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center ">
       <CircularProgressBar percentage={percentage} />
-      <h2 className="text-sm font-semibolCd text-white pb-3">{title}</h2>
+      <h2 className="text-sm font-semibold text-white pb-3">{title}</h2>
     </div>
   );
 };
@@ -160,7 +170,7 @@ const Profile = () => {
   const router = useRouter(); // Initialize useRouter
 
   const handleBackClick = () => {
-    router.push('/dashboard'); // Navigate to the /dashboard route
+    router.push('/dashboard'); 
   };
   return (
     <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
@@ -175,8 +185,15 @@ const Profile = () => {
           </h1>
         </div>
 
+        <DashboardInfo
+        dashboardName='Ground-1'
+        deviceId='Device-1'
+        deviceHealth='Ok'
+        deviceConnection='Connected'
+        />
+
         <div className="mx-auto sm:w-80 md:w-[500px] mb-8">
-          <h1 className="text-white/90 mb-2 ml-2">Visualization data:</h1>
+          <h1 className="text-white/90 mb-2 ml-2 font-sans font-bold">Visualization Data:</h1>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <VisualizationCard title="Soil Moisture" percentage={30} />
             <VisualizationCard title="Water Level" percentage={60} />
@@ -188,7 +205,7 @@ const Profile = () => {
         </div>
 
         <div className="mx-auto sm:w-80 md:w-[500px] mb-8">
-          <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
+          <h1 className="text-white/90 mb-2 ml-2 font-sans font-bold">Ai Analyze Suggestions:</h1>
           <div className="bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <AiAnalyzeCard
               title="Soil Moisture Analysis"
@@ -204,7 +221,7 @@ const Profile = () => {
         </div>
 
         <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
-          <h1 className="text-white/90 mb-2 ml-2">System Utilization:</h1>
+          <h1 className="text-white/90 mb-2 ml-2 font-sans font-bold">System Utilization:</h1>
           <div className="w-full max-w-3xl bg-white/10 pt-4 px-4 rounded-lg shadow-lg flex flex-col items-center">
             <UtilizationCard title="AI Water System" />
             <UtilizationCard title="AI Lights System" />
