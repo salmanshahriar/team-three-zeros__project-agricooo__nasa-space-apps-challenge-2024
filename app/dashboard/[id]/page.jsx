@@ -151,7 +151,7 @@ const Profile = () => {
     <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
       <div className="w-full max-w-3xl p-6">
         <div className="relative cursor-pointer" onClick={handleBackClick}>
-          <div className="absolute text-white left-2 flex items-center justify-center top-[2px]">
+          <div className="absolute text-white left-2 flex items-center justify-center top-[3px]">
             <i className="bx bx-chevron-left text-xl"></i>
             <p className="text-sm -ml-1">Back</p>
           </div>
@@ -172,9 +172,9 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-8">
+        <div className="w-full max-w-3xl p-6] mb-8">
           <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
-          <div className="bg-white/10 sm:w-80 md:w-[500px] backdrop-blur-md p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+          <div className="bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <AiAnalyzeCard
               title="Soil Moisture Analysis"
               percentage={30}
@@ -188,9 +188,9 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-32">
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
           <h1 className="text-white/90 mb-2 ml-2">System Utilization:</h1>
-          <div className="sm:w-80 md:w-[500px] bg-white/10 backdrop-blur-md p-4 pb-0 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+          <div className="sm:w-80 md:w-[500px] bg-white/10 backdrop-blur-md p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <UtilizationCard title="AI Water System" />
             <UtilizationCard title="AI Lights System" />
           </div>
