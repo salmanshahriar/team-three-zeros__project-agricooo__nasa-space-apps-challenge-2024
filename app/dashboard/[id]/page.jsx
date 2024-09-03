@@ -152,13 +152,13 @@ const UtilizationCard = ({ title }) => {
   <div>
     <h2 className="text-white text-md font-semibold">{title}</h2>
   </div>
-  <div className="absolute top-0 left-[200px] md:left-[375px]">
+  {/* <div className="absolute top-0 left-[200px] md:left-[375px]">
     {isOn ? (
       <span><span className='text-tiny text-white'>System is </span><span className="text-green-300 text-tiny">ON</span></span>
     ) : (
       <span><span className='text-tiny text-white'>System is </span><span className="text-red-300 text-tiny">OFF</span></span>
     )}
-  </div>
+  </div> */}
   <Switch checked={isOn} onChange={handleToggle} color={isOn ? 'success' : 'error'} />
 </Card>
 
@@ -173,7 +173,7 @@ const Profile = () => {
     router.push('/dashboard'); 
   };
   return (
-    <div className="min-h-screen flex flex-col justify-start ">
+    <div className="min-h-screen flex flex-col justify-start h-screen	overflow-y-scroll">
       <div className="mx-auto w-full max-w-3xl p-6">
         <div className="relative cursor-pointer" onClick={handleBackClick}>
           <div className="absolute text-white left-0 md:left-[105px] flex items-center justify-center top-[3px] md:top-[2px]">

@@ -64,7 +64,7 @@ const StepForm = () => {
     const progress = (step / 4) * 100;
 
     return (
-        <div className='min-h-screen relative z-50 flex flex-col justify-center items-center bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600'>
+        <div className='min-h-screen relative z-50 flex flex-col justify-center items-center h-screen overflow-y-scroll'>
             <div className="mx-auto p-6 sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 text-center space-y-8">
                 {step !== 0 && (
                     <Progress

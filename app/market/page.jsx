@@ -38,7 +38,7 @@ const list = [
 
 const Market = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600 py-10">
+    <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
       <div className="w-full max-w-3xl p-6 mb-16">
         <Input
           clearable
