@@ -89,11 +89,11 @@ const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
   return (
     <>
       {percentage <= 40 && (
-        <div className="w-72 md:w-[450px] text-white text-sm rounded-lg shadow-xl bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
-          <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md">
+        <div className="w-72 md:w-[450px] text-white text-sm rounded-lg shadow-xl ">
+          <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
             {title}
           </div>
-          <div className="border border-t-0 border-gray-100 rounded-b-lg">
+          <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/10 backdrop-blur-md">
             <Accordion bordered className=''>
               <AccordionItem
                 title={<span className="text-white text-center text-sm ml-2">{alertMessage}</span>}
