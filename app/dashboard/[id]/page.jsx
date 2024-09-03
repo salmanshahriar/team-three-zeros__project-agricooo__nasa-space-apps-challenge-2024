@@ -54,7 +54,7 @@ const CircularProgressBar = ({ percentage }) => {
 // VisualizationCard component
 const VisualizationCard = ({ title, percentage }) => {
   return (
-    <div className="bg-white/10 mx-auto w-[150px] backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center py-4">
+    <div className="bg-white/10 mx-auto w-[150px] backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center ">
       <CircularProgressBar percentage={percentage} />
       <h2 className="text-sm font-semibolCd text-white pb-3">{title}</h2>
     </div>
@@ -133,7 +133,7 @@ const UtilizationCard = ({ title }) => {
 const Profile = () => {
   return (
     <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
-      <div className="mx-auto pt-1 w-80 md:w-[500px]">
+      <div className="w-full max-w-3xl p-6">
         <h1 className="text-center text-md md:text-xl text-white mt-2 mb-8">
           Ground-1 / <span className="text-white/50">Device-1</span>
         </h1>
