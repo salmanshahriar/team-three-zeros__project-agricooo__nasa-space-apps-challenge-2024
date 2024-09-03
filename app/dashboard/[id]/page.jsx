@@ -123,7 +123,7 @@ const UtilizationCard = ({ title }) => {
   };
 
   return (
-    <Card className="w-72 md:w-[450px] relative border border-gray-100 bg-white/10 backdrop-blur-md rounded-lg shadow-lg py-7 px-5 mb-4 flex flex-row justify-between items-center">
+    <Card className="w-72 md:w-[450px] relative border border-gray-100 bg-white/10  rounded-lg shadow-lg py-7 px-5 mb-4 flex flex-row justify-between items-center">
   <div>
     <h2 className="text-white text-md font-semibold">{title}</h2>
   </div>
@@ -174,7 +174,7 @@ const Profile = () => {
 
         <div className="w-full max-w-3xl p-6] mb-8">
           <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
-          <div className="bg-white/10 backdrop-blur-md p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+          <div className="bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <AiAnalyzeCard
               title="Soil Moisture Analysis"
               percentage={30}
@@ -190,7 +190,7 @@ const Profile = () => {
 
         <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
           <h1 className="text-white/90 mb-2 ml-2">System Utilization:</h1>
-          <div className="sm:w-80 md:w-[500px] bg-white/10 backdrop-blur-md p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+          <div className="sm:w-80 md:w-[500px] bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <UtilizationCard title="AI Water System" />
             <UtilizationCard title="AI Lights System" />
           </div>
