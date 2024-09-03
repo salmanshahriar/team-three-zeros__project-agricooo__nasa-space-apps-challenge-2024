@@ -55,7 +55,7 @@ const CircularProgressBar = ({ percentage }) => {
 // VisualizationCard component
 const VisualizationCard = ({ title, percentage }) => {
   return (
-    <div className="bg-white/10 mx-auto w-[150px] backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center ">
+    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center ">
       <CircularProgressBar percentage={percentage} />
       <h2 className="text-sm font-semibolCd text-white pb-3">{title}</h2>
     </div>
@@ -65,7 +65,7 @@ const VisualizationCard = ({ title, percentage }) => {
 // TemperatureCard component
 const TemperatureCard = ({ temperature }) => {
   return (
-    <div className="bg-white/10 mx-auto w-[150px] backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center py-4">
+    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center py-4">
       <div className="text-white text-lg font-bold">{temperature}°C</div>
       <h2 className="text-sm font-semibold text-white pb-2">Temperature</h2>
     </div>
@@ -75,7 +75,7 @@ const TemperatureCard = ({ temperature }) => {
 // WindSpeedCard component
 const WindSpeedCard = ({ windSpeed }) => {
   return (
-    <div className="bg-white/10 mx-auto w-[150px] backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center py-4">
+    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center py-4">
       <div className="text-white text-lg font-bold">{windSpeed} km/h</div>
       <h2 className="text-sm font-semibold text-white pb-2">Wind Speed</h2>
     </div>
@@ -123,7 +123,7 @@ const UtilizationCard = ({ title }) => {
   };
 
   return (
-    <Card className="w-72 md:w-[450px] relative border border-gray-100 bg-white/10  rounded-lg shadow-lg py-7 px-5 mb-4 flex flex-row justify-between items-center">
+    <Card className="w-full max-w-3xl relative border border-gray-100 bg-white/10  rounded-lg shadow-lg py-7 px-5 mb-4 flex flex-row justify-between items-center">
   <div>
     <h2 className="text-white text-md font-semibold">{title}</h2>
   </div>
@@ -172,7 +172,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-3xl p-6] mb-8">
+        <div className="w-full max-w-3xl mb-8">
           <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
           <div className="bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <AiAnalyzeCard
@@ -188,9 +188,9 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
+        <div className="w-full max-w-3xl mb-32 ">
           <h1 className="text-white/90 mb-2 ml-2">System Utilization:</h1>
-          <div className="sm:w-80 md:w-[500px] bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+          <div className="w-full max-w-3xl bg-white/10 pt-4 px-4 rounded-lg shadow-lg flex flex-col items-center">
             <UtilizationCard title="AI Water System" />
             <UtilizationCard title="AI Lights System" />
           </div>
