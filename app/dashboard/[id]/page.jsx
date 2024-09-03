@@ -90,7 +90,7 @@ const defaultContent =
       <>
         {percentage <= 40 && (
           <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white text-sm rounded-lg shadow-xl">
-            <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 bg-white/5 backdrop-blur-md">
+            <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
               {title}
             </div>
             <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/5 backdrop-blur-md">
