@@ -166,9 +166,9 @@ const Profile = () => {
     <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
       <div className="mx-auto w-full max-w-3xl p-6">
         <div className="relative cursor-pointer" onClick={handleBackClick}>
-          <div className="absolute text-white left-0 md:left-[105px] flex items-center justify-center top-[3px]">
+          <div className="absolute text-white left-0 md:left-[105px] flex items-center justify-center top-[3px] md:top-[2px]">
             <i className="bx bx-chevron-left text-xl"></i>
-            <p className="text-sm -ml-1">Back</p>
+            <p className="text-sm md:text-lg -ml-1">Back</p>
           </div>
           <h1 className="text-center text-md md:text-xl text-white mt-2 mb-8">
             Ground-1 / <span className="text-white/50">Device-1</span>
