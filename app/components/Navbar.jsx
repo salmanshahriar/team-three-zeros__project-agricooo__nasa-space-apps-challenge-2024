@@ -13,11 +13,11 @@ function Navbar() {
   useEffect(() => {
     const initialIndex =
       pathname === '/' ? 0 :
-      pathname === '/dashboard' ? 1 :
+      pathname.startsWith('/dashboard') ? 1 :  // This includes both `/dashboard` and `/dashboard/device-1`
       pathname === '/ai-assistant' ? 2 :
       pathname === '/market' ? 3 : 4;
     setActiveIndex(initialIndex);
-  }, [pathname]);
+  }, [pathname]);  
 
   useEffect(() => {
     if (menuRef.current) {

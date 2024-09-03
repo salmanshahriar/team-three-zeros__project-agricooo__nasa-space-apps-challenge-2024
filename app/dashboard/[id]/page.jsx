@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button, Card, Switch, Accordion, AccordionItem } from '@nextui-org/react';
 
 // CircularProgressBar component
@@ -122,11 +123,11 @@ const UtilizationCard = ({ title }) => {
   };
 
   return (
-    <Card className="w-72 md:w-[450px] relative border border-gray-100 bg-white/10 backdrop-blur-md rounded-lg shadow-lg py-8 px-6 mb-4 flex flex-row justify-between items-center">
+    <Card className="w-72 md:w-[450px] relative border border-gray-100 bg-white/10 backdrop-blur-md rounded-lg shadow-lg py-7 px-5 mb-4 flex flex-row justify-between items-center">
   <div>
     <h2 className="text-white text-md font-semibold">{title}</h2>
   </div>
-  <div className="absolute top-1 left-48">
+  <div className="absolute top-0 left-48">
     {isOn ? (
       <span><span className='text-tiny text-white'>System is </span><span className="text-green-300 text-tiny">ON</span></span>
     ) : (
@@ -141,12 +142,23 @@ const UtilizationCard = ({ title }) => {
 
 // Profile component
 const Profile = () => {
+  const router = useRouter(); // Initialize useRouter
+
+  const handleBackClick = () => {
+    router.push('/dashboard'); // Navigate to the /dashboard route
+  };
   return (
     <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
       <div className="w-full max-w-3xl p-6">
-        <h1 className="text-center text-md md:text-xl text-white mt-2 mb-8">
-          Ground-1 / <span className="text-white/50">Device-1</span>
-        </h1>
+        <div className="relative cursor-pointer" onClick={handleBackClick}>
+          <div className="absolute text-white left-2 flex items-center justify-center top-[2px]">
+            <i className="bx bx-chevron-left text-xl"></i>
+            <p className="text-sm -ml-1">Back</p>
+          </div>
+          <h1 className="text-center text-md md:text-xl text-white mt-2 mb-8">
+            Ground-1 / <span className="text-white/50">Device-1</span>
+          </h1>
+        </div>
 
         <div className="mx-auto sm:w-80 md:w-[500px] mb-8">
           <h1 className="text-white/90 mb-2 ml-2">Visualization data:</h1>
@@ -178,7 +190,7 @@ const Profile = () => {
 
         <div className="mx-auto sm:w-80 md:w-[500px] mb-32">
           <h1 className="text-white/90 mb-2 ml-2">System Utilization:</h1>
-          <div className=' sm:w-80 md:w-[500px] bg-white/10 backdrop-blur-md p-4 pb-0 rounded-lg shadow-lg flex flex-col items-center space-y-4"'>
+          <div className="sm:w-80 md:w-[500px] bg-white/10 backdrop-blur-md p-4 pb-0 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <UtilizationCard title="AI Water System" />
             <UtilizationCard title="AI Lights System" />
           </div>
