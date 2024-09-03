@@ -90,16 +90,17 @@ const defaultContent =
       <>
         {percentage <= 40 && (
           <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white text-sm rounded-lg shadow-xl">
-            <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
+            <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md ">
               {title}
             </div>
-            <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/5 backdrop-blur-md">
+            <div className="border border-t-0 border-gray-100 rounded-b-lg ">
               <Accordion
                 bordered
                 className="w-full"
               >
                 <AccordionItem
-                  title={<span className="text-white text-center text-sm ml-2">{alertMessage}</span>}
+                  
+                  title={<div className='text-center w-64'><span className="text-red-300 text-center text-sm -mr-7 ">{alertMessage}</span></div>}
                 >
                   <p className="p-4">{defaultContent}</p>
                 </AccordionItem>
@@ -122,14 +123,19 @@ const UtilizationCard = ({ title }) => {
 
   return (
     <Card className="w-72 md:w-[450px] relative border border-gray-100 bg-white/10 backdrop-blur-md rounded-lg shadow-lg py-8 px-6 mb-4 flex flex-row justify-between items-center">
-      <div>
-        <h2 className="text-white text-md font-semibold">{title}</h2>
-      </div>
-      <div className="text-white text-tiny absolute top-1 left-48">
-        {isOn ? 'System is ON' : 'System is OFF'}
-      </div>
-      <Switch checked={isOn} onChange={handleToggle} color={isOn ? 'error' : 'success'} />
-    </Card>
+  <div>
+    <h2 className="text-white text-md font-semibold">{title}</h2>
+  </div>
+  <div className="absolute top-1 left-48">
+    {isOn ? (
+      <span><span className='text-tiny text-white'>System is </span><span className="text-green-300 text-tiny">ON</span></span>
+    ) : (
+      <span><span className='text-tiny text-white'>System is </span><span className="text-red-300 text-tiny">OFF</span></span>
+    )}
+  </div>
+  <Switch checked={isOn} onChange={handleToggle} color={isOn ? 'success' : 'error'} />
+</Card>
+
   );
 };
 
@@ -174,7 +180,7 @@ const Profile = () => {
           <h1 className="text-white/90 mb-2 ml-2">System Utilization:</h1>
           <div className=' sm:w-80 md:w-[500px] bg-white/10 backdrop-blur-md p-4 pb-0 rounded-lg shadow-lg flex flex-col items-center space-y-4"'>
             <UtilizationCard title="AI Water System" />
-            <UtilizationCard title="AI Water System" />
+            <UtilizationCard title="AI Lights System" />
           </div>
         </div>
       </div>
