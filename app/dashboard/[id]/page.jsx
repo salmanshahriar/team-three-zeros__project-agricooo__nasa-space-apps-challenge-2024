@@ -8,7 +8,7 @@ import {Card, Switch, Accordion, AccordionItem } from '@nextui-org/react';
 const DashboardInfo = ({ dashboardName, deviceId ,deviceHealth, deviceConnection }) => {
   return (
     <>
-        <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white rounded-lg shadow-xl bg-white/10 flex flex-col p-4 mb-8 font-sans">
+        <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white rounded-lg shadow-xl bg-white/10 flex flex-col gap-1 p-4 mb-8 font-sans">
           <div className='text-xs'>
             <span className='font-bold'>Dashboard Name:</span> <span>{dashboardName}</span>
           </div>
@@ -173,7 +173,7 @@ const Profile = () => {
     router.push('/dashboard'); 
   };
   return (
-    <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
+    <div className="min-h-screen flex flex-col justify-start ">
       <div className="mx-auto w-full max-w-3xl p-6">
         <div className="relative cursor-pointer" onClick={handleBackClick}>
           <div className="absolute text-white left-0 md:left-[105px] flex items-center justify-center top-[3px] md:top-[2px]">
