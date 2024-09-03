@@ -174,7 +174,7 @@ const Profile = () => {
 
         <div className="w-full max-w-3xl p-6] mb-8">
           <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
-          <div className="bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+          <div className="bg-white/10 backdrop-blur-md p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <AiAnalyzeCard
               title="Soil Moisture Analysis"
               percentage={30}
