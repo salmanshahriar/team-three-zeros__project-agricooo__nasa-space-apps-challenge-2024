@@ -2,7 +2,22 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Card, Switch, Accordion, AccordionItem } from '@nextui-org/react';
+import {Card, Switch, Accordion, AccordionItem } from '@nextui-org/react';
+
+
+const DashboardInfo = ({ }) => {
+  return (
+    <>
+      {percentage <= 40 && (
+        <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white text-sm rounded-lg shadow-xl">
+
+          
+        </div>
+      )}
+    </>
+  );
+};
+
 
 // CircularProgressBar component
 const CircularProgressBar = ({ percentage }) => {
@@ -127,7 +142,7 @@ const UtilizationCard = ({ title }) => {
   <div>
     <h2 className="text-white text-md font-semibold">{title}</h2>
   </div>
-  <div className="absolute top-0 left-48">
+  <div className="absolute top-0 left-[200px]">
     {isOn ? (
       <span><span className='text-tiny text-white'>System is </span><span className="text-green-300 text-tiny">ON</span></span>
     ) : (
@@ -149,9 +164,9 @@ const Profile = () => {
   };
   return (
     <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-gray-700 via-indigo-900 to-gray-600">
-      <div className="w-full max-w-3xl p-6">
+      <div className="mx-auto w-full max-w-3xl p-6">
         <div className="relative cursor-pointer" onClick={handleBackClick}>
-          <div className="absolute text-white left-0 flex items-center justify-center top-[3px]">
+          <div className="absolute text-white left-0 md:left-[105px] flex items-center justify-center top-[3px]">
             <i className="bx bx-chevron-left text-xl"></i>
             <p className="text-sm -ml-1">Back</p>
           </div>
@@ -172,7 +187,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-3xl mb-8">
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-8">
           <h1 className="text-white/90 mb-2 ml-2">Ai Analyze Suggestions:</h1>
           <div className="bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
             <AiAnalyzeCard
@@ -188,7 +203,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-3xl mb-32 ">
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
           <h1 className="text-white/90 mb-2 ml-2">System Utilization:</h1>
           <div className="w-full max-w-3xl bg-white/10 pt-4 px-4 rounded-lg shadow-lg flex flex-col items-center">
             <UtilizationCard title="AI Water System" />
