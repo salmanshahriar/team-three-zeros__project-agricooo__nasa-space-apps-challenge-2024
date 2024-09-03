@@ -5,7 +5,7 @@ import { Button, Card, Switch, Accordion, AccordionItem } from '@nextui-org/reac
 
 // CircularProgressBar component
 const CircularProgressBar = ({ percentage }) => {
-  const radius = 70;
+  const radius = 65;
   const stroke = 12;
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -85,28 +85,32 @@ const WindSpeedCard = ({ windSpeed }) => {
 const defaultContent =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
-const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
-  return (
-    <>
-      {percentage <= 40 && (
-        <div className="w-72 md:w-[450px] text-white text-sm rounded-lg shadow-xl ">
-          <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
-            {title}
-          </div>
-          <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/10 backdrop-blur-md">
-            <Accordion bordered className=''>
-              <AccordionItem
-                title={<span className="text-white text-center text-sm ml-2">{alertMessage}</span>}
+  const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
+    return (
+      <>
+        {percentage <= 40 && (
+          <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white text-sm rounded-lg shadow-xl">
+            <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
+              {title}
+            </div>
+            <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/5 backdrop-blur-md">
+              <Accordion
+                bordered
+                className="w-full"
               >
-                <p>{defaultContent}</p>
-              </AccordionItem>
-            </Accordion>
+                <AccordionItem
+                  title={<span className="text-white text-center text-sm ml-2">{alertMessage}</span>}
+                >
+                  <p className="p-4">{defaultContent}</p>
+                </AccordionItem>
+              </Accordion>
+            </div>
           </div>
-        </div>
-      )}
-    </>
-  );
-};
+        )}
+      </>
+    );
+  };
+  
 
 // UtilizationCard component
 const UtilizationCard = ({ title }) => {
