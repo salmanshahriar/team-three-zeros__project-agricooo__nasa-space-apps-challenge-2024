@@ -22,7 +22,7 @@ const Assistant = () => {
                 setMessages(prevMessages => [
                     ...prevMessages,
                     { text: input, isUser: true },
-                    { text: 'This is a response from the AI.', isUser: false }
+                    { text: 'Hello! How can I assist with your farming experience?', isUser: false }
                 ]);
             }, 1000);
         }
