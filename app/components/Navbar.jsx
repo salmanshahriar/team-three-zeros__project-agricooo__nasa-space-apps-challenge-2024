@@ -95,7 +95,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              href="/auth"
+              href="/profile"
               onClick={() => handleMenuClick(4)}
               className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
                 activeIndex === 4 ? 'scale-105 font-bold' : 'hover:scale-105'
