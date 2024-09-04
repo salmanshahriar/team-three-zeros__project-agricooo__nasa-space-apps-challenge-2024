@@ -83,7 +83,7 @@ const Market = () => {
           Sell Your Goods
         </Button>
         <Button className="mb-5 text-sm p-4"  shadow color="primary" auto>
-          Current Bazar Update
+          Bazar Price Updates
         </Button>
         </div>
 
