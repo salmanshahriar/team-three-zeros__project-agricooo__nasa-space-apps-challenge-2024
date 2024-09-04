@@ -109,7 +109,7 @@ const WindSpeedCard = ({ windSpeed }) => {
 
 // AiAnalyzeCard component
 const defaultContent =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  "When soil moisture is below optimal, irrigate your crops, monitor moisture levels, use mulch to retain water, optimize irrigation schedules, and check for system leaks..";
 
   const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
     return (
@@ -122,7 +122,7 @@ const defaultContent =
             <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/10 ">
               <Accordion
                 bordered
-                className="w-full"
+                className="w-full "
               >
                 <AccordionItem
                   

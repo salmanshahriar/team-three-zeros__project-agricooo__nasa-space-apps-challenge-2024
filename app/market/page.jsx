@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Input, Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Input, Card, CardBody, CardFooter, Image, Button } from "@nextui-org/react";
 
 const list = [
   {
@@ -38,8 +38,17 @@ const list = [
 
 const Market = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
-      <div className="w-full max-w-3xl p-6 mb-16">
+    <div className=" min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
+      <div className='mx-auto w-full max-w-3xl p-6 md:p-0 pt-2 flex flex-col md:w-[500px] mb-16'>
+      <div className="relative pt-3 text-white">
+        <div className="absolute flex items-center top-4 right-4 md:right-6 gap-3">
+          <i className='bx bxl-messenger text-xl'></i>
+          <i className='bx bxs-cart-alt text-xl'></i>
+        </div>
+        <h1 className="text-center text-md md:text-2xl mb-6">Market</h1>
+      </div>
+      
+      <div className="w-full max-w-3xl mb-16">
         <Input
           clearable
           fullWidth
@@ -47,7 +56,7 @@ const Market = () => {
           type="search"
           placeholder="Search to buy..."
           required
-          className="mb-10"
+          className="mb-4"
           classNames={{
             label: "text-black/50 ",
             input: [
@@ -68,8 +77,18 @@ const Market = () => {
           }}
         />
 
+        {/* Add a "Sell Your Goods" Button */}
+        <div className='flex flex-row justify-between md:justify-start md:gap-2'>
+        <Button className="mb-5 text-sm p-4"  shadow color="primary" auto>
+          Sell Your Goods
+        </Button>
+        <Button className="mb-5 text-sm p-4"  shadow color="primary" auto>
+          Current Bazar Update
+        </Button>
+        </div>
+
         {/* Demo Posts */}
-        <div className="gap-4 grid grid-cols-2 sm:grid-cols-4">
+        <div className="gap-4 grid grid-cols-2 sm:grid-cols-3">
           {list.map((item, index) => (
             <Card
               key={index}
@@ -94,6 +113,7 @@ const Market = () => {
             </Card>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );
