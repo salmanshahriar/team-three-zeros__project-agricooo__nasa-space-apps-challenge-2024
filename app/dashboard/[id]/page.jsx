@@ -159,7 +159,13 @@ const UtilizationCard = ({ title }) => {
       <span><span className='text-tiny text-white'>System is </span><span className="text-red-300 text-tiny">OFF</span></span>
     )}
   </div> */}
-  <Switch checked={isOn} onChange={handleToggle} color={isOn ? 'success' : 'error'} />
+  <Switch 
+  checked={isOn} 
+  onChange={handleToggle} 
+  color={isOn ? 'success' : 'error'} 
+  // startContent={<span className='text-[2px]'>ON</span>}
+  // endContent={<span className='text-xs'>OFF</span>}
+  />
 </Card>
 
   );
@@ -174,13 +180,13 @@ const Profile = () => {
   };
   return (
     <div className="min-h-screen flex flex-col justify-start h-screen	overflow-y-scroll">
-      <div className="mx-auto w-full max-w-3xl p-6">
+      <div className="mx-auto w-full max-w-3xl p-6 pt-2">
         <div className="relative cursor-pointer" onClick={handleBackClick}>
           <div className="absolute text-white left-0 md:left-[105px] flex items-center justify-center top-[3px] md:top-[2px]">
             <i className="bx bx-chevron-left text-xl"></i>
             <p className="text-sm md:text-lg -ml-1">Back</p>
           </div>
-          <h1 className="text-center text-md md:text-xl text-white mt-2 mb-8">
+          <h1 className="text-center text-md md:text-xl text-white mt-2 mb-6">
             Ground-1 / <span className="text-white/50">Device-1</span>
           </h1>
         </div>
