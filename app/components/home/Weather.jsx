@@ -100,7 +100,7 @@ function Weather() {
   };
 
   return (
-    <div className="mx-auto w-80 md:w-[500px] space-y-4">
+    <div className="mx-auto w-full max-w-3xl space-y-4">
       {/* First Card - Main Weather Card */}
       <div className="relative w-full">
         {showPermissionUI && (
