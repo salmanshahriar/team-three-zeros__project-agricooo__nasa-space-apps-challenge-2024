@@ -21,7 +21,6 @@ const Assistant = () => {
             setTimeout(() => {
                 setMessages(prevMessages => [
                     ...prevMessages,
-                    { text: input, isUser: true },
                     { text: 'Hello! How can I assist with your farming experience?', isUser: false }
                 ]);
             }, 1000);
@@ -39,8 +38,7 @@ const Assistant = () => {
                 // Add the image to messages first
                 setMessages(prevMessages => [
                     ...prevMessages,
-                    { text: '', isUser: false, image: reader.result }, // Empty message to show image
-                    { text: 'Image uploaded successfully.', isUser: false },
+                    { image: reader.result, isUser: true }, // Image uploaded by user
                     { 
                         text: 'The tomato mosaic virus (ToMV) is a prevalent plant virus that affects tomato plants. It causes a mosaic-like pattern on the leaves, leading to stunted growth and reduced yields. The virus spreads through infected seeds, contact between plants, and contaminated tools. To manage the virus, practice proper sanitation, use resistant plant varieties, and remove infected plants to prevent its spread. Would you like to know more about prevention or how to cure it?', 
                         isUser: false 
@@ -76,7 +74,7 @@ const Assistant = () => {
                     {messages.map((msg, index) => (
                         <div key={index} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
                             {msg.image ? (
-                                <div className="flex ml-20 md:ml-44 justify-center">
+                                <div className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
                                     <img src={msg.image} alt="Uploaded" className="max-w-xs rounded-lg" />
                                 </div>
                             ) : (
