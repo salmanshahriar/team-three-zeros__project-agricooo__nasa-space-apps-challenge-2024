@@ -8,7 +8,7 @@ import {Card, Switch, Accordion, AccordionItem } from '@nextui-org/react';
 const DashboardInfo = ({ dashboardName, deviceId ,deviceHealth, deviceConnection }) => {
   return (
     <>
-        <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white rounded-lg shadow-xl bg-white/10 flex flex-col gap-1 p-4 mb-8 font-sans">
+        <div className="mx-auto sm:w-80 md:w-[500px] text-white rounded-lg shadow-xl bg-white/10 flex flex-col gap-1 p-4 md:pl-6 mb-8 font-sans">
           <div className='text-xs'>
             <span className='font-bold'>Dashboard Name:</span> <span>{dashboardName}</span>
           </div>
