@@ -76,7 +76,7 @@ const Assistant = () => {
                     {messages.map((msg, index) => (
                         <div key={index} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
                             {msg.image ? (
-                                <div className="flex justify-center">
+                                <div className="flex ml-3 md:ml-44 justify-center">
                                     <img src={msg.image} alt="Uploaded" className="max-w-xs rounded-lg" />
                                 </div>
                             ) : (
