@@ -42,6 +42,7 @@ const InputModal = ({ isOpen, onOpenChange, onClose, dashboardTitle, onSave }) =
       isKeyboardDismissDisabled={true}
       className=" w-full md:w-[500px] max-w-3xl m-8 rounded-xl border border-gray-300 backdrop-blur-md shadow-2xl mt-0"
     >
+      <div>
       <ModalContent className="w-10/12 bg-white/10 border border-gray-300 backdrop-blur-md shadow-2xl rounded-xl">
         {(onClose) => (
           <div>
@@ -98,6 +99,7 @@ const InputModal = ({ isOpen, onOpenChange, onClose, dashboardTitle, onSave }) =
           </div>
         )}
       </ModalContent>
+      </div>
     </Modal>
   );
 };
