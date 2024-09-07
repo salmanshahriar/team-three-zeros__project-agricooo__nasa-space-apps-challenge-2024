@@ -12,11 +12,12 @@ At Agricooo, we aim to transform agriculture by leveraging NASA's datasets, prov
 
 Meet the dedicated team behind Agricooo:
 
+- **Salman Shahriar** - Frontend Developer
 - **Khaled Eabne Delowar** - Researcher
 - **Shagato Chowdhury** - Backend Developer
 - **Zarin Tasneem** - Researcher
 - **Mahdul Hasan Sunny** - Video Editor and Content Creator
-- **Salman Shahriar** - Frontend Developer
+
 
 ## 🚀 Key Features
 
