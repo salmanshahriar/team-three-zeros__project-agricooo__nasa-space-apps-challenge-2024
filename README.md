@@ -16,7 +16,7 @@ Meet the dedicated team behind Agricooo:
 - **Khaled Eabne Delowar** - Researcher
 - **Shagato Chowdhury** - Backend Developer
 - **Zarin Tasneem** - Researcher
-- **Mahdul Hasan Sunny** - Video Editor and Content Creator
+- **Mahamudul Hasan Sunny** - Video Editor and Content Creator
 
 
 ## 🚀 Key Features
