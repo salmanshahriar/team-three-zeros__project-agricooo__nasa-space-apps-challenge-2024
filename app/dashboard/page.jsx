@@ -50,7 +50,7 @@ const Dashboard = ({dashboardName, device}) => {
                     className="mx-auto w-80 md:w-[500px] border-none bg-white/10 backdrop-blur-md shadow-xl rounded-xl hover:bg-white/20 border-gray-300  p-4 flex items-center justify-center animate-slide-up transform transition-transform duration-300 hover:scale-105 cursor-pointer"
                     isPressable
                 >
-                    <div className='flex items-center space-x-3'>
+                    <div className='flex items-center gap-1 '>
                         <i className='bx bxs-plus-square text-3xl text-white/80 transition-colors duration-300 hover:text-white'></i>
                         <p className="text-lg text-white/80 transition-colors duration-300 hover:text-white">Create Dashboard</p>
                     </div>
@@ -63,6 +63,7 @@ const Dashboard = ({dashboardName, device}) => {
             onClose={handleClose}
             dashboardTitle="Create a Dashboard" // Ensure this prop matches
             onSave={handleSave} // Pass the save handler
+
             />
             </div>
         </div>

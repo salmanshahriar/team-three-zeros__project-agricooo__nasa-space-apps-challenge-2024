@@ -4,58 +4,16 @@ import React, { useState, useEffect } from "react";
 
 function Weather() {
   const [weatherData, setWeatherData] = useState(null);
-  const [locationError, setLocationError] = useState(false);
-  const [showPermissionUI, setShowPermissionUI] = useState(false);
 
-  const handleLocationPermission = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setShowPermissionUI(false); // Hide the permission UI on success
-          fetchWeatherData(`${position.coords.latitude},${position.coords.longitude}`);
-        },
-        (error) => {
-          console.error("Error fetching geolocation: ", error.message);
-          if (error.code === error.PERMISSION_DENIED) {
-            setLocationError(true);
-            setShowPermissionUI(true); // Show the permission UI if denied
-          }
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-      setLocationError(true);
-      setShowPermissionUI(true);
-    }
-  };
-
-  const handleResetPermission = () => {
-    alert(
-      "Please enable location access in your browser settings for this site."
-    );
-  };
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (weatherData) {
-        // Refresh weather data every minute if weatherData exists
-        fetchWeatherData(`${weatherData.location.lat},${weatherData.location.lon}`);
-      }
-    }, 60000); // 60000 ms = 1 minute
-
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [weatherData]);
-
-  useEffect(() => {
-    handleLocationPermission();
-    // Replace this with a call to a real API if necessary
-    // Setting fake data for 14 days forecast
+  // Mock API request to fetch weather data
+  const fetchWeatherData = async () => {
+    // Simulate an API request with fake data
     const fakeWeatherData = {
       location: {
         name: "Chittagong",
         country: "Bangladesh",
-        lat: "0",
-        lon: "0",
+        lat: "22.3384",
+        lon: "91.8317",
       },
       current: {
         temp_c: 28,
@@ -73,15 +31,29 @@ function Weather() {
             maxtemp_c: Math.floor(Math.random() * (35 - 20 + 1)) + 20, // Random max temp between 20°C and 35°C
             mintemp_c: Math.floor(Math.random() * (20 - 10 + 1)) + 10, // Random min temp between 10°C and 20°C
             condition: {
-              text: ["Sunny", "Cloudy", "Rainy", "Snowy"][Math.floor(Math.random() * 4)], // Random condition
-              icon: `//cdn.weatherapi.com/weather/64x64/day/116.png`, // ${116 + Math.floor(Math.random() * 3)}
+              text: ["Sunny", "Cloudy", "Rainy"][Math.floor(Math.random() * 3)], // Random condition
+              icon: `//cdn.weatherapi.com/weather/64x64/day/116.png`,
             },
             daily_chance_of_rain: Math.floor(Math.random() * 100), // Random chance of rain
           },
         })),
       },
     };
+
     setWeatherData(fakeWeatherData);
+  };
+
+  useEffect(() => {
+    fetchWeatherData();
+
+    const intervalId = setInterval(() => {
+      if (weatherData) {
+        // Refresh weather data every minute if weatherData exists
+        fetchWeatherData();
+      }
+    }, 60000); // 60000 ms = 1 minute
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
 
   const formattedDateDisplay = (date) => {
@@ -103,28 +75,8 @@ function Weather() {
     <div className="mx-auto w-full max-w-3xl space-y-4 md:w-[499px]">
       {/* First Card - Main Weather Card */}
       <div className="relative w-full">
-        {showPermissionUI && (
-          <div className="absolute top-0 left-0 right-0 bg-white/10 backdrop-blur-md border-gray-300 p-4 rounded z-50 shadow-lg flex justify-between items-center slide-down w-11/12">
-            <div className="text-white">
-              Location access is required to display weather data.
-            </div>
-            <button
-              onClick={handleResetPermission}
-              className="bg-blue-600 text-white px-2 py-1 text-sm rounded hover:bg-blue-700 transition"
-            >
-              Allow Location
-            </button>
-          </div>
-        )}
-
-        {locationError && !showPermissionUI && (
-          <div className="text-red-500 text-center mt-4">
-            Location access denied. Unable to display weather data.
-          </div>
-        )}
-
-        {weatherData && !locationError && (
-          <div className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl rounded-lg p-4 w-full">
+        {weatherData && (
+          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg p-4 w-full">
             <h2 className="font-bold text-gray-900 text-lg dark:text-gray-100">
               {formattedDateDisplay(new Date())}
             </h2>
@@ -164,7 +116,7 @@ function Weather() {
               </div>
             </div>
 
-            <div className="flex space-x-2 justify-between border-t dark:border-gray-500 mt-4 pt-3">
+            <div className="flex space-x-2 justify-between border-t dark:border-gray-400/50 mt-4 pt-3">
               {weatherData.forecast &&
                 weatherData.forecast.forecastday &&
                 weatherData.forecast.forecastday
@@ -173,7 +125,7 @@ function Weather() {
                     <div
                       key={index}
                       className={`flex-1 text-center ${
-                        index === 1 ? "border-x px-2 dark:border-gray-500" : ""
+                        index === 1 ? "border-x px-2 dark:border-gray-400/50" : ""
                       }`}
                     >
                       <div className="text-xs text-gray-600 dark:text-gray-300">
@@ -200,38 +152,35 @@ function Weather() {
         )}
       </div>
 
-{/* 2nd card */}
-<div className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl rounded-lg p-4 w-full mb-4">
-  <h2 className="text-xl font-semibold text-white mb-4">Natural Disaster Risks</h2>
-  <div className="space-y-2">
-    <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
-      <span className="text-white">Flood Risk</span>
-      <span className="text-blue-500 font-medium">Moderate</span>
-    </div>
-    <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
-      <span className="text-white">Drought Risk</span>
-      <span className="text-yellow-500 font-medium">Low</span>
-    </div>
-    <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
-      <span className="text-white">Cyclone Risk</span>
-      <span className="text-red-500 font-medium">High</span>
-    </div>
-    <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
-      <span className="text-white">Heavy Rain Chance</span>
-      <span className="text-teal-500 font-medium">Likely</span>
-    </div>
-  </div>
-</div>
-
-
-
+      {/* 2nd Card - Natural Disaster Risks */}
+      <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg p-4 w-full mb-4">
+        <h2 className="text-xl font-semibold text-white mb-4">Natural Disaster Risks</h2>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
+            <span className="text-white font-medium">Flood Risk</span>
+            <span className="text-blue-500 font-semibold">Moderate</span>
+          </div>
+          <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
+            <span className="text-white font-medium">Drought Risk</span>
+            <span className="text-yellow-500 font-semibold">Low</span>
+          </div>
+          <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
+            <span className="text-white font-medium">Cyclone Risk</span>
+            <span className="text-red-500 font-semibold">High</span>
+          </div>
+          <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
+            <span className="text-white font-medium">Heavy Rain Chance</span>
+            <span className="text-teal-500 font-semibold">Likely</span>
+          </div>
+        </div>
+      </div>
 
       {/* 3rd Card - 14-Day Weather Forecast */}
-      {weatherData && !locationError && (
+      {weatherData && (
         <div className="relative w-full">
-          <div className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl rounded-lg p-4 w-full">
+          <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg p-4 w-full">
             <h2 className="font-bold text-gray-900 text-lg dark:text-gray-100">
-              14-Day Weather Forecast
+              14 Day Weather Forecast
             </h2>
 
             <div className="mt-4 space-y-2">
@@ -244,18 +193,16 @@ function Weather() {
                     >
                       <div className="flex items-center">
                         <div className="flex flex-col justify-center items-center">
-                        <div className="text-white text-sm w-14">
-                          {getDayName(day.date)} {/* Day name */}
-                        </div>
-                        <div className="text-white text-xs">
-                          {new Date(day.date).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "2-digit",
-                          })} {/* Date formatted as dd/mm/yy */}
-                        </div>
-
-
+                          <div className="text-white text-sm w-14 font-bold">
+                            {getDayName(day.date)} {/* Day name */}
+                          </div>
+                          <div className="text-white text-xs">
+                            {new Date(day.date).toLocaleDateString("en-GB", {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "2-digit",
+                            })} {/* Date formatted as dd/mm/yy */}
+                          </div>
                         </div>
                         <div className="text-white text-xs w-5 ml-3">
                           {day.day.daily_chance_of_rain}% {/* Chance of rain */}
@@ -268,13 +215,20 @@ function Weather() {
                           width={32}
                           height={32}
                         />
-                        <div className="ml-4 text-white text-xs">
-                          {day.day.condition.text}
+                        <div className="text-white text-xs ml-4">
+                          {day.day.condition.text} {/* Weather condition */}
                         </div>
                       </div>
-                      <div className="text-white text-xs w-20 -mr-3">
-                        {`${day.day.maxtemp_c}°C - ${day.day.mintemp_c}°C`}{" "}
-                        {/* Max / Min temperature */}
+                      <div className="text-white text-sm flex space-x-2">
+                        <span className="font-semibold">
+                          {day.day.maxtemp_c}°C {/* Max temperature */}
+                        </span>
+                        <span>
+                          -
+                        </span>
+                        <span className="text-gray-300">
+                          {day.day.mintemp_c}°C {/* Min temperature */}
+                        </span>
                       </div>
                     </div>
                   ))}

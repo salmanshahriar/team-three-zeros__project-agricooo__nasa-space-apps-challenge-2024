@@ -65,7 +65,7 @@ const Assistant = () => {
                 <div className="absolute flex items-center top-4 left-4 md:left-6">
                     <i className="bx bx-history text-xl"></i>
                 </div>
-                <h1 className="text-center text-md md:text-2xl mb-6">Assistant Page</h1>
+                <h1 className="text-center text-md md:text-2xl mb-6">Ai Assistant</h1>
             </div>
 
             {/* Chat Messages */}

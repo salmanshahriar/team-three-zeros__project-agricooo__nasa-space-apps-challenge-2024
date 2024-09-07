@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import { Input, Card, CardBody, CardFooter, Image, Button } from "@nextui-org/react";
+import React from "react";
+import { Input, Card, CardBody, CardFooter, Image, Button, User } from "@nextui-org/react";
 
 const list = [
   {
@@ -36,84 +36,142 @@ const list = [
   },
 ];
 
+const topSellingUsers = [
+  {
+    name: "John Smith",
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702a",
+    status: "Top Seller",
+  },
+  {
+    name: "Alice Johnson",
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702b",
+    status: "Top Seller",
+  },
+  {
+    name: "Michael Brown",
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702c",
+    status: "Top Seller",
+  },
+];
+
 const Market = () => {
   return (
-    <div className=" min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
-      <div className='mx-auto w-full max-w-3xl p-6 md:p-0 pt-2 flex flex-col md:w-[500px] mb-16'>
-      <div className="relative pt-3 text-white">
-        <div className="absolute flex items-center top-4 right-4 md:right-6 gap-3">
-          <i className='bx bxl-messenger text-xl'></i>
-          <i className='bx bxs-cart-alt text-xl'></i>
-        </div>
-        <h1 className="text-center text-md md:text-2xl mb-6">Market</h1>
-      </div>
-      
-      <div className="w-full max-w-3xl mb-16">
-        <Input
-          clearable
-          fullWidth
-          label="Search"
-          type="search"
-          placeholder="Search to buy..."
-          required
-          className="mb-4"
-          classNames={{
-            label: "text-black/50 ",
-            input: [
-              "bg-transparent",
-              "text-white/90",
-              "placeholder:text-white/100",
-            ],
-            innerWrapper: "bg-transparent",
-            inputWrapper: [
-              "shadow-xl",
-              "bg-default-200/50",
-              "backdrop-blur-xl",
-              "backdrop-saturate-200",
-              "hover:bg-default-200/70",
-              "group-data-[focus=true]:bg-default-200/50",
-              "!cursor-text",
-            ],
-          }}
-        />
-
-        {/* Add a "Sell Your Goods" Button */}
-        <div className='flex flex-row justify-between md:justify-start md:gap-2'>
-        <Button className="mb-5 text-sm p-4"  shadow color="primary" auto>
-          Sell Your Goods
-        </Button>
-        <Button className="mb-5 text-sm p-4"  shadow color="primary" auto>
-          Bazar Price Updates
-        </Button>
+    <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
+      <div className="mx-auto w-full max-w-3xl p-6 md:p-0 pt-2 flex flex-col md:w-[500px] mb-16">
+        <div className="relative pt-3 text-white">
+          <div className="absolute flex items-center top-4 right-4 md:right-6 gap-3">
+            <i className="bx bxl-messenger text-xl"></i>
+            <i className="bx bxs-cart-alt text-xl"></i>
+          </div>
+          <h1 className="text-center text-md md:text-2xl mb-6">Market</h1>
         </div>
 
-        {/* Demo Posts */}
-        <div className="gap-4 grid grid-cols-2 sm:grid-cols-3">
-          {list.map((item, index) => (
-            <Card
-              key={index}
-              className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl"
-              isPressable
-              onPress={() => console.log("item pressed")}
-            >
-              <CardBody className="overflow-visible p-0">
-                <Image
-                  shadow="sm"
-                  radius="lg"
-                  width="100%"
-                  alt={item.title}
-                  className="w-full object-cover h-[140px]"
-                  src={item.img}
+        <div className="w-full max-w-3xl mb-16">
+          <Input
+            clearable
+            fullWidth
+            label="Search"
+            type="search"
+            placeholder="Search to buy..."
+            required
+            className="mb-4"
+            classNames={{
+              label: "text-black/50 ",
+              input: ["bg-transparent", "text-white/90", "placeholder:text-white/100"],
+              innerWrapper: "bg-transparent",
+              inputWrapper: [
+                "shadow-xl",
+                "bg-default-200/50",
+                "backdrop-blur-xl",
+                "backdrop-saturate-200",
+                "hover:bg-default-200/70",
+                "group-data-[focus=true]:bg-default-200/50",
+                "!cursor-text",
+              ],
+            }}
+          />
+
+          {/* Add a "Sell Your Goods" Button */}
+          <div className="flex flex-row justify-between md:justify-start md:gap-2">
+            <Button className="mb-5 text-sm p-4" shadow color="primary" auto>
+              Sell Your Goods
+            </Button>
+            <Button className="mb-5 text-sm p-4" shadow color="primary" auto>
+              Bazar Price Updates
+            </Button>
+          </div>
+
+          {/* Top Selling Section */}
+          <h2 className="text-lg text-white mb-4">Top Selling:</h2>
+          <div className="gap-4 grid grid-cols-1 sm:grid-cols-2">
+            {topSellingUsers.map((user, index) => (
+              <Card
+                key={index}
+                className="bg-blue-500/20 backdrop-blur-md border border-gray-300 shadow-xl"
+                isPressable
+                onPress={() => console.log(`${user.name} pressed`)}
+              >
+                <CardBody className="flex flex-row items-center">
+                  <User
+                    name={user.name}
+                    description={user.status}
+                    className="pb-3 pl-3"
+                    avatarProps={{
+                      src: user.avatar,
+                      size: "xl", // Larger avatar size for top sellers
+                      className: "w-16 h-16", // Custom avatar size
+                    }}
+                    classNames={{
+                      name: "text-white font-bold",
+                      description: "text-yellow-400",
+                    }}
+                  />
+                </CardBody>
+              </Card>
+            ))}
+          </div>
+
+          {/* Demo Posts */}
+          <h2 className="text-lg text-white mt-10 mb-4">Market Listings:</h2>
+          <div className="gap-4 grid grid-cols-2 sm:grid-cols-3">
+            {list.map((item, index) => (
+              <Card
+                key={index}
+                className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl"
+                isPressable
+                onPress={() => console.log("item pressed")}
+              >
+                <CardBody className="overflow-visible p-0">
+                  <Image
+                    shadow="sm"
+                    radius="lg"
+                    width="100%"
+                    alt={item.title}
+                    className="w-full object-cover h-[140px]"
+                    src={item.img}
+                  />
+                </CardBody>
+                <User
+                  name="Jane Doe"
+                  description="Verified Seller"
+                  className="pb-3 pl-3"
+                  avatarProps={{
+                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                    size: "md", // Regular avatar size for general market listings
+                  }}
+                  classNames={{
+                    name: "text-white",
+                    description: "text-gray-400",
+                  }}
                 />
-              </CardBody>
-              <CardFooter className="text-small justify-between p-3">
-                <b className='text-white'>{item.title}</b>
-                <p className="text-white/80">{item.price}</p>
-              </CardFooter>
-            </Card>
-          ))}
+                <CardFooter className="text-small justify-between p-3">
+                  <b className="text-white">{item.title}</b>
+                  <p className="text-white/80">{item.price}</p>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
