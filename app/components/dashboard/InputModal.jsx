@@ -40,10 +40,10 @@ const InputModal = ({ isOpen, onOpenChange, onClose, dashboardTitle, onSave }) =
       isDismissable={false}
       placement="center"
       isKeyboardDismissDisabled={true}
-      className="w-full md:w-[500px] max-w-3xl m-8 rounded-xl border border-gray-300 backdrop-blur-md shadow-2xl mt-0"
+      className="w-full md:w-[500px] max-w-3xl bg-gradient-to-r from-blue-500/40 to-purple-500/20 border border-blue-400/80 shadow-2xl mt-0"
     >
       <div>
-      <ModalContent className="w-10/12 bg-white/20 border border-gray-300 backdrop-blur-md shadow-2xl rounded-xl">
+      <ModalContent className="w-10/12 bg-white/5 shadow-2xl rounded-xl">
         {(onClose) => (
           <div>
             <ModalHeader className="flex flex-col gap-1 text-white text-lg font-semibold">
@@ -83,7 +83,7 @@ const InputModal = ({ isOpen, onOpenChange, onClose, dashboardTitle, onSave }) =
               <Button
                 color="danger"
                 variant="light"
-                className="text-red-600 hover:backdrop-blur-lg rounded-lg hover:bg-red-600/20 transition-all duration-200 ease-in-out"
+                className="text-red-500/80 hover:backdrop-blur-lg rounded-lg hover:bg-red-600/20 transition-all duration-200 ease-in-out"
                 onPress={onClose}
               >
                 Cancel

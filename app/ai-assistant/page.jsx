@@ -59,13 +59,13 @@ const Assistant = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
-            <div className='mx-auto w-full max-w-3xl p-5 md:p-0 pt-2 flex flex-col md:w-[500px]'> 
+            <div className='mx-auto w-full max-w-3xl p-6 pt-4 flex flex-col md:w-[500px]'> 
                 {/* Header */}
-            <div className="relative p-6 pt-3 pb-0 text-white">
-                <div className="absolute flex items-center top-4 left-4 md:left-6">
+            <div className="relative pb-0 text-white">
+                <div className="absolute flex items-center top-0 left-0">
                     <i className="bx bx-history text-xl p-1 bg-white/10 rounded"></i>
                 </div>
-                <h1 className="text-center text-md md:text-2xl mb-4">Ai Assistant</h1>
+                <h1 className="text-center font-semibold text-lg md:text-xl mb-5">Ai Assistant</h1>
             </div>
 
             {/* Chat Messages */}
@@ -78,7 +78,7 @@ const Assistant = () => {
                                     <img src={msg.image} alt="Uploaded" className="max-w-xs rounded-lg" />
                                 </div>
                             ) : (
-                                <div className={`max-w-xs p-3 rounded-lg ${msg.isUser ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-200'}`}>
+                                <div className={`max-w-xs p-3 rounded-lg ${msg.isUser ? 'bg-blue-500/90 text-white' : 'bg-gray-700/90 text-gray-200'}`}>
                                     {msg.text}
                                 </div>
                             )}
@@ -90,8 +90,9 @@ const Assistant = () => {
             {/* Input Field */}
             <div className="fixed mx-auto w-full md:w-[500px] bottom-20 left-0 right-0  mb-1.5 md:mb-2">
                 {/* Image Upload and Input Section */}
-                <div className="p-4 bg-white/20 flex items-center justify-center space-x-2 backdrop-blur-lg rounded-lg md:rounded-xl">
-                    <input
+                <div className=" bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/50  rounded-lg md:rounded-xl">
+                   <div className='bg-white/5 flex items-center justify-center gap-1 p-4'>
+                   <input
                         type="file"
                         accept="image/*"
                         className="hidden"
@@ -105,7 +106,7 @@ const Assistant = () => {
                     {/* Text Input */}
                     <input
                         type="text"
-                        className="flex-1 p-2 rounded-lg bg-gray-700 text-white"
+                        className="flex-1 p-2 rounded-lg bg-gray-700/90 text-white"
                         placeholder="Type a message..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
@@ -118,6 +119,7 @@ const Assistant = () => {
                     >
                         Send
                     </button>
+                   </div>
                 </div>
             </div>
             </div>

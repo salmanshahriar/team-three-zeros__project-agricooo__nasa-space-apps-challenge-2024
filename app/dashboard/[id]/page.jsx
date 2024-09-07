@@ -8,7 +8,7 @@ import {Card, Switch, Accordion, AccordionItem } from '@nextui-org/react';
 const DashboardInfo = ({ dashboardName, deviceId ,deviceHealth, deviceConnection }) => {
   return (
     <>
-        <div className="mx-auto sm:w-80 md:w-[500px] text-white rounded-lg shadow-xl bg-white/10 flex flex-col gap-1 p-4 md:pl-6 mb-8 font-sans">
+        <div className="mx-auto sm:w-80 md:w-[500px] text-white rounded-lg bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 shadow-xl flex flex-col gap-1 p-4 md:pl-6 mb-6 font-sans">
           <div className='text-xs'>
             <span className='font-bold'>Dashboard Name:</span> <span>{dashboardName}</span>
           </div>
@@ -80,7 +80,7 @@ const CircularProgressBar = ({ percentage }) => {
 // VisualizationCard component
 const VisualizationCard = ({ title, percentage }) => {
   return (
-    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center ">
+    <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80  w-full max-w-3xl rounded-lg shadow-lg flex flex-col items-center ">
       <CircularProgressBar percentage={percentage} />
       <h2 className="text-sm font-semibold text-white pb-3">{title}</h2>
     </div>
@@ -90,7 +90,7 @@ const VisualizationCard = ({ title, percentage }) => {
 // TemperatureCard component
 const TemperatureCard = ({ temperature }) => {
   return (
-    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center justify-center py-4">
+    <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 shadow-xl w-full max-w-3xl rounded-lg flex flex-col items-center justify-center py-4">
       <div className="text-white text-lg font-bold">{temperature}°C</div>
       <h2 className="text-sm font-semibold text-white pb-2">Temperature</h2>
     </div>
@@ -100,7 +100,7 @@ const TemperatureCard = ({ temperature }) => {
 // WindSpeedCard component
 const WindSpeedCard = ({ windSpeed }) => {
   return (
-    <div className="bg-white/10 w-full max-w-3xl backdrop-blur-md rounded-lg shadow-lg flex flex-col items-center justify-center py-4">
+    <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 w-full max-w-3xl rounded-lg shadow-lg flex flex-col items-center justify-center py-4">
       <div className="text-white text-lg font-bold">{windSpeed} km/h</div>
       <h2 className="text-sm font-semibold text-white pb-2">Wind Speed</h2>
     </div>
@@ -198,8 +198,8 @@ const Profile = () => {
         deviceConnection='Connected'
         />
 
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-8">
-          <h1 className="text-white/90 mb-2 ml-2 font-sans font-bold">Visualization Data:</h1>
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
+          <h1 className="text-white/90 mb-2 font-sans font-bold">Visualization Data:</h1>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <VisualizationCard title="Soil Moisture" percentage={30} />
             <VisualizationCard title="Water Level" percentage={60} />
@@ -210,9 +210,9 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-8">
-          <h1 className="text-white/90 mb-2 ml-2 font-sans font-bold">Ai Analyze Suggestions:</h1>
-          <div className="bg-white/10 p-4 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
+          <h1 className="text-white/90 mb-2 font-sans font-bold">Ai Analyze Suggestions:</h1>
+          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg shadow-xl flex flex-col items-center space-y-4">
             <AiAnalyzeCard
               title="Soil Moisture Analysis"
               percentage={30}
@@ -227,8 +227,8 @@ const Profile = () => {
         </div>
 
         <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
-          <h1 className="text-white/90 mb-2 ml-2 font-sans font-bold">System Utilization:</h1>
-          <div className="w-full max-w-3xl bg-white/10 pt-4 px-4 rounded-lg shadow-lg flex flex-col items-center">
+          <h1 className="text-white/90 mb-2 font-sans font-bold">System Utilization:</h1>
+          <div className="w-full max-w-3xl bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 pt-4 px-4 rounded-lg shadow-xl flex flex-col items-center">
             <UtilizationCard title="AI Water System" />
             <UtilizationCard title="AI Lights System" />
           </div>

@@ -39,124 +39,117 @@ const list = [
 const Market = () => {
   return (
     <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
-      <div className="mx-auto w-full max-w-3xl p-6 md:p-0 pt-2 flex flex-col md:w-[500px] mb-16">
-        <div className="relative pt-3 text-white">
-          <div className="absolute flex items-center top-4 right-4 md:right-6 gap-3">
-            <i className="bx bxs-cart-alt text-xl"></i>
+      <div className="w-full max-w-4xl p-6 pt-4 md:w-[500px] mb-36">
+        <div className="relative text-white">
+          <h1 className="text-center text-lg md:text-xl font-semibold mb-5">Market</h1>
+          <div className="absolute top-0 left-0 flex items-center gap-3">
+            <i className="bx bxs-cart-alt text-xl p-1 bg-white/10 rounded"></i>
           </div>
-          <h1 className="text-center text-md md:text-2xl mb-4">Market</h1>
         </div>
 
-        <div className="w-full max-w-3xl mb-16">
-          <Input
-            clearable
-            fullWidth
-            label="Search"
-            type="search"
-            placeholder="Search to buy..."
-            required
-            className="mb-4"
-            classNames={{
-              label: "text-black/50 ",
-              input: ["bg-transparent", "text-white/90", "placeholder:text-white/100"],
-              innerWrapper: "bg-transparent",
-              inputWrapper: [
-                "shadow-xl",
-                "bg-default-200/50",
-                "backdrop-blur-xl",
-                "backdrop-saturate-200",
-                "hover:bg-default-200/70",
-                "group-data-[focus=true]:bg-default-200/50",
-                "!cursor-text",
-              ],
-            }}
-          />
-
-          {/* Add a "Sell Your Goods" Button */}
-          <div className="flex flex-row justify-between md:justify-start md:gap-2">
-            <Button className=" text-sm p-4" shadow color="primary" auto>
-              Sell Your Goods
-            </Button>
-            <Button className=" text-sm p-4" shadow color="primary" auto>
-              Bazar Price Updates
-            </Button>
-          </div>
-
-
-
-          <h2 className="text-lg text-white mt-5 mb-4">My Listed:</h2>
-<div className="gap-4 grid grid-cols-2 sm:grid-cols-3">
-  {list.slice(0, 2).map((item, index) => (
-    <Card
-      key={index}
-      className="bg-white/10 backdrop-blur-md border border-gray-300 shadow-xl"
-      isPressable
-      onPress={() => console.log("item pressed")}
-    >
-      <CardBody className="overflow-visible p-0">
-        <Image
-          shadow="sm"
-          radius="lg"
-          width="100%"
-          alt={item.title}
-          className="w-full object-cover h-[140px]"
-          src={item.img}
+        <Input
+          clearable
+          fullWidth
+          type="search"
+          placeholder="Search to buy..."
+          required
+          className="mb-6"
+          classNames={{
+            label: "text-gray-300",
+            input: [
+              "bg-transparent",
+              "text-white/90",
+              "placeholder:text-white/100",
+            ],
+            innerWrapper: "bg-transparent",
+            inputWrapper: [
+              "shadow-xl",
+              "text-white",
+              "bg-default-200/50",
+              "backdrop-blur-xl",
+              "backdrop-saturate-200",
+              "hover:bg-default-200/70",
+              "group-data-[focus=true]:bg-default-200/50",
+              "!cursor-text",
+            ],
+          }}
         />
-      </CardBody>
 
-      <CardFooter className="text-small justify-between p-3">
-        <b className="text-white">{item.title}</b>
-        <p className="text-white/80">{item.price}</p>
-      </CardFooter>
-    </Card>
-  ))}
-</div>
+        <div className="flex flex-col md:flex-row md:justify-between gap-4 mb-8">
+          <Button className="text-sm py-2 px-4" shadow color="primary" auto>
+            Sell Your Items
+          </Button>
+          <Button className="text-sm py-2 px-4" shadow color="primary" auto>
+            Bazar Price Updates
+          </Button>
+        </div>
 
+        <h2 className="text-lg text-white mb-4">My Listed:</h2>
+        <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          {list.slice(0, 3).map((item, index) => (
+            <Card
+              key={index}
+              className="bg-white/20 backdrop-blur-md border border-gray-300 shadow-xl"
+              isPressable
+              onPress={() => console.log("item pressed")}
+            >
+              <CardBody className="p-0">
+                <Image
+                  shadow="sm"
+                  radius="lg"
+                  width="100%"
+                  alt={item.title}
+                  className="object-cover h-[140px]"
+                  src={item.img}
+                />
+              </CardBody>
+              <CardFooter className="justify-between p-4">
+                <b className="text-white">{item.title}</b>
+                <p className="text-white/80">{item.price}</p>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
 
-
-          {/* Top Sells */}
-          <h2 className="text-lg text-white mt-6 mb-4">Top Sells:</h2>
-          <div className="gap-4 grid grid-cols-2 sm:grid-cols-3">
-            {list.map((item, index) => (
-              <Card
-                key={index}
-                className="bg-white/10 backdrop-blur-xl border-2 border-gray-400 shadow-md"
-
-                isPressable
-                onPress={() => console.log("item pressed")}
-              >
-                <CardBody className="overflow-visible p-0">
-                <User
+        <h2 className="text-lg text-white mt-8 mb-4">Top Sells:</h2>
+        <div className="gap-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3">
+          {list.map((item, index) => (
+            <Card
+              key={index}
+              className="bg-white/20 backdrop-blur-md border border-gray-300 shadow-xl"
+              isPressable
+              onPress={() => console.log("item pressed")}
+            >
+              <CardBody className="p-0">
+              <User
                   name="Jane Doe"
                   description="Verified"
-                  className="p-2 "
                   avatarProps={{
-                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                    size: "xs", // Regular avatar size for general market listings
+                    src: "https://www.gravatar.com/avatar/?d=mp",
+                    size: "xs",
                   }}
+                  className="my-3"
                   classNames={{
                     name: "text-white",
                     description: "text-yellow-400 text-xs",
                   }}
                 />
-                  <Image
+                <Image
                   shadow="sm"
                   radius=""
                   width="100%"
                   alt={item.title}
-                  className="w-full object-cover h-[140px] border-y border-gray-400" // Add the border on the Y-axis
+                  className="object-cover h-[140px]"
                   src={item.img}
                 />
-
-                </CardBody>
-                
-                <CardFooter className="text-small justify-between p-3">
-                  <b className="text-white">{item.title}</b>
-                  <p className="text-white/80">{item.price}</p>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
+               
+              </CardBody>
+              <CardFooter className="justify-between p-4">
+                <b className="text-white">{item.title}</b>
+                <p className="text-white/80">{item.price}</p>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

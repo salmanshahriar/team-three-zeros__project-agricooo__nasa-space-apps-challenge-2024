@@ -72,12 +72,13 @@ function Weather() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-4 md:w-[499px]">
+    <div className="mx-auto w-full max-w-3xl space-y-4 ">
       {/* First Card - Main Weather Card */}
       <div className="relative w-full">
         {weatherData && (
-          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg p-4 w-full">
-            <h2 className="font-bold text-gray-900 text-lg dark:text-gray-100">
+          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg  w-full">
+            <div className="bg-white/5 p-4">
+            <h2 className="font-bold text-gray-900 text-lg dark:text-gray-100 ">
               {formattedDateDisplay(new Date())}
             </h2>
             <div className="flex mt-4 mb-2">
@@ -148,13 +149,15 @@ function Weather() {
                     </div>
                   ))}
             </div>
+            </div>
           </div>
         )}
       </div>
 
       {/* 2nd Card - Natural Disaster Risks */}
-      <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg p-4 w-full mb-4">
-        <h2 className="text-xl font-semibold text-white mb-4">Natural Disaster Risks</h2>
+      <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg w-full mb-4">
+       <div className="bg-white/5 p-4">
+       <h2 className="text-xl font-semibold text-white mb-4">Natural Disaster Risks</h2>
         <div className="space-y-2">
           <div className="flex justify-between items-center bg-gray-800 bg-opacity-20 p-2 rounded-md">
             <span className="text-white font-medium">Flood Risk</span>
@@ -173,13 +176,15 @@ function Weather() {
             <span className="text-teal-500 font-semibold">Likely</span>
           </div>
         </div>
+       </div>
       </div>
 
       {/* 3rd Card - 14-Day Weather Forecast */}
       {weatherData && (
         <div className="relative w-full">
-          <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg p-4 w-full">
-            <h2 className="font-bold text-gray-900 text-lg dark:text-gray-100">
+          <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg w-full">
+           <div className="bg-white/5 p-4">
+           <h2 className="font-bold text-gray-900 text-lg dark:text-gray-100">
               14 Day Weather Forecast
             </h2>
 
@@ -235,6 +240,7 @@ function Weather() {
                 </>
               )}
             </div>
+           </div>
           </div>
         </div>
       )}
