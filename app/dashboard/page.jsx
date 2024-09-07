@@ -31,7 +31,7 @@ const Dashboard = ({dashboardName, device}) => {
     return (
         <div className='min-h-screen flex flex-col items-center h-screen overflow-y-scroll'>
             <div className="mx-auto w-full max-w-3xl p-6 pt-3">
-                <h1 className="text-center text-md md:text-2xl text-white mb-6">Dashboard</h1>
+                <h1 className="text-center text-md md:text-2xl text-white mb-4">Dashboard</h1>
 
                 {/* Render all dashboards */}
                 {dashboards.map((dashboard, index) => (

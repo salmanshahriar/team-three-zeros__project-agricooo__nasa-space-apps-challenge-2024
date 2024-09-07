@@ -61,11 +61,11 @@ const Assistant = () => {
         <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
             <div className='mx-auto w-full max-w-3xl p-5 md:p-0 pt-2 flex flex-col md:w-[500px]'> 
                 {/* Header */}
-            <div className="relative p-6 pt-3 text-white">
+            <div className="relative p-6 pt-3 pb-0 text-white">
                 <div className="absolute flex items-center top-4 left-4 md:left-6">
-                    <i className="bx bx-history text-xl"></i>
+                    <i className="bx bx-history text-xl p-1 bg-white/10 rounded"></i>
                 </div>
-                <h1 className="text-center text-md md:text-2xl mb-6">Ai Assistant</h1>
+                <h1 className="text-center text-md md:text-2xl mb-4">Ai Assistant</h1>
             </div>
 
             {/* Chat Messages */}
