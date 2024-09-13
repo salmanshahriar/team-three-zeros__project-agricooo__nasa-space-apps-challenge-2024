@@ -86,7 +86,7 @@ const Market = () => {
 
         <h2 className="text-lg text-white mb-4">My Listed:</h2>
         <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          {list.slice(0, 3).map((item, index) => (
+          {list.slice(0, 1).map((item, index) => (
             <Card
               key={index}
               className="bg-white/20 backdrop-blur-md border border-gray-300 shadow-xl"
