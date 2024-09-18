@@ -248,7 +248,7 @@ const Market = () => {
             Sell Your Items
           </Button>
         </div>
-        <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <div className="gap-4 grid sm:grid-cols-1 md:grid-cols-2">
           {list.slice(0, 3).map((item, index) => (
               <Card
               key={index}
