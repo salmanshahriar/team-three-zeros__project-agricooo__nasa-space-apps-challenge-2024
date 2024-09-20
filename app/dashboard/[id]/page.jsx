@@ -181,8 +181,8 @@ const Profile = () => {
   return (
     <div className="min-h-screen flex flex-col justify-start h-screen	overflow-y-scroll">
       <div className="mx-auto w-full max-w-3xl p-6 pt-2">
-        <div className="relative cursor-pointer" onClick={handleBackClick}>
-          <div className="absolute text-white left-0 md:left-[105px] flex items-center justify-center top-[3px] md:top-[2px]">
+        <div className="relative">
+          <div onClick={handleBackClick} className="absolute cursor-pointer text-white hover:bg-white/10 hover:rounded p-1 pl-0 pr-2 left-0 md:left-[105px] left-0 md:left-[105px] flex items-center justify-center top-[3px] md:top-[2px]">
             <i className="bx bx-chevron-left text-xl"></i>
             <p className="text-sm md:text-lg -ml-1">Back</p>
           </div>

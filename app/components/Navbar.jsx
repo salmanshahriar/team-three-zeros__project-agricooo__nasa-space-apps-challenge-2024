@@ -13,22 +13,23 @@ function Navbar() {
   useEffect(() => {
     const initialIndex =
       pathname === '/' ? 0 :
-      pathname.startsWith('/dashboard') ? 1 :  // This includes both `/dashboard` and `/dashboard/device-1`
-      pathname === '/ai-assistant' ? 2 :
-      pathname === '/market' ? 3 : 4;
+      pathname.startsWith('/weather') ? 1 : 
+      pathname === '/dashboard' ? 2 :
+      pathname === '/ai-assistant' ? 3 :
+      pathname === '/market' ? 4 : 0;
     setActiveIndex(initialIndex);
-  }, [pathname]);  
+  }, [pathname]);
 
   useEffect(() => {
     if (menuRef.current) {
       const menuItems = menuRef.current.children;
       const activeItem = menuItems[activeIndex];
-      const sliderWidth = 40; // Fixed width for the slider
+      const sliderWidth = 40;
       const sliderOffset = activeItem.offsetLeft + (activeItem.clientWidth / 2) - (sliderWidth / 2);
       setIndicatorStyle({
         left: `${sliderOffset}px`,
         width: `${sliderWidth}px`,
-        height: '5px',  // Adjusted height for better visibility
+        height: '5px',
       });
     }
   }, [activeIndex]);
@@ -59,10 +60,22 @@ function Navbar() {
           </li>
           <li>
             <Link
-              href="/dashboard"
+              href="/weather"
               onClick={() => handleMenuClick(1)}
               className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
                 activeIndex === 1 ? 'scale-105 font-bold' : 'hover:scale-105'
+              }`}
+            >
+              <i className="bx bxs-cloud-rain text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Weather</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard"
+              onClick={() => handleMenuClick(2)}
+              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+                activeIndex === 2 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
               <i className="bx bxs-dashboard text-3xl"></i>
@@ -71,38 +84,26 @@ function Navbar() {
           </li>
           <li>
             <Link
-              href="/ai-assistant"
-              onClick={() => handleMenuClick(2)}
-              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
-                activeIndex === 2 ? 'scale-105 font-bold' : 'hover:scale-105'
-              }`}
-            >
-              <i className="bx bxs-message-square-dots text-3xl"></i>
-              <span className="text-xs font-medium mt-1">Assistant</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/market"
+              href="/assistance"
               onClick={() => handleMenuClick(3)}
               className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
                 activeIndex === 3 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
-              <i className="bx bxs-store text-3xl"></i>
-              <span className="text-xs font-medium mt-1">Market</span>
+              <i className="bx bxs-chat text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Assistants</span>
             </Link>
           </li>
           <li>
             <Link
-              href="/profile"
+              href="/market"
               onClick={() => handleMenuClick(4)}
               className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
                 activeIndex === 4 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
-              <i className="bx bxs-user-rectangle text-3xl"></i>
-              <span className="text-xs font-medium mt-1">Profile</span>
+              <i className="bx bxs-store text-3xl"></i>
+              <span className="text-xs font-medium mt-1">Market</span>
             </Link>
           </li>
         </ul>

@@ -3,7 +3,6 @@
 import React from "react";
 import { Tabs, Tab, Input, Card, CardBody, CardFooter, Image, Button, User } from "@nextui-org/react";
 
-
 const list = [
   {
     title: "Orange",
@@ -67,7 +66,6 @@ const list = [
   },
 ];
 
-
 const Market = () => {
   return (
     <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
@@ -107,12 +105,10 @@ const Market = () => {
           }}
         />
 
-        
-        
-
-
         <div className="flex w-full flex-col">
-        <Tabs aria-label="Options" color="primary" className="" classNames="bg-white/10"  width="100px">
+        <Tabs 
+        className="bg-white/0"
+        aria-label="Options" color="primary"  width="100px" >
         <Tab key="market" title="Market" className="glass-tab">
               <div className="gap-4 grid sm:grid-cols-1 md:grid-cols-2 mt-3">
                 {list.slice().reverse().map((item, index) => (
@@ -152,12 +148,14 @@ const Market = () => {
                     </CardBody>
                     <CardFooter className="justify-between  py-2">
                       
-                      <div className="flex flex-col">
-                        <b className="text-white truncate">{item.title}</b>
-                        <p className="text-white/80 text-sm text-start">{item.price}</p>
-                      </div>
-                      <div className="flex flex-col  ">
-                        <div className="text-yellow-300 flex space-x-1 justify-end">
+                     <div className="flex flex-col gap-3">
+                     <div className=" flex justify-between">
+                        <div className="flex flex-col">
+                          <b className="text-white truncate text-start w-44">{item.title}</b>
+                          <p className="text-white/80 text-sm text-start w-44">{item.price}</p>
+                        </div>
+                        <div className="flex flex-col mt-1">
+                        <div className="text-yellow-300 flex space-x-1 ml-1.5 justify-end w-28" >
                           {[...Array(item.rating)].map((_, i) => (
                             <svg
                               key={i}
@@ -170,8 +168,17 @@ const Market = () => {
                             </svg>
                           ))}
                         </div>
-                        <span className="text-white/60 text-xs ml-2 mt-1">{item.stock} in stock</span>
-                      </div>
+                        <span className="text-white/60 text-xs mt-1.5 ml-1.5 text-end w-28">{item.stock} in stock</span>
+                        </div>
+                      
+                     </div>
+
+                     <div className="flex justify-end">
+                     <Button color="primary" className="w-28 ">
+                        Buy
+                     </Button>
+                     </div>
+                     </div>
                     </CardFooter>
                   </Card>
                 ))}

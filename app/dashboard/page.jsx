@@ -15,16 +15,15 @@ const Dashboard = ({dashboardName, device}) => {
     const handleClose = () => setIsOpen(false);
 
     const handleSave = (device, dashboardName) => {
-        // Create a new dashboard object and add it to the state
+       
         const newDashboard = {
-            img: "/images/default-dashboard.png", // Use a default image or customize it based on the device
+            img: "/images/default-dashboard.png", 
             name: dashboardName,
             deviceName: device,
         };
 
         setDashboards((prevDashboards) => [...prevDashboards, newDashboard]);
 
-        // Close the modal after saving
         handleClose();
     };
 
@@ -61,9 +60,8 @@ const Dashboard = ({dashboardName, device}) => {
             isOpen={isOpen} 
             onOpenChange={setIsOpen} 
             onClose={handleClose}
-            dashboardTitle="Create a Dashboard" // Ensure this prop matches
-            onSave={handleSave} // Pass the save handler
-
+            dashboardTitle="Create a Dashboard" 
+            onSave={handleSave} 
             />
             </div>
         </div>

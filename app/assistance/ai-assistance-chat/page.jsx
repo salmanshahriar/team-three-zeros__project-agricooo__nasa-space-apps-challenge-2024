@@ -1,7 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-const Assistant = () => {
+const AiAssistantChat = () => {
     const [messages, setMessages] = useState([
         { text: "Hi, how can I help you today?", isUser: false },
         { text: "I'm looking for some information about the tomato plant virus that is on my plant.", isUser: true },
@@ -57,13 +58,24 @@ const Assistant = () => {
         }
     }, [messages]);
 
+        const router = useRouter(); // Initialize useRouter
+
+        const handleBackClick = () => {
+            router.push('/assistance'); 
+        };
+
     return (
         <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
             <div className='mx-auto w-full max-w-3xl p-6 pt-4 flex flex-col md:w-[500px]'> 
                 {/* Header */}
             <div className="relative pb-0 text-white">
-                <div className="absolute flex items-center top-0 left-0">
-                    <i className="bx bx-history text-xl p-1 bg-white/10 rounded"></i>
+                <div onClick={handleBackClick} className="absolute cursor-pointer text-white hover:bg-white/10 hover:rounded p-1 pl-0 pr-2 left-0 flex items-center justify-center top-[3px] md:-top-1">
+                    <i className="bx bx-chevron-left text-xl"></i>
+                    <p className="text-sm md:text-lg -ml-1">Back</p>
+                </div>
+                <div className="absolute flex items-center top-0 right-0">
+                
+                    <i className="bx bx-history text-xl p-1 bg-white/10 rounded cursor-pointer"></i>
                 </div>
                 <h1 className="text-center font-semibold text-lg md:text-xl mb-5">Ai Assistant</h1>
             </div>
@@ -127,4 +139,4 @@ const Assistant = () => {
     );
 }
 
-export default Assistant;
+export default AiAssistantChat;
