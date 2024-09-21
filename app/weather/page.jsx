@@ -5,9 +5,9 @@ import React, { useState, useEffect } from "react";
 function Weather() {
   const [weatherData, setWeatherData] = useState(null);
 
-  // Mock API request to fetch weather data
+ 
   const fetchWeatherData = async () => {
-    // Simulate an API request with fake data
+
     const fakeWeatherData = {
       location: {
         name: "Chittagong",
