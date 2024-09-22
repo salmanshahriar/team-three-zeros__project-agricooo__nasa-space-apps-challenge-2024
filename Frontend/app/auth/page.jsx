@@ -1,11 +1,12 @@
 "use client";
-
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Input, Button, Progress, Text } from "@nextui-org/react";
+import { useRouter } from 'next/navigation'; // For redirecting
 
 const AuthWelcome = ({ onNext }) => {
     return (
-        <>
+        <div className='z-50 relative'>
             <h1 className="text-6xl font-bold font-serif text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 drop-shadow-lg">
                 Agrico
             </h1>
@@ -17,25 +18,25 @@ const AuthWelcome = ({ onNext }) => {
                 <span className="hover:underline cursor-pointer">Utilize</span>
             </div>
             <h2 className="text-lg text-white font-light leading-relaxed">
-                Welcome to Agrico, your go-to guide for daily farming tips and an expert agricultural marketplace.
+                Welcome to Agrico...
             </h2>
             
             <Button className='mt-10' onClick={onNext} color="primary">
                 Sign Up
             </Button>
-        </>
+        </div>
     );
 };
 
 const StepForm = () => {
     const [step, setStep] = useState(0);
     const [formValues, setFormValues] = useState({
-        name: '',
+        fullName: '',
         email: '',
-        number: '',
-        location: ''
+        phoneNumber: ''
     });
     const [warning, setWarning] = useState('');
+    const router = useRouter(); // For navigation
 
     const handleChange = (e) => {
         setFormValues({
@@ -44,15 +45,30 @@ const StepForm = () => {
         });
     };
 
-    const handleNext = () => {
-        if ((step === 1 && !formValues.name) ||
+    const handleNext = async () => {
+        if ((step === 1 && !formValues.fullName) ||
             (step === 2 && !formValues.email) ||
-            (step === 3 && !formValues.number) ||
-            (step === 4 && !formValues.location)) {
+            (step === 3 && !formValues.phoneNumber)) {
             setWarning('Please fill out the required fields.');
         } else {
             setWarning('');
-            setStep(step + 1);
+            if (step === 3) {
+                try {
+                    const response = await axios.post('https://agricooo.projectdaffodil.xyz/createAccount', formValues);
+                    const { accessToken, apiToken } = response.data;
+
+                    // Save credentials in localStorage
+                    localStorage.setItem('accessToken', accessToken);
+                    localStorage.setItem('apiToken', apiToken);
+
+                    // Redirect to the homepage
+                    router.push('/');
+                } catch (error) {
+                    console.error('Error during authentication:', error);
+                }
+            } else {
+                setStep(step + 1);
+            }
         }
     };
 
@@ -60,11 +76,10 @@ const StepForm = () => {
         setStep(step - 1);
     };
 
-    // Calculate progress as a percentage
-    const progress = (step / 4) * 100;
+    const progress = (step / 3) * 100; // Adjust the progress calculation
 
     return (
-        <div className='min-h-screen relative z-50 flex flex-col justify-center items-center h-screen overflow-y-scroll'>
+        <div className='min-h-screen relative z-60 flex flex-col justify-center items-center h-screen overflow-y-scroll'>
             <div className="mx-auto p-6 sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 text-center space-y-8">
                 {step !== 0 && (
                     <Progress
@@ -73,26 +88,25 @@ const StepForm = () => {
                         value={progress}
                         color="success"
                         showValueLabel={true}
-                        className="mb-6"
+                        className="mb-6 text-white w-80"
                     />
                 )}
                 {step === 0 && <AuthWelcome onNext={() => setStep(1)} />}
                 {step === 1 && (
                     <>
                         <Input
-                            name="name"
-                            value={formValues.name}
+                            name="fullName"
+                            value={formValues.fullName}
                             onChange={handleChange}
                             clearable
                             fullWidth
-                            label="Name"
-                            placeholder="Enter your name"
+                            label="Full Name"
+                            placeholder="Enter your full name"
                             required
                         />
                         {warning && <Text color="error">{warning}</Text>}
                         <div className='mt-4'>
-                            <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
-                            <Button onClick={handleNext} color="primary" disabled={!formValues.name}>Next</Button>
+                            <Button onClick={handleNext} color="primary" disabled={!formValues.fullName}>Next</Button>
                         </div>
                     </>
                 )}
@@ -119,39 +133,19 @@ const StepForm = () => {
                 {step === 3 && (
                     <>
                         <Input
-                            name="number"
-                            value={formValues.number}
+                            name="phoneNumber"
+                            value={formValues.phoneNumber}
                             onChange={handleChange}
                             clearable
                             fullWidth
-                            label="Number"
-                            type="tel"
+                            label="Phone Number"
                             placeholder="Enter your phone number"
                             required
                         />
                         {warning && <Text color="error">{warning}</Text>}
                         <div className='mt-4'>
                             <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
-                            <Button onClick={handleNext} color="primary" disabled={!formValues.number}>Next</Button>
-                        </div>
-                    </>
-                )}
-                {step === 4 && (
-                    <>
-                        <Input
-                            name="location"
-                            value={formValues.location}
-                            onChange={handleChange}
-                            clearable
-                            fullWidth
-                            label="Location"
-                            placeholder="Enter your location"
-                            required
-                        />
-                        {warning && <Text color="error">{warning}</Text>}
-                        <div className='mt-4'>
-                            <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
-                            <Button color="primary" disabled={!formValues.location}>Submit</Button>
+                            <Button onClick={handleNext} color="primary" disabled={!formValues.phoneNumber}>Submit</Button>
                         </div>
                     </>
                 )}

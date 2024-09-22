@@ -1,20 +1,33 @@
+"use client";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar";
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import "./globals.css";
 import 'boxicons/css/boxicons.min.css';
 import { NextUIProvider } from '@nextui-org/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Agricooo | By ThreeZeros",
-  description: "Welcome to Agricooo, an innovative solution designed to help farmers around the world make informed decisions using real-time Earth observation data and powerful analytics. Agricooo empowers farmers to tackle the challenges posed by unpredictable weather, pests, and diseases, ensuring better crop management and enhanced agricultural productivity.",
-};
-
 export default function RootLayout({ children }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const apiToken = localStorage.getItem("apiToken");
+    
+    if (accessToken && apiToken) {
+      setIsAuthenticated(true);
+      router.push('/');
+    } else {
+      setIsAuthenticated(false);
+      router.push('/auth');
+    }
+  }, [router]);
+
   return (
     <html lang="en">
-      <title>Agricooo | By ThreeZeros</title>
       <body className={`${inter.className} main-bg`}>
         <NextUIProvider>
           <Navbar />

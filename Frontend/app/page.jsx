@@ -27,7 +27,7 @@ const Home = () => {
                 name: "text-white",
                 description: "text-yellow-400 text-xs",
               }}
-              onClick={openModal} // Open modal when user avatar is clicked
+              onClick={openModal} 
             />
           </div>
         </div>
