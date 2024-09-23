@@ -10,6 +10,9 @@ function Navbar() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
+  // Hide Navbar for specific route (like /auth)
+  const isAuthPage = pathname === '/auth';  // Adjust this route according to your StepForm route
+
   useEffect(() => {
     const initialIndex =
       pathname === '/' ? 0 :
@@ -34,9 +37,10 @@ function Navbar() {
     }
   }, [activeIndex]);
 
-  const handleMenuClick = (index) => {
-    setActiveIndex(index);
-  };
+  // Hide Navbar using conditional rendering based on route
+  if (isAuthPage) {
+    return null;  // No Navbar on /auth page
+  }
 
   return (
     <header className="fixed z-30 w-full md:w-[500px] md:rounded-xl bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl backdrop-blur-lg hover:shadow-3xl transition-shadow duration-300">
@@ -84,7 +88,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              href="/assistance"
+              href="/ai-assistant"
               onClick={() => handleMenuClick(3)}
               className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
                 activeIndex === 3 ? 'scale-105 font-bold' : 'hover:scale-105'
