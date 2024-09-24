@@ -13,12 +13,17 @@ function Navbar() {
   // Hide Navbar for specific route (like /auth)
   const isAuthPage = pathname === '/auth';  // Adjust this route according to your StepForm route
 
+  // Handle menu item click and update active index
+  const handleMenuClick = (index) => {
+    setActiveIndex(index);
+  };
+
   useEffect(() => {
     const initialIndex =
       pathname === '/' ? 0 :
       pathname.startsWith('/weather') ? 1 : 
       pathname === '/dashboard' ? 2 :
-      pathname === '/ai-assistant' ? 3 :
+      pathname === '/assistance' ? 3 :
       pathname === '/market' ? 4 : 0;
     setActiveIndex(initialIndex);
   }, [pathname]);
@@ -88,14 +93,14 @@ function Navbar() {
           </li>
           <li>
             <Link
-              href="/ai-assistant"
+              href="/assistance"
               onClick={() => handleMenuClick(3)}
               className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
                 activeIndex === 3 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
               <i className="bx bxs-chat text-3xl"></i>
-              <span className="text-xs font-medium mt-1">Assistants</span>
+              <span className="text-xs font-medium mt-1">Assistance</span>
             </Link>
           </li>
           <li>

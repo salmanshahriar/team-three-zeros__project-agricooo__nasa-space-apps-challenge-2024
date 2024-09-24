@@ -10,14 +10,14 @@ const AuthWelcome = ({ onNext }) => {
             <h1 className="text-6xl font-bold font-serif text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600 drop-shadow-lg mb-3 -mt-28">
                 Agrico
             </h1>
-            <div className="flex justify-center space-x-4 text-xl text-white font-sans mb-12">
+            <div className="flex justify-center space-x-4 text-xl text-white font-sans mb-8">
                 <span className="hover:underline cursor-pointer">Visualize</span>
                 <span>|</span>
                 <span className="hover:underline cursor-pointer">Analyze</span>
                 <span>|</span>
                 <span className="hover:underline cursor-pointer">Utilize</span>
             </div>
-            <h2 className="text-sm text-white font-light leading-relaxed">
+            <h2 className="text-sm text-white font-light leading-relaxed w-80 md:w-[500px]">
             Agricooo is a smart farming solution that helps farmers make informed decisions using real-time Earth data and IoT devices. It empowers them to manage crops effectively, tackling challenges like unpredictable weather, pests, and diseases for enhanced productivity.
             </h2>
             
@@ -80,51 +80,55 @@ const StepForm = () => {
 
     return (
         <div className='min-h-screen relative z-50 flex flex-col justify-center items-center h-screen overflow-y-scroll'>
-            <div className="mx-auto p-6 sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 text-center space-y-8">
+            <div className="mx-auto p-6 text-center h-full mt-60">
                 {step !== 0 && (
                     <Progress
                         aria-label="Step Progress"
                         size="md"
                         value={progress}
                         color="success"
-                        showValueLabel={true}
-                        className="mb-6 text-white w-80"
+                        showValueLabel={false}
+                        className="mb-6 text-white absolute top-0 left-0 w-full  "
                     />
                 )}
                 {step === 0 && <AuthWelcome onNext={() => setStep(1)} />}
                 {step === 1 && (
                     <>
+                        <div className='text-white font-medium text-md text-left '>Full Name:</div>
                         <Input
                             name="fullName"
                             value={formValues.fullName}
                             onChange={handleChange}
                             clearable
                             fullWidth
-                            label="Full Name"
                             placeholder="Enter your full name"
-                            required
+                            required 
+                            className='w-80 mt-2'
+                            
                         />
                         {warning && <Text color="error">{warning}</Text>}
-                        <div className='mt-4'>
+                        <div className='mt-4 w-80 flex'>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.fullName}>Next</Button>
                         </div>
                     </>
                 )}
                 {step === 2 && (
-                    <>
+                    <>  
+                        <span className='text-white font-medium text-md text-left '>Email:</span>
                         <Input
                             name="email"
                             value={formValues.email}
                             onChange={handleChange}
                             clearable
                             fullWidth
-                            label="Email"
+                            label=""
                             type="email"
                             placeholder="Enter your email"
                             required
+                            className='w-80 mt-2'
                         />
                         {warning && <Text color="error">{warning}</Text>}
-                        <div className='mt-4'>
+                        <div className='mt-4 w-80 flex'>
                             <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.email}>Next</Button>
                         </div>
@@ -132,18 +136,20 @@ const StepForm = () => {
                 )}
                 {step === 3 && (
                     <>
+                        <span className='text-white font-medium text-md text-left '>Phone Number:</span>
                         <Input
                             name="phoneNumber"
                             value={formValues.phoneNumber}
                             onChange={handleChange}
                             clearable
                             fullWidth
-                            label="Phone Number"
+                            label=""
                             placeholder="Enter your phone number"
                             required
+                            className='w-80 mt-2'
                         />
                         {warning && <Text color="error">{warning}</Text>}
-                        <div className='mt-4'>
+                        <div className='mt-4 w-80 flex'>
                             <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.phoneNumber}>Submit</Button>
                         </div>
