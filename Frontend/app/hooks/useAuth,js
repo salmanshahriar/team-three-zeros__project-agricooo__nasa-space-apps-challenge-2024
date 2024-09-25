@@ -1,4 +1,3 @@
-// /hooks/useAuth.js
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -13,14 +12,14 @@ const useAuth = () => {
       const accessToken = localStorage.getItem("accessToken");
       const apiToken = localStorage.getItem("apiToken");
 
+      // Check if both tokens exist
       if (accessToken && apiToken) {
         setIsAuthenticated(true);
-        setIsLoading(false);
       } else {
         setIsAuthenticated(false);
-        setIsLoading(false);
         router.push("/auth");
       }
+      setIsLoading(false); // Moved this here to ensure it's set after the checks
     };
 
     checkCredentials();
@@ -28,7 +27,8 @@ const useAuth = () => {
 
   const login = async (userData) => {
     try {
-        const response = await axios.post('https://agricooo.projectdaffodil.xyz/createAccount', formValues);
+      // Use the API URL from the environment variable
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_AGICOOO_CREATE_ACCOUNT_API_URL}`, userData);
       const { accessToken, apiToken } = response.data;
 
       // Save tokens to localStorage
@@ -36,7 +36,7 @@ const useAuth = () => {
       localStorage.setItem("apiToken", apiToken);
 
       setIsAuthenticated(true);
-      router.push("/");
+      router.push("/"); // Redirect to the homepage after login
     } catch (error) {
       console.error("Login failed", error);
     }
@@ -46,7 +46,7 @@ const useAuth = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("apiToken");
     setIsAuthenticated(false);
-    router.push("/auth");
+    router.push("/auth"); // Redirect to the auth page after logout
   };
 
   return { isAuthenticated, isLoading, login, logout };

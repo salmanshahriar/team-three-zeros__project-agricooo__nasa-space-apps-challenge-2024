@@ -18,7 +18,7 @@ const AuthWelcome = ({ onNext }) => {
                 <span className="hover:underline cursor-pointer">Utilize</span>
             </div>
             <h2 className="text-sm text-white font-light leading-relaxed w-80 md:w-[500px]">
-            Agricooo is a smart farming solution that helps farmers make informed decisions using real-time Earth data and IoT devices. It empowers them to manage crops effectively, tackling challenges like unpredictable weather, pests, and diseases for enhanced productivity.
+                Agricooo is a smart farming solution that helps farmers make informed decisions using real-time Earth data and IoT devices. It empowers them to manage crops effectively, tackling challenges like unpredictable weather, pests, and diseases for enhanced productivity.
             </h2>
             
             <Button className='mt-10' onClick={onNext} color="primary">
@@ -46,6 +46,7 @@ const StepForm = () => {
     };
 
     const handleNext = async () => {
+        // Check required fields based on step
         if ((step === 1 && !formValues.fullName) ||
             (step === 2 && !formValues.email) ||
             (step === 3 && !formValues.phoneNumber)) {
@@ -54,7 +55,8 @@ const StepForm = () => {
             setWarning('');
             if (step === 3) {
                 try {
-                    const response = await axios.post('https://agricooo.projectdaffodil.xyz/createAccount', formValues);
+                    // Submit form on the last step
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_AGICOOO_CREATE_ACCOUNT_API_URL}`, formValues);
                     const { accessToken, apiToken } = response.data;
 
                     // Save credentials in localStorage
@@ -64,7 +66,7 @@ const StepForm = () => {
                     // Redirect to the homepage
                     router.push('/');
                 } catch (error) {
-                    console.error('Error during authentication:', error);
+                    console.error('Error during authentication:', error.response ? error.response.data : error.message);
                 }
             } else {
                 setStep(step + 1);
@@ -88,7 +90,7 @@ const StepForm = () => {
                         value={progress}
                         color="success"
                         showValueLabel={false}
-                        className="mb-6 text-white absolute top-0 left-0 w-full  "
+                        className="mb-6 text-white absolute top-0 left-0 w-full"
                     />
                 )}
                 {step === 0 && <AuthWelcome onNext={() => setStep(1)} />}
@@ -104,7 +106,6 @@ const StepForm = () => {
                             placeholder="Enter your full name"
                             required 
                             className='w-80 mt-2'
-                            
                         />
                         {warning && <Text color="error">{warning}</Text>}
                         <div className='mt-4 w-80 flex'>
@@ -113,7 +114,7 @@ const StepForm = () => {
                     </>
                 )}
                 {step === 2 && (
-                    <>  
+                    <>
                         <span className='text-white font-medium text-md text-left '>Email:</span>
                         <Input
                             name="email"
@@ -121,7 +122,6 @@ const StepForm = () => {
                             onChange={handleChange}
                             clearable
                             fullWidth
-                            label=""
                             type="email"
                             placeholder="Enter your email"
                             required
@@ -143,7 +143,6 @@ const StepForm = () => {
                             onChange={handleChange}
                             clearable
                             fullWidth
-                            label=""
                             placeholder="Enter your phone number"
                             required
                             className='w-80 mt-2'
