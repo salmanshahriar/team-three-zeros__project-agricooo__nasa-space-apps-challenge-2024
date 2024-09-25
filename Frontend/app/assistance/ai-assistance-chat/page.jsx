@@ -29,7 +29,7 @@ const AiAssistantChat = () => {
 
             // Make an API request with the accessToken
             try {
-                const response = await axios.post(process.env.NEXT_PUBLIC_AGICOOO_CHAT_WITH_AI_API_URL, {
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/chatWithAi`, {
                     prompt: input,
                     chatId: chatId, // Ensure you set the chatId properly
                     accessToken: accessToken,

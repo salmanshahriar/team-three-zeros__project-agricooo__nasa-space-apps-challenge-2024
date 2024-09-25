@@ -28,7 +28,7 @@ const useAuth = () => {
   const login = async (userData) => {
     try {
       // Use the API URL from the environment variable
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_AGICOOO_CREATE_ACCOUNT_API_URL}`, userData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/createAccount`, userData);
       const { accessToken, apiToken } = response.data;
 
       // Save tokens to localStorage
