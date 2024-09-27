@@ -11,52 +11,63 @@ const AiAssistantChat = () => {
     const [image, setImage] = useState(null);
     const [accessToken, setAccessToken] = useState('');
     const [apiToken, setApiToken] = useState('');
-    const [chatId, setChatId] = useState(''); // Set up chatId as needed
+    const [chatId, setChatId] = useState(''); // Initialize chatId here
 
-    // Retrieve tokens from localStorage when the component mounts
+    // Retrieve tokens and initialize chatId from localStorage when the component mounts
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         const apiToken = localStorage.getItem('apiToken');
+        const chatId = localStorage.getItem('chatId'); // Optional: can set it dynamically
+
         if (token) setAccessToken(token);
         if (apiToken) setApiToken(apiToken);
+        if (chatId) setChatId(chatId);
+        else setChatId('default-chat-id'); // Fallback for chatId if not in localStorage
     }, []);
 
     const handleSend = async () => {
-        if (input.trim()) {
-            const userMessage = { text: input, isUser: true };
-            setMessages(prevMessages => [...prevMessages, userMessage]);
-            setInput('');
+        if (!input.trim()) return; // Prevent empty inputs
 
-            // Make an API request with the accessToken
-            try {
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/chatWithAi`, {
-                    prompt: input,
-                    chatId: chatId, // Ensure you set the chatId properly
-                    accessToken: accessToken,
-                    apiToken: apiToken,
-                });
+        const userMessage = { text: input, isUser: true };
+        setMessages(prevMessages => [...prevMessages, userMessage]);
+        setInput('');
 
-                // Update with actual response from your API
-                const rawAiMessage = `${response.data.replyStr}` || "Sorry, I didn't understand that.";
+        // Ensure tokens and chatId are available before making API call
+        if (!accessToken || !apiToken || !chatId) {
+            setMessages(prevMessages => [
+                ...prevMessages,
+                { text: "Error: Missing accessToken, apiToken, or chatId.", isUser: false }
+            ]);
+            return;
+        }
 
-                // Create a temporary DOM element to extract the text content
-                const tempDiv = document.createElement("div");
-                tempDiv.innerHTML = rawAiMessage; // Set the inner HTML to the response
-                const aiMessage = tempDiv.innerText; // Extract text without HTML tags
+        // Make an API request with accessToken and apiToken
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/chatWithAi`, {
+                prompt: input,
+                chatId: chatId, 
+                accessToken: accessToken,
+                apiToken: apiToken,
+            });
 
-                // Update the messages state
-                setMessages(prevMessages => [
-                    ...prevMessages,
-                    { text: aiMessage, isUser: false }
-                ]);
+            // Handle API response and remove any HTML tags from the response message
+            const rawAiMessage = response.data.replyStr || "Sorry, I didn't understand that.";
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = rawAiMessage;
+            const aiMessage = tempDiv.innerText;
 
-            } catch (error) {
-                console.error('Error sending message:', error);
-                setMessages(prevMessages => [
-                    ...prevMessages,
-                    { text: "Error: Unable to send message. Please try again later.", isUser: false }
-                ]);
-            }
+            // Update the messages with AI's response
+            setMessages(prevMessages => [
+                ...prevMessages,
+                { text: aiMessage, isUser: false }
+            ]);
+
+        } catch (error) {
+            console.error('Error sending message:', error);
+            setMessages(prevMessages => [
+                ...prevMessages,
+                { text: "Error: Unable to send message. Please try again later.", isUser: false }
+            ]);
         }
     };
 
@@ -85,7 +96,7 @@ const AiAssistantChat = () => {
     const router = useRouter();
 
     const handleBackClick = () => {
-        router.push('/assistance'); 
+        router.push('/assistance');
     };
 
     return (
@@ -156,6 +167,6 @@ const AiAssistantChat = () => {
             </div>
         </div>
     );
-}
+};
 
 export default AiAssistantChat;

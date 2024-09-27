@@ -96,7 +96,7 @@ const StepForm = () => {
                 {step === 0 && <AuthWelcome onNext={() => setStep(1)} />}
                 {step === 1 && (
                     <>
-                        <div className='text-white font-medium text-md text-left '>Full Name:</div>
+                        <div className='text-white font-medium text-md text-left flex '>Full Name:</div>
                         <Input
                             name="fullName"
                             value={formValues.fullName}
@@ -115,7 +115,7 @@ const StepForm = () => {
                 )}
                 {step === 2 && (
                     <>
-                        <span className='text-white font-medium text-md text-left '>Email:</span>
+                        <span className='text-white font-medium text-md text-left flex'>Email:</span>
                         <Input
                             name="email"
                             value={formValues.email}
@@ -136,7 +136,7 @@ const StepForm = () => {
                 )}
                 {step === 3 && (
                     <>
-                        <span className='text-white font-medium text-md text-left '>Phone Number:</span>
+                        <span className='text-white font-medium text-md text-left flex'>Phone Number:</span>
                         <Input
                             name="phoneNumber"
                             value={formValues.phoneNumber}

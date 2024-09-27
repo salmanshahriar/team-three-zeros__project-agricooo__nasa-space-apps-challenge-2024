@@ -28,12 +28,10 @@ export default function RootLayout({ children }) {
       }
     };
 
-    // Check authentication on initial render
     checkAuthentication();
   }, []);
 
   useEffect(() => {
-    // Redirect based on authentication status
     if (isAuthenticated === true) {
       router.push("/");
     } else if (isAuthenticated === false) {

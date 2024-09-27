@@ -59,7 +59,7 @@ function Navbar() {
             <Link
               href="/"
               onClick={() => handleMenuClick(0)}
-              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+              className={`flex flex-col items-center text-white transition-all duration-200 transform ${
                 activeIndex === 0 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
@@ -71,7 +71,7 @@ function Navbar() {
             <Link
               href="/weather"
               onClick={() => handleMenuClick(1)}
-              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+              className={`flex flex-col items-center text-white transition-all duration-200 transform ${
                 activeIndex === 1 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
@@ -83,7 +83,7 @@ function Navbar() {
             <Link
               href="/dashboard"
               onClick={() => handleMenuClick(2)}
-              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+              className={`flex flex-col items-center text-white transition-all duration-200 transform ${
                 activeIndex === 2 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
@@ -95,7 +95,7 @@ function Navbar() {
             <Link
               href="/assistance"
               onClick={() => handleMenuClick(3)}
-              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+              className={`flex flex-col items-center text-white transition-all duration-200 transform ${
                 activeIndex === 3 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
@@ -107,7 +107,7 @@ function Navbar() {
             <Link
               href="/market"
               onClick={() => handleMenuClick(4)}
-              className={`flex flex-col items-center text-gray-900 dark:text-gray-100 transition-all duration-200 transform ${
+              className={`flex flex-col items-center text-white transition-all duration-200 transform ${
                 activeIndex === 4 ? 'scale-105 font-bold' : 'hover:scale-105'
               }`}
             >
