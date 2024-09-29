@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Input, Button, Progress, Text } from "@nextui-org/react";
+import { Input, Button, Progress } from "@nextui-org/react";
 import { useRouter } from 'next/navigation'; // For redirecting
 
 const AuthWelcome = ({ onNext }) => {
@@ -107,7 +107,7 @@ const StepForm = () => {
                             required 
                             className='w-80 mt-2'
                         />
-                        {warning && <Text color="error">{warning}</Text>}
+                        {warning && <p className="text-red-500">{warning}</p>} {/* Replaced Text component with <p> */}
                         <div className='mt-4 w-80 flex'>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.fullName}>Next</Button>
                         </div>
@@ -127,7 +127,7 @@ const StepForm = () => {
                             required
                             className='w-80 mt-2'
                         />
-                        {warning && <Text color="error">{warning}</Text>}
+                        {warning && <p className="text-red-500">{warning}</p>} {/* Replaced Text component with <p> */}
                         <div className='mt-4 w-80 flex'>
                             <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.email}>Next</Button>
@@ -147,7 +147,7 @@ const StepForm = () => {
                             required
                             className='w-80 mt-2'
                         />
-                        {warning && <Text color="error">{warning}</Text>}
+                        {warning && <p className="text-red-500">{warning}</p>} {/* Replaced Text component with <p> */}
                         <div className='mt-4 w-80 flex'>
                             <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.phoneNumber}>Submit</Button>
