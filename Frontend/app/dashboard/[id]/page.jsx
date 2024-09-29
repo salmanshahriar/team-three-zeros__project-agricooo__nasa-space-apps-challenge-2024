@@ -418,13 +418,13 @@ const SensorDisplay = ({ sensors }) => {
 const DashboardInfo = ({  }) => {
   return (
     <>
-        <div className='text-white space-y-3 bg-gray-800/20 rounded-lg shadow-lg mx-2 py-3 mb-4'>
+        <div className='text-white px-4 space-y-3 bg-gray-800/20 rounded-lg shadow-lg mx-2 py-3 mb-4'>
           <div className=''>
-            <h2 className='font-bold text-center text-md'>Soil Monitoring Sensors</h2>
+            <h2 className='font-bold text-center text-md'>Soil Monitoring Sensors:</h2>
             <SensorDisplay sensors={soilMonitoringSensors} />
           </div>
           <div>
-            <h2 className='font-bold text-center text-md'>Weather and Environmental Sensors</h2>
+            <h2 className='font-bold text-center text-md'>Weather and Environmental Sensors:</h2>
             <SensorDisplay sensors={weatherAndEnvironmentalSensors} />
           </div>
           <div>
@@ -432,11 +432,11 @@ const DashboardInfo = ({  }) => {
             <SensorDisplay sensors={waterManagementSensors} />
           </div>
           <div>
-             <h2 className='font-bold text-center text-md'>Air Quality And Pollution Sensors</h2>
+             <h2 className='font-bold text-center text-md'>Air Quality And Pollution Sensors:</h2>
             <SensorDisplay sensors={airQualityAndPollutionSensors} />
           </div>
           <div>
-            <h2 className='font-bold text-center text-md'>Plant Health Monitoring Sensors</h2>
+            <h2 className='font-bold text-center text-md'>Plant Health Monitoring Sensors:</h2>
             <SensorDisplay sensors={plantHealthMonitoringSensors} />
           </div>
         </div>
@@ -657,20 +657,24 @@ const Profile = () => {
             Ground-1 / <span className="text-white/50">Device-1</span>
           </h1>
         </div>
-
-     
-        <div className="mb-4 w-full max-w-md sm:w-80 md:w-[450px] text-white text-sm rounded-lg shadow-xl">
-          <div className="rounded-lg bg-white/30 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80">
-            <Accordion
+      
+        
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
+          <h1 className="text-white/90 mb-2 font-sans font-bold">Sensors:</h1>
+          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg shadow-xl flex flex-col items-center space-y-4">
+           
+             <Accordion
               bordered
-              className="w-full"
+              className="w-full "
             >
-              <AccordionItem title={<div className='text-center w-64'><span className="text-white font-bold text-center text-md -mr-7 md:-mr-44 ">Dashboard Info</span></div>} className=''>
-                <DashboardInfo/>
-              </AccordionItem>
-            </Accordion>
+          <AccordionItem title={<div className='text-center '><span className="text-white font-bold text-center text-md -mr-7 md:-mr-44 ">Dashboard Info</span></div>}>
+            <DashboardInfo/>
+          </AccordionItem>
+        
+        </Accordion>
           </div>
         </div>
+       
         
         <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
           <h1 className="text-white/90 mb-2 font-sans font-bold">Visualization Data:</h1>
@@ -679,6 +683,7 @@ const Profile = () => {
 
                 <Tab key="soil" title="Soil" className=''>
                   <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Soil Sensors</h1>
                   <div className="grid grid-cols-2 gap-4 ">
                   {Object.values(soilMonitoringSensors).map((sensor, index) => (
                     <VisualizationCard
@@ -702,6 +707,7 @@ const Profile = () => {
                 </Tab>
                 <Tab key="weatherAndEnvironmentalSensors" title="Environmental" className=''>
                   <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Weather And Environmental Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(weatherAndEnvironmentalSensors).map((sensor, index) => (
                     <VisualizationCard
@@ -725,6 +731,7 @@ const Profile = () => {
                 </Tab>
                 <Tab key="waterManagementSensors" title="Water" className=''>
                   <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Water Management Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(waterManagementSensors).map((sensor, index) => (
                     <VisualizationCard
@@ -748,6 +755,7 @@ const Profile = () => {
                 </Tab>
                 <Tab key="airQualityAndPollutionSensors" title="Air" className=''>
                   <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Air Quality And Pollution Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(airQualityAndPollutionSensors).map((sensor, index) => (
                     <VisualizationCard
@@ -771,6 +779,7 @@ const Profile = () => {
                 </Tab>
                 <Tab key="plantHealthMonitoringSensors" title="Plant Health" className=''>
                   <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Plant Health Monitoring Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(plantHealthMonitoringSensors).map((sensor, index) => (
                     <VisualizationCard
@@ -810,6 +819,7 @@ const Profile = () => {
               percentage={30}
               alertMessage="Humidity is high optimal level"
             />
+            
           </div>
         </div>
        

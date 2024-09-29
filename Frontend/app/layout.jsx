@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
       const accessToken = localStorage.getItem("accessToken");
       const apiToken = localStorage.getItem("apiToken");
 
+      // Determine if user is authenticated
       if (accessToken && apiToken) {
         setIsAuthenticated(true);
       } else {
@@ -32,10 +33,13 @@ export default function RootLayout({ children }) {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated === true) {
-      router.push("/");
-    } else if (isAuthenticated === false) {
-      router.push("/auth");
+    // Only redirect if authentication status is determined
+    if (isAuthenticated !== null) {
+      if (isAuthenticated) {
+        // If authenticated, do nothing or navigate to the desired authenticated route
+      } else {
+        router.push("/auth"); // Redirect to auth page if not authenticated
+      }
     }
   }, [isAuthenticated, router]);
 
