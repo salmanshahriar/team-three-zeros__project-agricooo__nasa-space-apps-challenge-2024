@@ -1,6 +1,451 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react"; 
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Tabs, Tab, Card, CardBody} from "@nextui-org/react";
+import { Line } from 'react-chartjs-2';
+import Head from 'next/head';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+// Register the chart components
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+// fakeFloodData
+const fakeFloodData = [
+  { date: 'Oct-2023', twsa: 20, floodLevel: 'Severe' },
+  { date: 'Nov-2023', twsa: 18, floodLevel: 'Severe' },
+  { date: 'Dec-2023', twsa: 16, floodLevel: 'Severe' },
+  { date: 'Jan-2024', twsa: 15, floodLevel: 'Severe' },
+  { date: 'Feb-2024', twsa: 12, floodLevel: 'Moderate' },
+  { date: 'Mar-2024', twsa: 7, floodLevel: 'Moderate' },
+  { date: 'Apr-2024', twsa: 2, floodLevel: 'Low' },
+  { date: 'May-2024', twsa: 4, floodLevel: 'Low' },
+  { date: 'Jun-2024', twsa: 8, floodLevel: 'Moderate' },
+  { date: 'Jul-2024', twsa: 1, floodLevel: 'Low' },
+  { date: 'Aug-2024', twsa: 5, floodLevel: 'Moderate' },
+  { date: 'Sep-2024', twsa: 10, floodLevel: 'Severe' },
+];
+
+// Function to determine flood level based on TWSA
+const getFloodLevel = (twsa) => {
+  if (twsa >= 10) return 'Severe';
+  if (twsa >= 5) return 'Moderate';
+  return 'Low';
+};
+
+// Generate future data for 1 year (12 months)
+const generateFutureFloodData = () => {
+  const futureData = [];
+  const startDate = new Date('2024-10-01'); // Start from October 2024
+  for (let i = 0; i < 12; i++) { // Generate data for 12 months (1 year)
+    const date = new Date(startDate);
+    date.setMonth(startDate.getMonth() + i);
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+    const twsa = Math.floor(Math.random() * 20); // Random value between 0 and 20
+    const floodLevel = getFloodLevel(twsa);
+    futureData.push({ date: `${month}-${year}`, twsa, floodLevel });
+  }
+  return futureData;
+};
+
+const FloodRiskChart = () => {
+  const [floodData, setFloodData] = useState([]);
+  const futureFloodData = generateFutureFloodData(); // Generate future data
+
+  useEffect(() => {
+    setFloodData(fakeFloodData);
+  }, []);
+
+  // Prepare data for the historical chart
+  const historicalFloodChartData = {
+    labels: floodData.map((item) => item.date),
+    datasets: [
+      {
+        label: 'TWSA (Total Water Storage Anomalies)',
+        data: floodData.map((item) => item.twsa),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  // Prepare data for the future chart
+  const futureFloodChartData = {
+    labels: futureFloodData.map((item) => item.date),
+    datasets: [
+      {
+        label: 'Predicted TWSA (Total Water Storage Anomalies)',
+        data: futureFloodData.map((item) => item.twsa),
+        borderColor: 'rgba(255, 206, 86, 1)', // Different color for future predictions
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false, // Allow the chart to take full width and height
+    scales: {
+      x: {
+        ticks: {
+          color: 'white',
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.5)',
+        },
+      },
+      y: {
+        min: 0, // Set the minimum value for the y-axis
+        max: 50, // Set the maximum value for the y-axis
+        ticks: {
+          color: 'white',
+          stepSize: 5, // Set the step size for the ticks
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.5)',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          color: 'white',
+        },
+      },
+      title: {
+        display: true,
+        text: 'Groundwater Flood Risk Indicator',
+        color: 'white',
+      },
+    },
+  };
+
+  return (
+    <div className="text-white -mx-3 ">
+
+      <Tabs aria-label="Options" color="primary">
+        <Tab key="Present" title="Present data">
+          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+            <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={historicalFloodChartData} options={options} />
+          </div>
+        </Tab>
+        <Tab key="future" title="Future data">
+          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+            <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={futureFloodChartData} options={options} />
+          </div>
+        </Tab>
+      </Tabs>
+
+    </div>
+  );
+};
+
+// fakeGroundwaterData
+const fakeGroundwaterData = [
+  { date: 'Oct-2023', twsa: -20, droughtLevel: 'Severe' },
+  { date: 'Nov-2023', twsa: -18, droughtLevel: 'Severe' },
+  { date: 'Dec-2023', twsa: -16, droughtLevel: 'Severe' },
+  { date: 'Jan-2024', twsa: -15, droughtLevel: 'Severe' },
+  { date: 'Feb-2024', twsa: -12, droughtLevel: 'Severe' },
+  { date: 'Mar-2024', twsa: -7, droughtLevel: 'Moderate' },
+  { date: 'Apr-2024', twsa: 2, droughtLevel: 'No Drought' },
+  { date: 'May-2024', twsa: 4, droughtLevel: 'No Drought' },
+  { date: 'Jun-2024', twsa: 8, droughtLevel: 'No Drought' },
+  { date: 'Jul-2024', twsa: 1, droughtLevel: 'No Drought' },
+  { date: 'Aug-2024', twsa: -5, droughtLevel: 'Moderate' },
+  { date: 'Sep-2024', twsa: -10, droughtLevel: 'Severe' },
+];
+
+// Function to determine drought level based on TWSA
+const getDroughtLevel = (twsa) => {
+  if (twsa < -10) return 'Severe';
+  if (twsa < 0) return 'Moderate';
+  return 'No Drought';
+};
+
+// Generate future data for 1 year (12 months)
+const generateFutureData = () => {
+  const futureData = [];
+  const startDate = new Date('2024-10-01'); // Start from October 2024
+  for (let i = 0; i < 12; i++) { // Generate data for 12 months (1 year)
+    const date = new Date(startDate);
+    date.setMonth(startDate.getMonth() + i);
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+    const twsa = Math.floor(Math.random() * 20) - 10; // Random value between -10 and 10
+    const droughtLevel = getDroughtLevel(twsa);
+    futureData.push({ date: `${month}-${year}`, twsa, droughtLevel });
+  }
+  return futureData;
+};
+
+const DroughtWarningChart = () => {
+  const [groundwaterData, setGroundwaterData] = useState([]);
+  const futureGroundwaterData = generateFutureData(); // Generate future data
+
+  useEffect(() => {
+    setGroundwaterData(fakeGroundwaterData);
+  }, []);
+
+  // Prepare data for the historical chart
+  const historicalChartData = {
+    labels: groundwaterData.map((item) => item.date),
+    datasets: [
+      {
+        label: 'TWSA (Total Water Storage Anomalies)',
+        data: groundwaterData.map((item) => item.twsa),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  // Prepare data for the future chart
+  const futureChartData = {
+    labels: futureGroundwaterData.map((item) => item.date),
+    datasets: [
+      {
+        label: 'Predicted TWSA (Total Water Storage Anomalies)',
+        data: futureGroundwaterData.map((item) => item.twsa),
+        borderColor: 'rgba(255, 206, 86, 1)', // Different color for future predictions
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false, // Allow the chart to take full width and height
+    scales: {
+      x: {
+        ticks: {
+          color: 'white',
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.5)',
+        },
+      },
+      y: {
+        min: -50, // Set the minimum value for the y-axis
+        max: 50, // Set the maximum value for the y-axis
+        ticks: {
+          color: 'white',
+          stepSize: 5, // Set the step size for the ticks
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.5)',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          color: 'white',
+        },
+      },
+      title: {
+        display: true,
+        text: 'Groundwater Drought Indicator',
+        color: 'white',
+      },
+    },
+  };
+
+  return (
+    <div className="text-white -mx-3 ">
+
+      <Tabs aria-label="Options" color="primary">
+        <Tab key="Present" title="Present data">
+          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+            <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={historicalChartData} options={options} />
+          </div>
+        </Tab>
+        <Tab key="future" title="Future data">
+          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+            <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={futureChartData} options={options} />
+          </div>
+        </Tab>
+      </Tabs>
+
+    </div>
+  );
+};
+
+
+
+
+const NaturalDisasterRisks = () => {
+  const [isFloodModalOpen, setIsFloodModalOpen] = useState(false);
+  const [isDroughtModalOpen, setIsDroughtModalOpen] = useState(false);
+  const [isCycloneModalOpen, setIsCycloneModalOpen] = useState(false);
+  const [isRainModalOpen, setIsRainModalOpen] = useState(false);
+
+  return (
+    <div className="bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full mb-4">
+      <div className="bg-white/5 p-4">
+        <h2 className="text-xl font-semibold text-white mb-4 text-center">Natural Disaster Risks</h2>
+        <div className="space-y-2">
+          {/* Flood Risk */}
+          <div
+            onClick={() => setIsFloodModalOpen(true)}
+            className="flex justify-between items-center bg-gray-800/15 p-3 rounded-md cursor-pointer"
+          >
+            <span className="text-white/95 font-medium">Flood Risk</span>
+            <div className="flex gap-2 justify-center items-center">
+            <span className="text-blue-400 font-semibold">Moderate</span>
+            <i class='bx bxs-info-circle text-white/85'></i>
+            </div>
+          </div>
+          <Modal 
+          className="mx-4 bg-white/30 bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full" 
+          placement="center"
+          isOpen={isFloodModalOpen} 
+          onOpenChange={setIsFloodModalOpen}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1 text-white">Flood Risk Details</ModalHeader>
+                  <ModalBody>
+                  <DroughtWarningChart/>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+          {/* Drought Risk */}
+          <div
+            onClick={() => setIsDroughtModalOpen(true)}
+            className="flex justify-between items-center bg-gray-800/15 p-3 rounded-md cursor-pointer"
+          >
+            <span className="text-white/95 font-medium">Drought Risk</span>
+            
+            <div className="flex gap-2 justify-center items-center">
+            <span className="text-yellow-400 font-semibold">Low</span>
+            <i class='bx bxs-info-circle text-white/85'></i>
+            </div>
+          </div>
+          <Modal
+          className="mx-4 bg-white/30 bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full" 
+          placement="center"
+          isOpen={isDroughtModalOpen} 
+          onOpenChange={setIsDroughtModalOpen}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1 text-white">Drought Risk Details</ModalHeader>
+                  <ModalBody>
+                  <DroughtWarningChart/>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+
+          {/* Cyclone Risk */}
+          <div
+            onClick={() => setIsCycloneModalOpen(true)}
+            className="flex justify-between items-center bg-gray-800/15 p-3 rounded-md cursor-pointer"
+          >
+            <span className="text-white/95 font-medium">Cyclone Risk</span>
+            <div className="flex gap-2 justify-center items-center">
+            <span className="text-red-400 font-semibold">High</span>
+            <i class='bx bxs-info-circle text-white/85'></i>
+            </div>
+          </div>
+          <Modal 
+          className="" 
+          placement="center"
+          isOpen={isCycloneModalOpen} 
+          onOpenChange={setIsCycloneModalOpen}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">Cyclone Risk Details</ModalHeader>
+                  <ModalBody>
+                    <p>
+                      Cyclones are expected in the region, with a high risk of severe weather including strong winds and heavy rains.
+                    </p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+
+          {/* Heavy Rain Chance */}
+          <div
+            onClick={() => setIsRainModalOpen(true)}
+            className="flex justify-between items-center bg-gray-800/15 p-3 rounded-md cursor-pointer"
+          >
+            <span className="text-white/95 font-medium">Heavy Rain Chance</span>
+            
+            <div className="flex gap-2 justify-center items-center">
+            <span className="text-teal-400 font-semibold">Likely</span>
+            <i class='bx bxs-info-circle text-white/85'></i>
+            </div>
+          </div>
+          <Modal 
+          className="bg-white/30 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 text-white text-sm m-2" 
+          placement="center"
+          isOpen={isRainModalOpen} 
+          onOpenChange={setIsRainModalOpen}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">Heavy Rain Chance Details</ModalHeader>
+                  <ModalBody>
+                    <p>
+                      The chance of heavy rain is likely, which could lead to minor flooding and water accumulation in low-lying areas.
+                    </p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 function Weather() {
   const [weatherData, setWeatherData] = useState(null);
@@ -68,6 +513,7 @@ function Weather() {
     const date = new Date(dateStr);
     return date.toLocaleDateString("en-US", { weekday: "short" });
   };
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
     <div className="min-h-screen flex flex-col items-center h-screen overflow-y-scroll">
@@ -77,39 +523,14 @@ function Weather() {
         </h1>
 
         <div className="mx-auto w-full max-w-3xl space-y-4 ">
-          {/* 1st Card - Natural Disaster Risks */}
-          <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg w-full mb-4">
-            <div className="bg-white/5 p-4">
-              <h2 className="text-xl font-semibold text-white mb-4">
-                Natural Disaster Risks
-              </h2>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center bg-gray-800/20 p-2 rounded-md">
-                  <span className="text-white font-medium">Flood Risk</span>
-                  <span className="text-blue-500 font-semibold">Moderate</span>
-                </div>
-                <div className="flex justify-between items-center bg-gray-800/20 p-2 rounded-md">
-                  <span className="text-white font-medium">Drought Risk</span>
-                  <span className="text-yellow-500 font-semibold">Low</span>
-                </div>
-                <div className="flex justify-between items-center bg-gray-800/20 p-2 rounded-md">
-                  <span className="text-white font-medium">Cyclone Risk</span>
-                  <span className="text-red-500 font-semibold">High</span>
-                </div>
-                <div className="flex justify-between items-center bg-gray-800/20 p-2 rounded-md">
-                  <span className="text-white font-medium">
-                    Heavy Rain Chance
-                  </span>
-                  <span className="text-teal-500 font-semibold">Likely</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <NaturalDisasterRisks/>
+          
 
-          {/* 2nd Card - Main Weather Card */}
+
+          {/* Main Weather Card */}
           <div className="relative w-full">
             {weatherData && (
-              <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg w-full">
+              <div className="bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full">
                 <div className="bg-white/5 p-4">
                   <h2 className="font-bold text-white text-lg">
                     {formattedDateDisplay(new Date())}
@@ -176,10 +597,10 @@ function Weather() {
             )}
           </div>
 
-          {/* 3rd Card - 14-Day Weather Forecast */}
+          {/* 14-Day Weather Forecast */}
           {weatherData && (
             <div className="relative w-full">
-              <div className="bg-gradient-to-r from-blue-500/40 to-[#8F36EA]/20 backdrop-blur-xl border border-blue-400/80 shadow-xl rounded-lg w-full">
+              <div className="bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full">
                 <div className="bg-white/5 p-4">
                   <h2 className="font-bold text-white">14 Day Weather Forecast</h2>
                   <div className="mt-4 space-y-2">
@@ -220,7 +641,7 @@ function Weather() {
                           <span className="text-white text-xs">
                             Min {day.day.mintemp_c}°C
                           </span>
-                          <span className="text-white text-xs">/</span>
+                          <span className="text-white text-xs">-</span>
                           <span className="text-white text-xs">
                             Max {day.day.maxtemp_c}°C
                           </span>

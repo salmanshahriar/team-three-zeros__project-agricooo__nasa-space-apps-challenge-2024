@@ -683,32 +683,38 @@ const VisualizationCard = ({
               return (
                 <>
                   <ModalHeader className="flex flex-col text-center gap-1">{title}</ModalHeader>
-                  <ModalBody>
-                    <div className='flex w-full justify-center items-center'>
-                      <div className='w-2/3'>
-                        <p><strong>Connection:</strong> <span className='text-green-400'>{connectionType}</span></p>
-                        <p><strong>Current Value:</strong> {mainValue}{define}</p>
-                        <p><strong>Updated:</strong> {finalFormattedDate}</p>
-                        <p><strong>Alert Level:</strong> {alertLevel}</p>
-                        <p><strong>Suggested:</strong> {suggestedMin}{define} - {suggestedMax}{define}</p>
+                    <ModalBody>
+                      <div className='flex w-full justify-center items-center'>
+                        <div className='w-2/3'>
+                          <p><strong>Connection:</strong> 
+                            <span className={connectionType === "connected" ? "text-green-400 font-normal" : "text-red-400 font-normal"}>
+                              <span> {connectionType}</span>
+                            </span>
+                          </p>
+                          <p><strong>Current Value:</strong> {connectionType === "disconnected" ? "--" : mainValue}{define}</p>
+                          <p><strong>Updated:</strong> {connectionType === "disconnected" ? "--" : finalFormattedDate}</p>
+                          <p><strong>Alert Level:</strong> {connectionType === "disconnected" ? "--" : alertLevel}</p>
+                          <p><strong>Suggested:</strong> {connectionType === "disconnected" ? "--" : `${suggestedMin}${define} - ${suggestedMax}${define}`}</p>
+                        </div>
+                        <div
+                          className="w-1/3 flex flex-col items-center p-4 space-y-4 cursor-pointer"
+                          onClick={onOpen}
+                        >
+                          <CircularProgressBar mainValue={connectionType === "disconnected" ? "--" : mainValue} define={define} />
+                        </div>
                       </div>
-                      <div
-                        className="w-1/3 flex flex-col items-center p-4 space-y-4 cursor-pointer"
-                        onClick={onOpen}
-                      >
-                        <CircularProgressBar mainValue={mainValue} define={define} />
-                      </div>
-                    </div>
-                    <p><strong>{warningTitle}</strong></p>
-                    <p>{warningDescription}</p>
-                    <p><strong>Recommended Action:</strong> {recommendedAction}</p>
-                    <p>{recommendedActionDescription}</p>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button color="danger" variant="light" onPress={onClose}>
-                      Close
-                    </Button>
-                  </ModalFooter>
+                      <p><strong>{connectionType === "disconnected" ? "" : warningTitle}</strong></p>
+                      <p>{connectionType === "disconnected" ? "" : warningDescription}</p>
+                      <p><strong>Recommended Action:</strong> {connectionType === "disconnected" ? "" : recommendedAction}</p>
+                      <p>{connectionType === "disconnected" ? "" : recommendedActionDescription}</p>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" variant="light" onPress={onClose}>
+                        Close
+                      </Button>
+                    </ModalFooter>
+
+
                 </>
               );
             }}
