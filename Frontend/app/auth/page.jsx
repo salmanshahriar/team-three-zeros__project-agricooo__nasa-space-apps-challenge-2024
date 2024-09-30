@@ -56,7 +56,7 @@ const StepForm = () => {
             if (step === 3) {
                 try {
                     // Submit form on the last step
-                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/createAccount`, formValues);
+                    const response = await axios.post(`https://agricooo.projectdaffodil.xyz/createAccount`, formValues);
                     const { accessToken, apiToken } = response.data;
 
                     // Save credentials in localStorage

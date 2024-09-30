@@ -2,9 +2,145 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {Tabs, Tab, Card, CardBody, Switch, Accordion, AccordionItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure  } from '@nextui-org/react';
+import { CardContent, CardDescription, CardHeader, CardTitle, Tabs, Tab, Card, CardBody, Switch, Accordion, AccordionItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure  } from '@nextui-org/react';
+import { AlertTriangle, ThumbsUp, Zap, AlertOctagon } from "lucide-react";
 
 
+// const simulateAIAnalysis = () => {
+//   return {
+//     recommendations: [
+//       "Increase irrigation in Field A by 15% due to dry soil conditions",
+//       "Apply nitrogen-rich fertilizer to corn crops in Field C within the next 7 days",
+//       "Consider crop rotation for Field B in the next planting season to improve soil health"
+//     ],
+//     warnings: [
+//       "Potential pest infestation detected in soybean crops (Field D)",
+//       "Soil pH levels in Field E are below optimal range for current crops"
+//     ],
+//     priorities: [
+//       "Harvest wheat in Field F within the next 5 days to prevent over-ripening",
+//       "Repair irrigation system in Field G to prevent crop stress"
+//     ],
+//     urgentActions: [
+//       "Immediate action required: Fungal disease detected in tomato plants (Greenhouse 2)",
+//       "Critical: Weather forecast indicates frost risk tonight - protect vulnerable crops"
+//     ]
+//   }
+// };
+
+// const AIAnalysis = () => {
+//   const [analysisData, setAnalysisData] = useState(null);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const data = await new Promise(resolve => setTimeout(() => resolve(simulateAIAnalysis()), 1500));
+//       setAnalysisData(data);
+//     };
+//     fetchData();
+//   }, []);
+
+//   if (!analysisData) {
+//     return <div className="flex justify-center items-center h-64">Loading analysis...</div>;
+//   }
+
+//   return (
+//     <div className="space-y-6">
+//       <h1 className="text-3xl font-bold">AI Farming Analysis</h1>
+
+//       {/* Recommendations Card */}
+//       <Card>
+//         <CardHeader>
+//           <CardTitle className="flex items-center gap-2">
+//             <ThumbsUp className="h-6 w-6 text-green-500" />
+//             Recommendations
+//           </CardTitle>
+//           <CardDescription>Actions to optimize your farm's performance</CardDescription>
+//         </CardHeader>
+//         <CardBody>
+//           <ScrollArea style={{ height: '200px' }}>
+//             <ul className="space-y-2">
+//               {analysisData.recommendations.map((rec, index) => (
+//                 <li key={index} className="flex items-start gap-2">
+//                   <Badge variant="outline" className="mt-1 shrink-0">Rec {index + 1}</Badge>
+//                   <span>{rec}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           </ScrollArea>
+//         </CardBody>
+//       </Card>
+
+//       {/* Warnings Card */}
+//       <Card>
+//         <CardHeader>
+//           <CardTitle className="flex items-center gap-2">
+//             <AlertTriangle className="h-6 w-6 text-yellow-500" />
+//             Warnings
+//           </CardTitle>
+//           <CardDescription>Potential issues that require attention</CardDescription>
+//         </CardHeader>
+//         <CardBody>
+//           <ScrollArea style={{ height: '150px' }}>
+//             <ul className="space-y-2">
+//               {analysisData.warnings.map((warning, index) => (
+//                 <li key={index} className="flex items-start gap-2">
+//                   <Badge variant="destructive" className="mt-1 shrink-0">Warning</Badge>
+//                   <span>{warning}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           </ScrollArea>
+//         </CardBody>
+//       </Card>
+
+//       {/* Priorities Card */}
+//       <Card>
+//         <CardHeader>
+//           <CardTitle className="flex items-center gap-2">
+//             <Zap className="h-6 w-6 text-blue-500" />
+//             Priority Actions
+//           </CardTitle>
+//           <CardDescription>Tasks that should be addressed soon</CardDescription>
+//         </CardHeader>
+//         <CardBody>
+//           <ScrollArea style={{ height: '150px' }}>
+//             <ul className="space-y-2">
+//               {analysisData.priorities.map((priority, index) => (
+//                 <li key={index} className="flex items-start gap-2">
+//                   <Badge variant="secondary" className="mt-1 shrink-0">Priority</Badge>
+//                   <span>{priority}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           </ScrollArea>
+//         </CardBody>
+//       </Card>
+
+//       {/* Urgent Actions Card */}
+//       <Card>
+//         <CardHeader>
+//           <CardTitle className="flex items-center gap-2">
+//             <AlertOctagon className="h-6 w-6 text-red-500" />
+//             Urgent Implementations
+//           </CardTitle>
+//           <CardDescription>Critical actions requiring immediate attention</CardDescription>
+//         </CardHeader>
+//         <CardBody>
+//           <ScrollArea style={{ height: '150px' }}>
+//             <ul className="space-y-2">
+//               {analysisData.urgentActions.map((action, index) => (
+//                 <li key={index} className="flex items-start gap-2">
+//                   <Badge variant="destructive" className="mt-1 shrink-0">URGENT</Badge>
+//                   <span className="font-semibold">{action}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           </ScrollArea>
+//         </CardBody>
+//       </Card>
+//     </div>
+//   );
+// };
 
 const soilMonitoringSensors = {
   soil_moisture: {
@@ -418,7 +554,7 @@ const SensorDisplay = ({ sensors }) => {
 const DashboardInfo = ({  }) => {
   return (
     <>
-        <div className='text-white px-4 space-y-3 bg-gray-800/20 rounded-lg shadow-lg mx-2 py-3 mb-4'>
+        <div className='text-white space-y-3 bg-gray-800/20 rounded-lg shadow-lg mx-2 py-3 mb-4'>
           <div className=''>
             <h2 className='font-bold text-center text-md'>Soil Monitoring Sensors:</h2>
             <SensorDisplay sensors={soilMonitoringSensors} />
@@ -675,6 +811,8 @@ const Profile = () => {
           </div>
         </div>
        
+
+
         
         <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
           <h1 className="text-white/90 mb-2 font-sans font-bold">Visualization Data:</h1>
