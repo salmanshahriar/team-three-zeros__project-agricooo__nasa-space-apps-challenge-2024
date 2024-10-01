@@ -269,7 +269,7 @@ const Market = () => {
             >
               <CardBody className="px-3">
                 <div className="absolute z-20 right-0 top-0 bg-white/80 px-2 pl-2.5 rounded-bl-xl">
-                   <i class='bx bxs-edit'></i>
+                   <i className='bx bxs-edit'></i>
                 </div>
                 <Image
                   shadow="sm"

@@ -602,7 +602,7 @@ const VisualizationCard = ({
       >
         <CircularProgressBar mainValue={mainValue} define={define} />
         <h2 className="text-sm font-semibold text-white text-center">{title}</h2>
-        <div className='absolute right-1 text-gray-100/70'><i class='bx bx-info-circle'></i></div>
+        <div className='absolute right-1 text-gray-100/70'><i className='bx bx-info-circle'></i></div>
       </div>
 
       <Modal 

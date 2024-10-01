@@ -180,13 +180,13 @@ const getDroughtLevel = (twsa) => {
 // Generate future data for 1 year (12 months)
 const generateFutureData = () => {
   const futureData = [];
-  const startDate = new Date('2024-10-01'); // Start from October 2024
-  for (let i = 0; i < 12; i++) { // Generate data for 12 months (1 year)
+  const startDate = new Date('2024-10-01');
+  for (let i = 0; i < 12; i++) { 
     const date = new Date(startDate);
     date.setMonth(startDate.getMonth() + i);
     const month = date.toLocaleString('default', { month: 'short' });
     const year = date.getFullYear();
-    const twsa = Math.floor(Math.random() * 20) - 10; // Random value between -10 and 10
+    const twsa = Math.floor(Math.random() * 20) - 10;
     const droughtLevel = getDroughtLevel(twsa);
     futureData.push({ date: `${month}-${year}`, twsa, droughtLevel });
   }
@@ -195,7 +195,7 @@ const generateFutureData = () => {
 
 const DroughtWarningChart = () => {
   const [groundwaterData, setGroundwaterData] = useState([]);
-  const futureGroundwaterData = generateFutureData(); // Generate future data
+  const futureGroundwaterData = generateFutureData(); 
 
   useEffect(() => {
     setGroundwaterData(fakeGroundwaterData);
@@ -223,7 +223,7 @@ const DroughtWarningChart = () => {
       {
         label: 'Predicted TWSA (Total Water Storage Anomalies)',
         data: futureGroundwaterData.map((item) => item.twsa),
-        borderColor: 'rgba(255, 206, 86, 1)', // Different color for future predictions
+        borderColor: 'rgba(255, 206, 86, 1)', 
         backgroundColor: 'rgba(255, 206, 86, 0.2)',
         fill: true,
         tension: 0.4,
@@ -233,7 +233,7 @@ const DroughtWarningChart = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // Allow the chart to take full width and height
+    maintainAspectRatio: false, 
     scales: {
       x: {
         ticks: {
@@ -244,11 +244,11 @@ const DroughtWarningChart = () => {
         },
       },
       y: {
-        min: -50, // Set the minimum value for the y-axis
-        max: 50, // Set the maximum value for the y-axis
+        min: -50, 
+        max: 50, 
         ticks: {
           color: 'white',
-          stepSize: 5, // Set the step size for the ticks
+          stepSize: 5, 
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.5)',
@@ -275,12 +275,12 @@ const DroughtWarningChart = () => {
 
       <Tabs aria-label="Options" color="primary">
         <Tab key="Present" title="Present data">
-          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+          <div className="h-64 w-full mt-4"> 
             <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={historicalChartData} options={options} />
           </div>
         </Tab>
         <Tab key="future" title="Future data">
-          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+          <div className="h-64 w-full mt-4"> 
             <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={futureChartData} options={options} />
           </div>
         </Tab>
@@ -393,7 +393,7 @@ const NaturalDisasterRisks = () => {
             <span className="text-white/95 font-medium">Flood Risk</span>
             <div className="flex gap-2 justify-center items-center">
             <span className="text-blue-400 font-semibold">Moderate</span>
-            <i class='bx bxs-info-circle text-white/85'></i>
+            <i className='bx bxs-info-circle text-white/85'></i>
             </div>
           </div>
           <Modal 
@@ -426,7 +426,7 @@ const NaturalDisasterRisks = () => {
             
             <div className="flex gap-2 justify-center items-center">
             <span className="text-yellow-400 font-semibold">Low</span>
-            <i class='bx bxs-info-circle text-white/85'></i>
+            <i className='bx bxs-info-circle text-white/85'></i>
             </div>
           </div>
           <Modal
@@ -459,7 +459,7 @@ const NaturalDisasterRisks = () => {
             <span className="text-white/95 font-medium">Cyclone Risk</span>
             <div className="flex gap-2 justify-center items-center">
             <span className="text-red-400 font-semibold">High</span>
-            <i class='bx bxs-info-circle text-white/85'></i>
+            <i className='bx bxs-info-circle text-white/85'></i>
             </div>
           </div>
           <Modal 
@@ -495,7 +495,7 @@ const NaturalDisasterRisks = () => {
             
             <div className="flex gap-2 justify-center items-center">
             <span className="text-teal-400 font-semibold">Likely</span>
-            <i class='bx bxs-info-circle text-white/85'></i>
+            <i className='bx bxs-info-circle text-white/85'></i>
             </div>
           </div>
           <Modal 
@@ -553,13 +553,13 @@ function Weather() {
             .toISOString()
             .split("T")[0], // Generating date for each day
           day: {
-            maxtemp_c: Math.floor(Math.random() * (35 - 20 + 1)) + 20, // Random max temp between 20°C and 35°C
-            mintemp_c: Math.floor(Math.random() * (20 - 10 + 1)) + 10, // Random min temp between 10°C and 20°C
+            maxtemp_c: Math.floor(Math.random() * (35 - 20 + 1)) + 20, 
+            mintemp_c: Math.floor(Math.random() * (20 - 10 + 1)) + 10, 
             condition: {
-              text: ["Sunny", "Cloudy", "Rainy"][Math.floor(Math.random() * 3)], // Random condition
+              text: ["Sunny", "Cloudy", "Rainy"][Math.floor(Math.random() * 3)], 
               icon: `//cdn.weatherapi.com/weather/64x64/day/116.png`,
             },
-            daily_chance_of_rain: Math.floor(Math.random() * 100), // Random chance of rain
+            daily_chance_of_rain: Math.floor(Math.random() * 100),
           },
         })),
       },
@@ -573,11 +573,11 @@ function Weather() {
 
     const intervalId = setInterval(() => {
       if (weatherData) {
-        fetchWeatherData(); // Refresh weather data every minute
+        fetchWeatherData(); 
       }
-    }, 60000); // 60000 ms = 1 minute
+    }, 60000); 
 
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+    return () => clearInterval(intervalId); 
   }, []);
 
   const formattedDateDisplay = (date) => {
@@ -604,14 +604,13 @@ function Weather() {
         </h1>
 
         <div className="mx-auto w-full max-w-3xl space-y-4 ">
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
-          <h1 className="text-white/90 mb-2 font-sans font-bold">Ai Analyze Suggestions:</h1>
+        
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-4">
           <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow flex flex-col items-center space-y-4">
-          <AiWarningAndRecommendations/>
-         
+            <h1 className="text-white/90 mb-2 font-sans text-lg font-bold">Get Weather Suggestions from AI</h1>
+            <AiWarningAndRecommendations/>
           </div>
         </div>
-        
         <NaturalDisasterRisks/>
           
           {/* Main Weather Card */}
@@ -713,23 +712,23 @@ function Weather() {
                             {day.day.daily_chance_of_rain}%
                           </div>
                           <img
-                            className="ml-4"
+                            className="ml-2"
                             src={`https:${day.day.condition.icon}`}
                             alt={day.day.condition.text}
                             loading="lazy"
                             width={32}
                             height={32}
                           />
-                          <div className="text-white text-xs ml-4">
+                          <div className="text-white text-xs ml-2">
                             {day.day.condition.text}
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-white text-xs">
+                          <span className="text-white text-xs text-center">
                             Min {day.day.mintemp_c}°C
                           </span>
                           <span className="text-white text-xs">-</span>
-                          <span className="text-white text-xs">
+                          <span className="text-white text-xs text-center">
                             Max {day.day.maxtemp_c}°C
                           </span>
                         </div>
