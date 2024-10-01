@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from "@nextui-org/react";
 import InputModal from '../components/dashboard/InputModal';
 import DashBoardCard from '../components/dashboard/DashBoardCard';
 import { useRouter } from 'next/navigation';
 
-const Dashboard = ({dashboardName, device}) => {
+const Dashboard = ({ dashboardName, device }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [dashboards, setDashboards] = useState([]);
     const router = useRouter();
@@ -14,15 +14,26 @@ const Dashboard = ({dashboardName, device}) => {
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
 
+    // Load dashboards from localStorage on component mount
+    useEffect(() => {
+        const storedDashboards = JSON.parse(localStorage.getItem('dashboards'));
+        if (storedDashboards) {
+            setDashboards(storedDashboards);
+        }
+    }, []);
+
     const handleSave = (device, dashboardName) => {
-       
         const newDashboard = {
-            img: "/images/default-dashboard.png", 
+            img: "/images/default-dashboard.png",
             name: dashboardName,
             deviceName: device,
         };
 
-        setDashboards((prevDashboards) => [...prevDashboards, newDashboard]);
+        const updatedDashboards = [...dashboards, newDashboard];
+        setDashboards(updatedDashboards);
+
+        // Save the updated dashboards to localStorage
+        localStorage.setItem('dashboards', JSON.stringify(updatedDashboards));
 
         handleClose();
     };
@@ -34,12 +45,12 @@ const Dashboard = ({dashboardName, device}) => {
 
                 {/* Render all dashboards */}
                 {dashboards.map((dashboard, index) => (
-                    <DashBoardCard 
+                    <DashBoardCard
                         key={index}
-                        img={dashboard.img} 
-                        name={dashboard.name} 
+                        img={dashboard.img}
+                        name={dashboard.name}
                         deviceName={dashboard.deviceName}
-                        onClick={() => router.push(`/dashboard/${dashboard.deviceName}`)} 
+                        onClick={() => router.push(`/dashboard/${dashboard.deviceName}`)}
                     />
                 ))}
 
@@ -54,15 +65,14 @@ const Dashboard = ({dashboardName, device}) => {
                         <p className="text-lg text-white/80 transition-colors duration-300 hover:text-white">Add Field Dashboard</p>
                     </div>
                 </Card>
-            
 
-            <InputModal 
-            isOpen={isOpen} 
-            onOpenChange={setIsOpen} 
-            onClose={handleClose}
-            dashboardTitle="Create a Dashboard" 
-            onSave={handleSave} 
-            />
+                <InputModal
+                    isOpen={isOpen}
+                    onOpenChange={setIsOpen}
+                    onClose={handleClose}
+                    dashboardTitle="Create a Dashboard"
+                    onSave={handleSave}
+                />
             </div>
         </div>
     );
