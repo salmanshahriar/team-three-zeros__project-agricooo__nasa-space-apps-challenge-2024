@@ -36,6 +36,7 @@ const StepForm = () => {
         phoneNumber: ''
     });
     const [warning, setWarning] = useState('');
+    const [errorMessage, setErrorMessage] = useState(''); // To display API errors
     const router = useRouter(); // For navigation
 
     const handleChange = (e) => {
@@ -59,14 +60,19 @@ const StepForm = () => {
                     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/createAccount`, formValues);
                     const { accessToken, apiToken } = response.data;
 
-                    // Save credentials in localStorage
-                    localStorage.setItem('accessToken', accessToken);
-                    localStorage.setItem('apiToken', apiToken);
+                    if (accessToken && apiToken) {
+                        // Save credentials in localStorage
+                        localStorage.setItem('accessToken', accessToken);
+                        localStorage.setItem('apiToken', apiToken);
 
-                    // Redirect to the homepage
-                    router.push('/');
+                        // Redirect to the homepage
+                        router.push('/');
+                    } else {
+                        throw new Error("Invalid response from server");
+                    }
                 } catch (error) {
                     console.error('Error during authentication:', error.response ? error.response.data : error.message);
+                    setErrorMessage('Failed to authenticate. Please try again.');
                 }
             } else {
                 setStep(step + 1);
@@ -107,7 +113,7 @@ const StepForm = () => {
                             required 
                             className='w-80 mt-2'
                         />
-                        {warning && <p className="text-red-500">{warning}</p>} {/* Replaced Text component with <p> */}
+                        {warning && <p className="text-red-500">{warning}</p>}
                         <div className='mt-4 w-80 flex'>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.fullName}>Next</Button>
                         </div>
@@ -127,7 +133,7 @@ const StepForm = () => {
                             required
                             className='w-80 mt-2'
                         />
-                        {warning && <p className="text-red-500">{warning}</p>} {/* Replaced Text component with <p> */}
+                        {warning && <p className="text-red-500">{warning}</p>}
                         <div className='mt-4 w-80 flex'>
                             <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.email}>Next</Button>
@@ -147,13 +153,14 @@ const StepForm = () => {
                             required
                             className='w-80 mt-2'
                         />
-                        {warning && <p className="text-red-500">{warning}</p>} {/* Replaced Text component with <p> */}
+                        {warning && <p className="text-red-500">{warning}</p>}
                         <div className='mt-4 w-80 flex'>
                             <Button className='mr-2' onClick={handleBack} color="primary">Back</Button>
                             <Button onClick={handleNext} color="primary" disabled={!formValues.phoneNumber}>Submit</Button>
                         </div>
                     </>
                 )}
+                {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
             </div>
         </div>
     );

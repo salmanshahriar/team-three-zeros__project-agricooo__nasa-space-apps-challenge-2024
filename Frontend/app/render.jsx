@@ -1,4 +1,4 @@
-"use client"; // Keep this here to ensure Render is a Client Component
+"use client"; // Ensure this component is a Client Component
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
@@ -9,10 +9,12 @@ const Render = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
+    // Only run this on the client side
     const checkAuthentication = () => {
       const accessToken = localStorage.getItem("accessToken");
       const apiToken = localStorage.getItem("apiToken");
 
+      // Check if both tokens are present, else mark as not authenticated
       if (accessToken && apiToken) {
         setIsAuthenticated(true);
       } else {
@@ -24,13 +26,13 @@ const Render = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated !== null) {
-      if (!isAuthenticated) {
-        router.push("/auth");
-      }
+    // Redirect to auth page if not authenticated
+    if (isAuthenticated === false) {
+      router.push("/auth");
     }
   }, [isAuthenticated, router]);
 
+  // Show loading spinner while checking authentication
   if (isAuthenticated === null) {
     return (
       <div className="main-bg flex justify-center items-center min-h-screen">
@@ -39,10 +41,12 @@ const Render = ({ children }) => {
     );
   }
 
+  // If authenticated, render children
   if (isAuthenticated) {
     return <>{children}</>;
   }
 
+  // If not authenticated, return null since we handle redirection above
   return null;
 };
 
