@@ -290,7 +290,88 @@ const DroughtWarningChart = () => {
   );
 };
 
-
+  const AiWarningAndRecommendations = () => {
+    return (
+      <> 
+        {/* Warnings Section */}
+        <div className="p-4 text-white bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full mb-4">
+          <div className="flex items-center justify-center gap-2">
+            <div>
+              <i className="bx bx-error text-lg text-yellow-400"></i>
+            </div>
+            <div className="font-bold text-lg">Warnings</div>
+          </div>
+          <div className="text-white/85 mb-6 font-medium text-center">
+            Potential issues that require attention
+          </div>
+  
+          <div className='flex flex-col gap-3'>
+            <div className="flex gap-2 mb-3 justify-between">
+              <div className="bg-red-400 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4">
+                Warning
+              </div>
+              <div className="text-sm font-medium w-3/4">
+                Potential pest infestation detected in soybean crops.
+              </div>
+            </div>
+  
+            <div className="flex gap-2 mb-3 justify-between">
+              <div className="bg-red-400 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4">
+                Warning
+              </div>
+              <div className="text-sm font-medium w-3/4">
+                Soil pH levels in Field E are below the optimal range for current crops.
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        {/* Recommendations Section */}
+        <div className="p-4 text-white bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full mb-4">
+          <div className="flex items-center justify-center gap-2">
+            <div>
+              <i className="bx bx-like text-lg text-blue-400"></i>
+            </div>
+            <div className="font-bold text-lg">Recommendations</div>
+          </div>
+          <div className="text-white/85 mb-6 font-medium text-center">
+            Suggestions to improve conditions
+          </div>
+  
+          <div className='flex flex-col gap-3'>
+            
+            <div className="flex gap-2 mb-3">
+              <div className="bg-white text-black/75 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4 text-center">
+                Rec 1
+              </div>
+              <div className="text-sm font-medium w-3/4">
+                Apply pest control measures in soybean crops.
+              </div>
+            </div>
+  
+            <div className="flex gap-2 mb-3">
+              <div className="bg-white text-black/75 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4 text-center">
+                Rec 2
+              </div>
+              <div className="text-sm font-medium w-3/4">
+                Adjust soil pH levels in Field E to improve crop health.
+              </div>
+            </div>
+  
+            <div className="flex gap-2 mb-3">
+              <div className="bg-white text-black/75 p-1 px-2 rounded-xl h-full text-xs font-semibold w-1/4 text-center">
+                Rec 3
+              </div>
+              <div className="text-sm font-medium w-3/4">
+                Implement soil treatment to raise pH levels in Field E.
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+  
 
 
 const NaturalDisasterRisks = () => {
@@ -523,10 +604,16 @@ function Weather() {
         </h1>
 
         <div className="mx-auto w-full max-w-3xl space-y-4 ">
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
+          <h1 className="text-white/90 mb-2 font-sans font-bold">Ai Analyze Suggestions:</h1>
+          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow flex flex-col items-center space-y-4">
+          <AiWarningAndRecommendations/>
+         
+          </div>
+        </div>
+        
         <NaturalDisasterRisks/>
           
-
-
           {/* Main Weather Card */}
           <div className="relative w-full">
             {weatherData && (

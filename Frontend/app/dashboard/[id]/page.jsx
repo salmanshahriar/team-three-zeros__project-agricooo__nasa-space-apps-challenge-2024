@@ -2,145 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CardContent, CardDescription, CardHeader, CardTitle, Tabs, Tab, Card, CardBody, Switch, Accordion, AccordionItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure  } from '@nextui-org/react';
-import { AlertTriangle, ThumbsUp, Zap, AlertOctagon } from "lucide-react";
+import { Link, CardContent, CardDescription, CardHeader, CardTitle, Tabs, Tab, Card, CardBody, Switch, Accordion, AccordionItem, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure  } from '@nextui-org/react';
 
-
-// const simulateAIAnalysis = () => {
-//   return {
-//     recommendations: [
-//       "Increase irrigation in Field A by 15% due to dry soil conditions",
-//       "Apply nitrogen-rich fertilizer to corn crops in Field C within the next 7 days",
-//       "Consider crop rotation for Field B in the next planting season to improve soil health"
-//     ],
-//     warnings: [
-//       "Potential pest infestation detected in soybean crops (Field D)",
-//       "Soil pH levels in Field E are below optimal range for current crops"
-//     ],
-//     priorities: [
-//       "Harvest wheat in Field F within the next 5 days to prevent over-ripening",
-//       "Repair irrigation system in Field G to prevent crop stress"
-//     ],
-//     urgentActions: [
-//       "Immediate action required: Fungal disease detected in tomato plants (Greenhouse 2)",
-//       "Critical: Weather forecast indicates frost risk tonight - protect vulnerable crops"
-//     ]
-//   }
-// };
-
-// const AIAnalysis = () => {
-//   const [analysisData, setAnalysisData] = useState(null);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const data = await new Promise(resolve => setTimeout(() => resolve(simulateAIAnalysis()), 1500));
-//       setAnalysisData(data);
-//     };
-//     fetchData();
-//   }, []);
-
-//   if (!analysisData) {
-//     return <div className="flex justify-center items-center h-64">Loading analysis...</div>;
-//   }
-
-//   return (
-//     <div className="space-y-6">
-//       <h1 className="text-3xl font-bold">AI Farming Analysis</h1>
-
-//       {/* Recommendations Card */}
-//       <Card>
-//         <CardHeader>
-//           <CardTitle className="flex items-center gap-2">
-//             <ThumbsUp className="h-6 w-6 text-green-500" />
-//             Recommendations
-//           </CardTitle>
-//           <CardDescription>Actions to optimize your farm's performance</CardDescription>
-//         </CardHeader>
-//         <CardBody>
-//           <ScrollArea style={{ height: '200px' }}>
-//             <ul className="space-y-2">
-//               {analysisData.recommendations.map((rec, index) => (
-//                 <li key={index} className="flex items-start gap-2">
-//                   <Badge variant="outline" className="mt-1 shrink-0">Rec {index + 1}</Badge>
-//                   <span>{rec}</span>
-//                 </li>
-//               ))}
-//             </ul>
-//           </ScrollArea>
-//         </CardBody>
-//       </Card>
-
-//       {/* Warnings Card */}
-//       <Card>
-//         <CardHeader>
-//           <CardTitle className="flex items-center gap-2">
-//             <AlertTriangle className="h-6 w-6 text-yellow-500" />
-//             Warnings
-//           </CardTitle>
-//           <CardDescription>Potential issues that require attention</CardDescription>
-//         </CardHeader>
-//         <CardBody>
-//           <ScrollArea style={{ height: '150px' }}>
-//             <ul className="space-y-2">
-//               {analysisData.warnings.map((warning, index) => (
-//                 <li key={index} className="flex items-start gap-2">
-//                   <Badge variant="destructive" className="mt-1 shrink-0">Warning</Badge>
-//                   <span>{warning}</span>
-//                 </li>
-//               ))}
-//             </ul>
-//           </ScrollArea>
-//         </CardBody>
-//       </Card>
-
-//       {/* Priorities Card */}
-//       <Card>
-//         <CardHeader>
-//           <CardTitle className="flex items-center gap-2">
-//             <Zap className="h-6 w-6 text-blue-500" />
-//             Priority Actions
-//           </CardTitle>
-//           <CardDescription>Tasks that should be addressed soon</CardDescription>
-//         </CardHeader>
-//         <CardBody>
-//           <ScrollArea style={{ height: '150px' }}>
-//             <ul className="space-y-2">
-//               {analysisData.priorities.map((priority, index) => (
-//                 <li key={index} className="flex items-start gap-2">
-//                   <Badge variant="secondary" className="mt-1 shrink-0">Priority</Badge>
-//                   <span>{priority}</span>
-//                 </li>
-//               ))}
-//             </ul>
-//           </ScrollArea>
-//         </CardBody>
-//       </Card>
-
-//       {/* Urgent Actions Card */}
-//       <Card>
-//         <CardHeader>
-//           <CardTitle className="flex items-center gap-2">
-//             <AlertOctagon className="h-6 w-6 text-red-500" />
-//             Urgent Implementations
-//           </CardTitle>
-//           <CardDescription>Critical actions requiring immediate attention</CardDescription>
-//         </CardHeader>
-//         <CardBody>
-//           <ScrollArea style={{ height: '150px' }}>
-//             <ul className="space-y-2">
-//               {analysisData.urgentActions.map((action, index) => (
-//                 <li key={index} className="flex items-start gap-2">
-//                   <Badge variant="destructive" className="mt-1 shrink-0">URGENT</Badge>
-//                   <span className="font-semibold">{action}</span>
-//                 </li>
-//               ))}
-//             </ul>
-//           </ScrollArea>
-//         </CardBody>
-//       </Card>
-//     </div>
-//   );
-// };
 
 const soilMonitoringSensors = {
   soil_moisture: {
@@ -554,7 +417,7 @@ const SensorDisplay = ({ sensors }) => {
 const DashboardInfo = ({  }) => {
   return (
     <>
-        <div className='text-white space-y-3 bg-gray-800/20 rounded-lg shadow-lg mx-2 py-3 mb-4'>
+        <div className='text-white space-y-3 bg-gray-800/15 rounded-lg shadow-lg mx-2 py-3 mb-4'>
           <div className=''>
             <h2 className='font-bold text-center text-md'>Soil Monitoring Sensors:</h2>
             <SensorDisplay sensors={soilMonitoringSensors} />
@@ -581,6 +444,90 @@ const DashboardInfo = ({  }) => {
     </>
   );
 };
+
+// AiAnalyzeCard component
+const AiAnalyzeCard = () => {
+  return (
+    <> 
+      {/* Warnings Section */}
+      <div className="p-4 text-white bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full mb-4">
+        <div className="flex items-center justify-center gap-2">
+          <div>
+            <i className="bx bx-error text-lg text-yellow-400"></i>
+          </div>
+          <div className="font-bold text-lg">Warnings</div>
+        </div>
+        <div className="text-white/85 mb-6 font-medium text-center">
+          Potential issues that require attention
+        </div>
+
+        <div className='flex flex-col gap-3'>
+          <div className="flex gap-2 mb-3 justify-between">
+            <div className="bg-red-400 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4">
+              Warning
+            </div>
+            <div className="text-sm font-medium w-3/4">
+              Potential pest infestation detected in soybean crops.
+            </div>
+          </div>
+
+          <div className="flex gap-2 mb-3 justify-between">
+            <div className="bg-red-400 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4">
+              Warning
+            </div>
+            <div className="text-sm font-medium w-3/4">
+              Soil pH levels in Field E are below the optimal range for current crops.
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      {/* Recommendations Section */}
+      <div className="p-4 text-white bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full mb-4">
+        <div className="flex items-center justify-center gap-2">
+          <div>
+            <i className="bx bx-like text-lg text-blue-400"></i>
+          </div>
+          <div className="font-bold text-lg">Recommendations</div>
+        </div>
+        <div className="text-white/85 mb-6 font-medium text-center">
+          Suggestions to improve conditions
+        </div>
+
+        <div className='flex flex-col gap-3'>
+          
+          <div className="flex gap-2 mb-3">
+            <div className="bg-white text-black/75 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4 text-center">
+              Rec 1
+            </div>
+            <div className="text-sm font-medium w-3/4">
+              Apply pest control measures in soybean crops.
+            </div>
+          </div>
+
+          <div className="flex gap-2 mb-3">
+            <div className="bg-white text-black/75 p-1 mt-0.5 px-2 rounded-xl h-full text-xs font-semibold w-1/4 text-center">
+              Rec 2
+            </div>
+            <div className="text-sm font-medium w-3/4">
+              Adjust soil pH levels in Field E to improve crop health.
+            </div>
+          </div>
+
+          <div className="flex gap-2 mb-3">
+            <div className="bg-white text-black/75 p-1 px-2 rounded-xl h-full text-xs font-semibold w-1/4 text-center">
+              Rec 3
+            </div>
+            <div className="text-sm font-medium w-3/4">
+              Implement soil treatment to raise pH levels in Field E.
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 
 // CircularProgressBar component
 const CircularProgressBar = ({ mainValue, suggestedMin, suggestedMax, define }) => {
@@ -650,7 +597,7 @@ const VisualizationCard = ({
   return (
     <>
       <div
-        className="relative h-[220px] bg-white/10 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 w-full max-w-3xl rounded-lg shadow-lg flex flex-col items-center cursor-pointer"
+        className="relative h-[220px] bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full flex flex-col items-center cursor-pointer"
         onClick={onOpen}
       >
         <CircularProgressBar mainValue={mainValue} define={define} />
@@ -659,7 +606,7 @@ const VisualizationCard = ({
       </div>
 
       <Modal 
-          className='bg-white/30 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 text-white text-sm m-2' 
+          className='bg-white/50 bg-gradient-to-r from-blue-500/60 to-purple-500/40 backdrop-blur-xl border border-blue-400/80 text-white text-sm m-2' 
           isOpen={isOpen} 
           onOpenChange={onOpenChange} 
           placement="center"
@@ -703,10 +650,11 @@ const VisualizationCard = ({
                           <CircularProgressBar mainValue={connectionType === "disconnected" ? "--" : mainValue} define={define} />
                         </div>
                       </div>
-                      <p><strong>{connectionType === "disconnected" ? "" : warningTitle}</strong></p>
+                      <p><strong className='text-red-400'>{connectionType === "disconnected" ? "" : warningTitle}</strong></p>
                       <p>{connectionType === "disconnected" ? "" : warningDescription}</p>
-                      <p><strong>Recommended Action:</strong> {connectionType === "disconnected" ? "" : recommendedAction}</p>
+                      <p><strong className='text-green-400'>Recommended Action:</strong> {connectionType === "disconnected" ? "" : recommendedAction}</p>
                       <p>{connectionType === "disconnected" ? "" : recommendedActionDescription}</p>
+                      <p className='bg-blue-400 w-60 text-center rounded-md p-1'>Learn more with Ai Assistant chat</p>
                     </ModalBody>
                     <ModalFooter>
                       <Button color="danger" variant="light" onPress={onClose}>
@@ -726,36 +674,8 @@ const VisualizationCard = ({
   );
 };
 
-// AiAnalyzeCard component
-const defaultContent =
-  "When soil moisture is below optimal, irrigate your crops, monitor moisture levels, use mulch to retain water, optimize irrigation schedules, and check for system leaks..";
 
-const AiAnalyzeCard = ({ title, percentage, alertMessage }) => {
-  return (
-    <>
-      {percentage <= 40 && (
-        <div className="w-full max-w-md sm:w-80 md:w-[450px] text-white text-sm rounded-lg shadow-xl">
-          <div className="text-center font-bold border border-gray-100 drop-shadow-md rounded-t-lg p-2 text-md bg-default-200/35 backdrop-blur-xl backdrop-saturate-200">
-            {title}
-          </div>
-          <div className="border border-t-0 border-gray-100 rounded-b-lg bg-white/10 ">
-            <Accordion
-              bordered
-              className="w-full "
-            >
-              <AccordionItem
-                
-                title={<div className='text-center w-64'><span className="text-red-300 text-center text-sm -mr-7 md:-mr-44 ">{alertMessage}</span></div>}
-              >
-                <p className="p-4">{defaultContent}</p>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
+
   
 // UtilizationCard component
 const UtilizationCard = ({ title }) => {
@@ -766,7 +686,7 @@ const UtilizationCard = ({ title }) => {
   };
 
   return (
-    <Card className="w-full max-w-3xl relative border border-gray-100 bg-white/10  rounded-lg shadow-lg py-7 px-5 mb-4 flex flex-row justify-between items-center">
+    <Card className="w-full max-w-3xl relative border bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full py-7 px-5 mb-4 flex flex-row justify-between items-center">
       <div>
         <h2 className="text-white text-md font-semibold">{title}</h2>
       </div>
@@ -785,7 +705,7 @@ const Profile = () => {
   const router = useRouter(); 
 
   const handleBackClick = () => {
-    router.push('/dashboard'); 
+    router.push('/dashboard');
   };
   return (
     <div className="min-h-screen flex flex-col justify-start h-screen	overflow-y-scroll">
@@ -799,17 +719,16 @@ const Profile = () => {
             Ground-1 / <span className="text-white/50">Device-1</span>
           </h1>
         </div>
-      
         
         <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
           <h1 className="text-white/90 mb-2 font-sans font-bold">Sensors:</h1>
-          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg shadow-xl flex flex-col items-center space-y-4">
+          <div className="bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full flex flex-col items-center space-y-4">
            
              <Accordion
               bordered
               className="w-full "
             >
-          <AccordionItem title={<div className='text-center '><span className="text-white font-bold text-center text-md -mr-7 md:-mr-44 ">Dashboard Info</span></div>}>
+          <AccordionItem title={<div className='text-center'><span className="text-white font-bold text-center text-md -mr-7 md:-mr-44 ">Dashboard Info</span></div>}>
             <DashboardInfo/>
           </AccordionItem>
         
@@ -817,16 +736,21 @@ const Profile = () => {
           </div>
         </div>
        
+        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
+          <h1 className="text-white/90 mb-2 font-sans font-bold">Ai Analyze Weather Suggestions:</h1>
+          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow flex flex-col items-center space-y-4">
+            <AiAnalyzeCard/>
+         
+          </div>
+        </div>
 
-
-        
         <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
           <h1 className="text-white/90 mb-2 font-sans font-bold">Visualization Data:</h1>
           <div className="flex w-full flex-col">
               <Tabs aria-label="Options" color="primary" className=''>
 
                 <Tab key="soil" title="Soil" className=''>
-                  <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
                   <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Soil Sensors</h1>
                   <div className="grid grid-cols-2 gap-4 ">
                   {Object.values(soilMonitoringSensors).map((sensor, index) => (
@@ -850,7 +774,7 @@ const Profile = () => {
                   </Card>  
                 </Tab>
                 <Tab key="weatherAndEnvironmentalSensors" title="Environmental" className=''>
-                  <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
                   <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Weather And Environmental Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(weatherAndEnvironmentalSensors).map((sensor, index) => (
@@ -874,7 +798,7 @@ const Profile = () => {
                   </Card>  
                 </Tab>
                 <Tab key="waterManagementSensors" title="Water" className=''>
-                  <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
                   <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Water Management Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(waterManagementSensors).map((sensor, index) => (
@@ -898,7 +822,7 @@ const Profile = () => {
                   </Card>  
                 </Tab>
                 <Tab key="airQualityAndPollutionSensors" title="Air" className=''>
-                  <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
                   <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Air Quality And Pollution Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(airQualityAndPollutionSensors).map((sensor, index) => (
@@ -922,7 +846,7 @@ const Profile = () => {
                   </Card>  
                 </Tab>
                 <Tab key="plantHealthMonitoringSensors" title="Plant Health" className=''>
-                  <Card className=' rounded-xl bg-white/5 p-2 -mx-1'>
+                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
                   <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Plant Health Monitoring Sensors</h1>
                   <div className="grid grid-cols-2 gap-4">
                   {Object.values(plantHealthMonitoringSensors).map((sensor, index) => (
@@ -943,35 +867,17 @@ const Profile = () => {
                     />
                   ))}
                   </div>
-                  </Card>  
+                  </Card>
                 </Tab>
-              
               </Tabs>
             </div>
-        </div>
-
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
-          <h1 className="text-white/90 mb-2 font-sans font-bold">Ai Analyze Suggestions:</h1>
-          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg shadow-xl flex flex-col items-center space-y-4">
-            <AiAnalyzeCard
-              title="Soil Moisture Analysis"
-              percentage={30}
-              alertMessage="Soil Moisture is below optimal level"
-            />
-            <AiAnalyzeCard
-              title="Humidity Analysis"
-              percentage={30}
-              alertMessage="Humidity is high optimal level"
-            />
-            
-          </div>
         </div>
        
         <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
           <h1 className="text-white/90 mb-2 font-sans font-bold">System Utilization:</h1>
-          <div className="w-full max-w-3xl bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 pt-4 px-4 rounded-lg shadow-xl flex flex-col items-center">
-            <UtilizationCard title="AI Water System" />
-            <UtilizationCard title="AI Lights System" />
+          <div className="w-full max-w-3xl bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1 pt-4 px-4 flex flex-col items-center">
+            <UtilizationCard title="Auto Water Control" />
+            <UtilizationCard title="Auto Lights Control" />
           </div>
         </div>
       </div>

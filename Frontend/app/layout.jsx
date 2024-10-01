@@ -9,8 +9,6 @@ import "./globals.css";
 import 'boxicons/css/boxicons.min.css';
 import { NextUIProvider } from "@nextui-org/react";
 
-
-
 export default function RootLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const router = useRouter();
@@ -53,8 +51,6 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Agricooo" />
-        <link rel="apple-touch-startup-image" href="/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
-        <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
       </Head>
       <body className="main-bg">
