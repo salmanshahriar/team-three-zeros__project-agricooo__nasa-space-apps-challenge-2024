@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Input, Button, Progress } from "@nextui-org/react";
-import { useRouter } from 'next/navigation'; // For redirecting
+import { useRouter } from 'next/navigation';  
 
 const AuthWelcome = ({ onNext }) => {
     return (
@@ -36,8 +36,8 @@ const StepForm = () => {
         phoneNumber: ''
     });
     const [warning, setWarning] = useState('');
-    const [errorMessage, setErrorMessage] = useState(''); // To display API errors
-    const router = useRouter(); // For navigation
+    const [errorMessage, setErrorMessage] = useState('');
+    const router = useRouter(); 
 
     const handleChange = (e) => {
         setFormValues({
@@ -55,19 +55,16 @@ const StepForm = () => {
             setWarning('');
             if (step === 3) {
                 try {
-                    // Submit form on the last step
                     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/createAccount`, formValues);
     
-                    console.log('API response:', response.data); // Log the API response for debugging
+                    console.log('API response:', response.data);
     
                     const { accessToken, apiToken } = response.data;
     
                     if (accessToken && apiToken) {
-                        // Save credentials in localStorage
                         localStorage.setItem('accessToken', accessToken);
                         localStorage.setItem('apiToken', apiToken);
     
-                        // Redirect to the homepage
                         router.push('/');
                     } else {
                         throw new Error("Invalid response from server");
@@ -87,7 +84,7 @@ const StepForm = () => {
         setStep(step - 1);
     };
 
-    const progress = (step / 3) * 100; // Adjust the progress calculation
+    const progress = (step / 3) * 100;
 
     return (
         <div className='min-h-screen relative z-50 flex flex-col justify-center items-center h-screen overflow-y-scroll'>

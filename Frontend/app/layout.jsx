@@ -19,10 +19,10 @@ export default function RootLayout({ children }) {
       </head>
       <body className="main-bg">
         <NextUIProvider>
-          <Render>
+          {/* <Render> */}
             <Navbar />
             {children}
-          </Render>
+          {/* </Render> */}
         </NextUIProvider>
       </body>
     </html>

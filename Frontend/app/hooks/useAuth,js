@@ -5,21 +5,24 @@ import { useRouter } from "next/router";
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null); // To manage login errors
   const router = useRouter();
 
   useEffect(() => {
     const checkCredentials = () => {
+      setIsLoading(true); // Start loading
+
       const accessToken = localStorage.getItem("accessToken");
       const apiToken = localStorage.getItem("apiToken");
 
-      // Check if both tokens exist
       if (accessToken && apiToken) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
-        router.push("/auth");
+        router.push("/auth"); // Redirect to /auth if tokens are missing
       }
-      setIsLoading(false); // Moved this here to ensure it's set after the checks
+
+      setIsLoading(false); // Stop loading once check is complete
     };
 
     checkCredentials();
@@ -27,18 +30,22 @@ const useAuth = () => {
 
   const login = async (userData) => {
     try {
-      // Use the API URL from the environment variable
+      setIsLoading(true); // Start loading
+      setError(null); // Reset error state
+
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/createAccount`, userData);
       const { accessToken, apiToken } = response.data;
 
-      // Save tokens to localStorage
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("apiToken", apiToken);
 
       setIsAuthenticated(true);
-      router.push("/"); // Redirect to the homepage after login
+      router.push("/"); // Redirect to homepage on successful login
     } catch (error) {
       console.error("Login failed", error);
+      setError("Login failed. Please try again."); // Set error message
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
 
@@ -46,10 +53,10 @@ const useAuth = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("apiToken");
     setIsAuthenticated(false);
-    router.push("/auth"); // Redirect to the auth page after logout
+    router.push("/auth"); // Redirect to /auth on logout
   };
 
-  return { isAuthenticated, isLoading, login, logout };
+  return { isAuthenticated, isLoading, login, logout, error };
 };
 
 export default useAuth;

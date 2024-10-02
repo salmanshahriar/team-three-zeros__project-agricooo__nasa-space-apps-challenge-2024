@@ -11,28 +11,26 @@ const AiAssistantChat = () => {
     const [image, setImage] = useState(null);
     const [accessToken, setAccessToken] = useState('');
     const [apiToken, setApiToken] = useState('');
-    const [chatId, setChatId] = useState(''); // Initialize chatId here
+    const [chatId, setChatId] = useState('');
 
-    // Retrieve tokens and initialize chatId from localStorage when the component mounts
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         const apiToken = localStorage.getItem('apiToken');
-        const chatId = localStorage.getItem('chatId'); // Optional: can set it dynamically
+        const chatId = localStorage.getItem('chatId'); 
 
         if (token) setAccessToken(token);
         if (apiToken) setApiToken(apiToken);
         if (chatId) setChatId(chatId);
-        else setChatId('default-chat-id'); // Fallback for chatId if not in localStorage
+        else setChatId('default-chat-id'); 
     }, []);
 
     const handleSend = async () => {
-        if (!input.trim()) return; // Prevent empty inputs
+        if (!input.trim()) return; 
 
         const userMessage = { text: input, isUser: true };
         setMessages(prevMessages => [...prevMessages, userMessage]);
         setInput('');
 
-        // Ensure tokens and chatId are available before making API call
         if (!accessToken || !apiToken || !chatId) {
             setMessages(prevMessages => [
                 ...prevMessages,
@@ -41,7 +39,6 @@ const AiAssistantChat = () => {
             return;
         }
 
-        // Make an API request with accessToken and apiToken
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/chatWithAi`, {
                 prompt: input,
@@ -50,13 +47,11 @@ const AiAssistantChat = () => {
                 apiToken: apiToken,
             });
 
-            // Handle API response and remove any HTML tags from the response message
             const rawAiMessage = response.data.replyStr || "Sorry, I didn't understand that.";
             const tempDiv = document.createElement("div");
             tempDiv.innerHTML = rawAiMessage;
             const aiMessage = tempDiv.innerText;
 
-            // Update the messages with AI's response
             setMessages(prevMessages => [
                 ...prevMessages,
                 { text: aiMessage, isUser: false }

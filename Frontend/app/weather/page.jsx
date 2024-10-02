@@ -15,10 +15,8 @@ import {
   Legend,
 } from 'chart.js';
 
-// Register the chart components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// fakeFloodData
 const fakeFloodData = [
   { date: 'Oct-2023', twsa: 20, floodLevel: 'Severe' },
   { date: 'Nov-2023', twsa: 18, floodLevel: 'Severe' },
@@ -34,7 +32,6 @@ const fakeFloodData = [
   { date: 'Sep-2024', twsa: 10, floodLevel: 'Severe' },
 ];
 
-// Function to determine flood level based on TWSA
 const getFloodLevel = (twsa) => {
   if (twsa >= 10) return 'Severe';
   if (twsa >= 5) return 'Moderate';
@@ -44,13 +41,13 @@ const getFloodLevel = (twsa) => {
 // Generate future data for 1 year (12 months)
 const generateFutureFloodData = () => {
   const futureData = [];
-  const startDate = new Date('2024-10-01'); // Start from October 2024
-  for (let i = 0; i < 12; i++) { // Generate data for 12 months (1 year)
+  const startDate = new Date('2024-10-01'); 
+  for (let i = 0; i < 12; i++) { 
     const date = new Date(startDate);
     date.setMonth(startDate.getMonth() + i);
     const month = date.toLocaleString('default', { month: 'short' });
     const year = date.getFullYear();
-    const twsa = Math.floor(Math.random() * 20); // Random value between 0 and 20
+    const twsa = Math.floor(Math.random() * 20); 
     const floodLevel = getFloodLevel(twsa);
     futureData.push({ date: `${month}-${year}`, twsa, floodLevel });
   }
@@ -59,13 +56,12 @@ const generateFutureFloodData = () => {
 
 const FloodRiskChart = () => {
   const [floodData, setFloodData] = useState([]);
-  const futureFloodData = generateFutureFloodData(); // Generate future data
+  const futureFloodData = generateFutureFloodData(); 
 
   useEffect(() => {
     setFloodData(fakeFloodData);
   }, []);
 
-  // Prepare data for the historical chart
   const historicalFloodChartData = {
     labels: floodData.map((item) => item.date),
     datasets: [
@@ -80,7 +76,6 @@ const FloodRiskChart = () => {
     ],
   };
 
-  // Prepare data for the future chart
   const futureFloodChartData = {
     labels: futureFloodData.map((item) => item.date),
     datasets: [
@@ -97,7 +92,7 @@ const FloodRiskChart = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // Allow the chart to take full width and height
+    maintainAspectRatio: false, 
     scales: {
       x: {
         ticks: {
@@ -108,11 +103,11 @@ const FloodRiskChart = () => {
         },
       },
       y: {
-        min: 0, // Set the minimum value for the y-axis
-        max: 50, // Set the maximum value for the y-axis
+        min: 0, 
+        max: 50, 
         ticks: {
           color: 'white',
-          stepSize: 5, // Set the step size for the ticks
+          stepSize: 5,
         },
         grid: {
           color: 'rgba(255, 255, 255, 0.5)',
@@ -139,12 +134,12 @@ const FloodRiskChart = () => {
 
       <Tabs aria-label="Options" color="primary">
         <Tab key="Present" title="Present data">
-          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+          <div className="h-64 w-full mt-4"> 
             <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={historicalFloodChartData} options={options} />
           </div>
         </Tab>
         <Tab key="future" title="Future data">
-          <div className="h-64 w-full mt-4"> {/* Adjust the height as needed */}
+          <div className="h-64 w-full mt-4"> 
             <Line className="bg-gray-800/15 p-2 rounded-md w-full h-80" data={futureFloodChartData} options={options} />
           </div>
         </Tab>

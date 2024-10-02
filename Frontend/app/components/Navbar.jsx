@@ -10,10 +10,8 @@ function Navbar() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
-  // Hide Navbar for specific route (like /auth)
-  const isAuthPage = pathname === '/auth';  // Adjust this route according to your StepForm route
-
-  // Handle menu item click and update active index
+  const isAuthPage = pathname === '/auth'; 
+  
   const handleMenuClick = (index) => {
     setActiveIndex(index);
   };
@@ -42,9 +40,8 @@ function Navbar() {
     }
   }, [activeIndex]);
 
-  // Hide Navbar using conditional rendering based on route
   if (isAuthPage) {
-    return null;  // No Navbar on /auth page
+    return null; 
   }
 
   return (
