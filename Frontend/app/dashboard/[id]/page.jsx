@@ -531,7 +531,7 @@ const AiAnalyzeCard = () => {
 
 // CircularProgressBar component
 const CircularProgressBar = ({ mainValue, suggestedMin, suggestedMax, define }) => {
-  const radius = 83;
+  const radius = 80;
   const stroke = 13;
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -709,7 +709,7 @@ const Profile = () => {
   };
   return (
     <div className="min-h-screen flex flex-col justify-start h-screen	overflow-y-scroll">
-      <div className="mx-auto w-full max-w-3xl p-6 pt-2">
+      <div className="mx-auto w-full p-6 pt-2">
         <div className="relative">
           <div onClick={handleBackClick} className="absolute cursor-pointer text-white hover:bg-white/10 hover:rounded mt-0.5 left-0 md:left-[105px] flex items-center justify-center ">
             <i className="bx bx-chevron-left mt-0.5 text-xl"></i>
@@ -720,166 +720,275 @@ const Profile = () => {
           </h1>
         </div>
         
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
-          <h1 className="text-white/90 mb-2 font-sans font-bold">Sensors:</h1>
-          <div className="bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full flex flex-col items-center space-y-4">
-           
-             <Accordion
-              bordered
-              className="w-full "
-            >
-          <AccordionItem title={<div className='text-center'><span className="text-white font-bold text-center text-md -mr-7 md:-mr-44 ">Dashboard Info</span></div>}>
-            <DashboardInfo/>
-          </AccordionItem>
-        
-        </Accordion>
-          </div>
-        </div>
-       
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
-          <h1 className="text-white/90 mb-2 font-sans font-bold">Ai Analyze Weather Suggestions:</h1>
-          <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow flex flex-col items-center space-y-4">
-            <AiAnalyzeCard/>
-         
-          </div>
-        </div>
+      <div className='lg:flex lg:justify-around lg:items-start'>
+      <div className='lg:w-9/10 lg:justify-center hidden lg:flex lg:flex-col gap-10 '>
+        <Card className='bg-white/0  shadow-none -mx-1 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow'>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-9 gap-10">
+            {Object.values(soilMonitoringSensors).map((sensor, index) => (
+              <VisualizationCard
+                key={index}
+                title={sensor.title}
+                connectionType={sensor.connection_type}
+                mainValue={sensor.value}
+                define={sensor.define}
+                lastUpdated={sensor.last_updated}
+                alertLevel={sensor.alert_level}
+                suggestedMin={sensor.suggested_range_min}
+                suggestedMax={sensor.suggested_range_max}
+                warningTitle={sensor.warning_title}
+                warningDescription={sensor.warning_description}
+                recommendedAction={sensor.recommended_action}
+                recommendedActionDescription={sensor.recommended_action_description}
+                className="lg:w-full"
+              />
+            ))}
 
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-6">
-          <h1 className="text-white/90 mb-2 font-sans font-bold">Visualization Data:</h1>
-          <div className="flex w-full flex-col">
-              <Tabs aria-label="Options" color="primary" className=''>
+            {Object.values(weatherAndEnvironmentalSensors).map((sensor, index) => (
+              <VisualizationCard
+                key={index}
+                title={sensor.title}
+                connectionType={sensor.connection_type}
+                mainValue={sensor.value}
+                define={sensor.define}
+                lastUpdated={sensor.last_updated}
+                alertLevel={sensor.alert_level}
+                suggestedMin={sensor.suggested_range_min}
+                suggestedMax={sensor.suggested_range_max}
+                warningTitle={sensor.warning_title}
+                warningDescription={sensor.warning_description}
+                recommendedAction={sensor.recommended_action}
+                recommendedActionDescription={sensor.recommended_action_description}
+                className="lg:w-full"
+              />
+            ))}
 
-                <Tab key="soil" title="Soil" className=''>
-                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
-                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Soil Sensors</h1>
-                  <div className="grid grid-cols-2 gap-4 ">
-                  {Object.values(soilMonitoringSensors).map((sensor, index) => (
-                    <VisualizationCard
-                      key={index}
-                      title={sensor.title}
-                      connectionType={sensor.connection_type}
-                      mainValue={sensor.value}
-                      define={sensor.define}
-                      lastUpdated={sensor.last_updated}
-                      alertLevel={sensor.alert_level}
-                      suggestedMin={sensor.suggested_range_min}
-                      suggestedMax={sensor.suggested_range_max}
-                      warningTitle={sensor.warning_title}
-                      warningDescription={sensor.warning_description}
-                      recommendedAction={sensor.recommended_action}
-                      recommendedActionDescription={sensor.recommended_action_description}
-                    />
-                  ))}
-                  </div>
-                  </Card>  
-                </Tab>
-                <Tab key="weatherAndEnvironmentalSensors" title="Environmental" className=''>
-                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
-                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Weather And Environmental Sensors</h1>
-                  <div className="grid grid-cols-2 gap-4">
-                  {Object.values(weatherAndEnvironmentalSensors).map((sensor, index) => (
-                    <VisualizationCard
-                      key={index}
-                      title={sensor.title}
-                      connectionType={sensor.connection_type}
-                      mainValue={sensor.value}
-                      define={sensor.define}
-                      lastUpdated={sensor.last_updated}
-                      alertLevel={sensor.alert_level}
-                      suggestedMin={sensor.suggested_range_min}
-                      suggestedMax={sensor.suggested_range_max}
-                      warningTitle={sensor.warning_title}
-                      warningDescription={sensor.warning_description}
-                      recommendedAction={sensor.recommended_action}
-                      recommendedActionDescription={sensor.recommended_action_description}
-                    />
-                  ))}
-                  </div>
-                  </Card>  
-                </Tab>
-                <Tab key="waterManagementSensors" title="Water" className=''>
-                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
-                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Water Management Sensors</h1>
-                  <div className="grid grid-cols-2 gap-4">
-                  {Object.values(waterManagementSensors).map((sensor, index) => (
-                    <VisualizationCard
-                      key={index}
-                      title={sensor.title}
-                      connectionType={sensor.connection_type}
-                      mainValue={sensor.value}
-                      define={sensor.define}
-                      lastUpdated={sensor.last_updated}
-                      alertLevel={sensor.alert_level}
-                      suggestedMin={sensor.suggested_range_min}
-                      suggestedMax={sensor.suggested_range_max}
-                      warningTitle={sensor.warning_title}
-                      warningDescription={sensor.warning_description}
-                      recommendedAction={sensor.recommended_action}
-                      recommendedActionDescription={sensor.recommended_action_description}
-                    />
-                  ))}
-                  </div>
-                  </Card>  
-                </Tab>
-                <Tab key="airQualityAndPollutionSensors" title="Air" className=''>
-                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
-                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Air Quality And Pollution Sensors</h1>
-                  <div className="grid grid-cols-2 gap-4">
-                  {Object.values(airQualityAndPollutionSensors).map((sensor, index) => (
-                    <VisualizationCard
-                      key={index}
-                      title={sensor.title}
-                      connectionType={sensor.connection_type}
-                      mainValue={sensor.value}
-                      define={sensor.define}
-                      lastUpdated={sensor.last_updated}
-                      alertLevel={sensor.alert_level}
-                      suggestedMin={sensor.suggested_range_min}
-                      suggestedMax={sensor.suggested_range_max}
-                      warningTitle={sensor.warning_title}
-                      warningDescription={sensor.warning_description}
-                      recommendedAction={sensor.recommended_action}
-                      recommendedActionDescription={sensor.recommended_action_description}
-                    />
-                  ))}
-                  </div>
-                  </Card>  
-                </Tab>
-                <Tab key="plantHealthMonitoringSensors" title="Plant Health" className=''>
-                  <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
-                  <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Plant Health Monitoring Sensors</h1>
-                  <div className="grid grid-cols-2 gap-4">
-                  {Object.values(plantHealthMonitoringSensors).map((sensor, index) => (
-                    <VisualizationCard
-                      key={index}
-                      title={sensor.title}
-                      connectionType={sensor.connection_type}
-                      mainValue={sensor.value}
-                      define={sensor.define}
-                      lastUpdated={sensor.last_updated}
-                      alertLevel={sensor.alert_level}
-                      suggestedMin={sensor.suggested_range_min}
-                      suggestedMax={sensor.suggested_range_max}
-                      warningTitle={sensor.warning_title}
-                      warningDescription={sensor.warning_description}
-                      recommendedAction={sensor.recommended_action}
-                      recommendedActionDescription={sensor.recommended_action_description}
-                    />
-                  ))}
-                  </div>
-                  </Card>
-                </Tab>
-              </Tabs>
+            {Object.values(waterManagementSensors).map((sensor, index) => (
+              <VisualizationCard
+                key={index}
+                title={sensor.title}
+                connectionType={sensor.connection_type}
+                mainValue={sensor.value}
+                define={sensor.define}
+                lastUpdated={sensor.last_updated}
+                alertLevel={sensor.alert_level}
+                suggestedMin={sensor.suggested_range_min}
+                suggestedMax={sensor.suggested_range_max}
+                warningTitle={sensor.warning_title}
+                warningDescription={sensor.warning_description}
+                recommendedAction={sensor.recommended_action}
+                recommendedActionDescription={sensor.recommended_action_description}
+                className="lg:w-full"
+              />
+            ))}
+
+            {Object.values(airQualityAndPollutionSensors).map((sensor, index) => (
+              <VisualizationCard
+                key={index}
+                title={sensor.title}
+                connectionType={sensor.connection_type}
+                mainValue={sensor.value}
+                define={sensor.define}
+                lastUpdated={sensor.last_updated}
+                alertLevel={sensor.alert_level}
+                suggestedMin={sensor.suggested_range_min}
+                suggestedMax={sensor.suggested_range_max}
+                warningTitle={sensor.warning_title}
+                warningDescription={sensor.warning_description}
+                recommendedAction={sensor.recommended_action}
+                recommendedActionDescription={sensor.recommended_action_description}
+                className="lg:w-full"
+              />
+            ))}
+
+            {Object.values(plantHealthMonitoringSensors).map((sensor, index) => (
+              <VisualizationCard
+                key={index}
+                title={sensor.title}
+                connectionType={sensor.connection_type}
+                mainValue={sensor.value}
+                define={sensor.define}
+                lastUpdated={sensor.last_updated}
+                alertLevel={sensor.alert_level}
+                suggestedMin={sensor.suggested_range_min}
+                suggestedMax={sensor.suggested_range_max}
+                warningTitle={sensor.warning_title}
+                warningDescription={sensor.warning_description}
+                recommendedAction={sensor.recommended_action}
+                recommendedActionDescription={sensor.recommended_action_description}
+                className="lg:w-full"
+              />
+            ))}
+          </div>
+        </Card>
+      </div>
+
+
+        <div className='lg:flex lg:flex-col lg:w-96 '>
+          <div className="mx-auto sm:w-80 md:w-[500px] lg:w-96 mb-6 ">
+            <h1 className="text-white/90 mb-2 font-sans font-bold lg:hidden">Sensors:</h1>
+            <div className="lg:hidden bg-gradient-to-r from-blue-500/80 to-purple-400/60 backdrop-blur-xl border border-blue-400/80 custom-shadow rounded-lg w-full flex flex-col items-center space-y-4">
+             
+               <Accordion
+                bordered
+                className="w-full "
+              >
+            <AccordionItem title={<div className='text-center'><span className="text-white font-bold text-center text-md -mr-7 md:-mr-44 ">Dashboard Info</span></div>}>
+              <DashboardInfo/>
+            </AccordionItem>
+          
+          </Accordion>
             </div>
-        </div>
-       
-        <div className="mx-auto sm:w-80 md:w-[500px] mb-32 ">
-          <h1 className="text-white/90 mb-2 font-sans font-bold">System Utilization:</h1>
-          <div className="w-full max-w-3xl bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1 pt-4 px-4 flex flex-col items-center">
-            <UtilizationCard title="Auto Water Control" />
-            <UtilizationCard title="Auto Lights Control" />
+          </div>
+         
+          <div className="mx-auto sm:w-80 md:w-[500px] lg:w-96 mb-6 lg:-mt-6">
+            <h1 className="text-white/90 mb-2 font-sans font-bold lg:hidden">Ai Analyze Weather Suggestions:</h1>
+            <div className="bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow flex flex-col items-center space-y-4">
+              <AiAnalyzeCard/>
+           
+            </div>
+          </div>
+  
+          <div className="mx-auto sm:w-80 md:w-[500px] mb-6 lg:hidden">
+            <h1 className="text-white/90 mb-2 font-sans font-bold">Visualization Data:</h1>
+            <div className="flex w-full flex-col">
+                <Tabs aria-label="Options" color="primary" className=''>
+  
+                  <Tab key="soil" title="Soil" className=''>
+                    <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
+                    <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Soil Sensors</h1>
+                    <div className="grid grid-cols-2 gap-5">
+                    {Object.values(soilMonitoringSensors).map((sensor, index) => (
+                      <VisualizationCard
+                        key={index}
+                        title={sensor.title}
+                        connectionType={sensor.connection_type}
+                        mainValue={sensor.value}
+                        define={sensor.define}
+                        lastUpdated={sensor.last_updated}
+                        alertLevel={sensor.alert_level}
+                        suggestedMin={sensor.suggested_range_min}
+                        suggestedMax={sensor.suggested_range_max}
+                        warningTitle={sensor.warning_title}
+                        warningDescription={sensor.warning_description}
+                        recommendedAction={sensor.recommended_action}
+                        recommendedActionDescription={sensor.recommended_action_description}
+                      />
+                    ))}
+                    </div>
+                    </Card>  
+                  </Tab>
+                  <Tab key="weatherAndEnvironmentalSensors" title="Environmental" className=''>
+                    <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
+                    <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Weather And Environmental Sensors</h1>
+                    <div className="grid grid-cols-2 gap-4">
+                    {Object.values(weatherAndEnvironmentalSensors).map((sensor, index) => (
+                      <VisualizationCard
+                        key={index}
+                        title={sensor.title}
+                        connectionType={sensor.connection_type}
+                        mainValue={sensor.value}
+                        define={sensor.define}
+                        lastUpdated={sensor.last_updated}
+                        alertLevel={sensor.alert_level}
+                        suggestedMin={sensor.suggested_range_min}
+                        suggestedMax={sensor.suggested_range_max}
+                        warningTitle={sensor.warning_title}
+                        warningDescription={sensor.warning_description}
+                        recommendedAction={sensor.recommended_action}
+                        recommendedActionDescription={sensor.recommended_action_description}
+                      />
+                    ))}
+                    </div>
+                    </Card>  
+                  </Tab>
+                  <Tab key="waterManagementSensors" title="Water" className=''>
+                    <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
+                    <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Water Management Sensors</h1>
+                    <div className="grid grid-cols-2 gap-4">
+                    {Object.values(waterManagementSensors).map((sensor, index) => (
+                      <VisualizationCard
+                        key={index}
+                        title={sensor.title}
+                        connectionType={sensor.connection_type}
+                        mainValue={sensor.value}
+                        define={sensor.define}
+                        lastUpdated={sensor.last_updated}
+                        alertLevel={sensor.alert_level}
+                        suggestedMin={sensor.suggested_range_min}
+                        suggestedMax={sensor.suggested_range_max}
+                        warningTitle={sensor.warning_title}
+                        warningDescription={sensor.warning_description}
+                        recommendedAction={sensor.recommended_action}
+                        recommendedActionDescription={sensor.recommended_action_description}
+                      />
+                    ))}
+                    </div>
+                    </Card>  
+                  </Tab>
+                  <Tab key="airQualityAndPollutionSensors" title="Air" className=''>
+                    <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
+                    <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Air Quality And Pollution Sensors</h1>
+                    <div className="grid grid-cols-2 gap-4">
+                    {Object.values(airQualityAndPollutionSensors).map((sensor, index) => (
+                      <VisualizationCard
+                        key={index}
+                        title={sensor.title}
+                        connectionType={sensor.connection_type}
+                        mainValue={sensor.value}
+                        define={sensor.define}
+                        lastUpdated={sensor.last_updated}
+                        alertLevel={sensor.alert_level}
+                        suggestedMin={sensor.suggested_range_min}
+                        suggestedMax={sensor.suggested_range_max}
+                        warningTitle={sensor.warning_title}
+                        warningDescription={sensor.warning_description}
+                        recommendedAction={sensor.recommended_action}
+                        recommendedActionDescription={sensor.recommended_action_description}
+                      />
+                    ))}
+                    </div>
+                    </Card>  
+                  </Tab>
+                  <Tab key="plantHealthMonitoringSensors" title="Plant Health" className=''>
+                    <Card className='bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1'>
+                    <h1 className="text-white/90 mb-3 font-sans font-medium text-center">Plant Health Monitoring Sensors</h1>
+                    <div className="grid grid-cols-2 gap-4">
+                    {Object.values(plantHealthMonitoringSensors).map((sensor, index) => (
+                      <VisualizationCard
+                        key={index}
+                        title={sensor.title}
+                        connectionType={sensor.connection_type}
+                        mainValue={sensor.value}
+                        define={sensor.define}
+                        lastUpdated={sensor.last_updated}
+                        alertLevel={sensor.alert_level}
+                        suggestedMin={sensor.suggested_range_min}
+                        suggestedMax={sensor.suggested_range_max}
+                        warningTitle={sensor.warning_title}
+                        warningDescription={sensor.warning_description}
+                        recommendedAction={sensor.recommended_action}
+                        recommendedActionDescription={sensor.recommended_action_description}
+                      />
+                    ))}
+                    </div>
+                    </Card>
+                  </Tab>
+                </Tabs>
+              </div>
+          </div>
+         
+          <div className="mx-auto sm:w-80 md:w-[500px] lg:w-96 mb-32 lg:hidden">
+            <h1 className="text-white/90 mb-2 font-sans font-bold">System Utilization:</h1>
+            <div className="w-full max-w-3xl bg-white/0 bg-gradient-to-r from-blue-500/40 to-purple-500/20 backdrop-blur-xl border border-blue-400/80 p-4 rounded-lg custom-shadow -mx-1 pt-4 px-4 flex flex-col items-center">
+              <UtilizationCard title="Auto Water Control" />
+              <UtilizationCard title="Auto Lights Control" />
+            </div>
           </div>
         </div>
+
+      </div>
+
+
       </div>
     </div>
   );
