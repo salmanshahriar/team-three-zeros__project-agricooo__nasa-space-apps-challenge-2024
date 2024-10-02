@@ -47,7 +47,6 @@ const StepForm = () => {
     };
 
     const handleNext = async () => {
-        // Check required fields based on step
         if ((step === 1 && !formValues.fullName) ||
             (step === 2 && !formValues.email) ||
             (step === 3 && !formValues.phoneNumber)) {
@@ -58,13 +57,16 @@ const StepForm = () => {
                 try {
                     // Submit form on the last step
                     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/createAccount`, formValues);
+    
+                    console.log('API response:', response.data); // Log the API response for debugging
+    
                     const { accessToken, apiToken } = response.data;
-
+    
                     if (accessToken && apiToken) {
                         // Save credentials in localStorage
                         localStorage.setItem('accessToken', accessToken);
                         localStorage.setItem('apiToken', apiToken);
-
+    
                         // Redirect to the homepage
                         router.push('/');
                     } else {
@@ -79,6 +81,7 @@ const StepForm = () => {
             }
         }
     };
+    
 
     const handleBack = () => {
         setStep(step - 1);

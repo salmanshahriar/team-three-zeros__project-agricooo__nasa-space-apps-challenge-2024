@@ -9,13 +9,15 @@ const Render = ({ children }) => {
 
   useEffect(() => {
     const checkAuthentication = () => {
-      const accessToken = localStorage.getItem("accessToken");
-      const apiToken = localStorage.getItem("apiToken");
+      if (typeof window !== "undefined") {  
+        const accessToken = localStorage.getItem("accessToken");
+        const apiToken = localStorage.getItem("apiToken");
 
-      if (accessToken && apiToken) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
+        if (accessToken && apiToken) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
       }
     };
 

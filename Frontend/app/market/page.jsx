@@ -185,70 +185,72 @@ const Market = () => {
         <Tab key="topSelling" title="Top Selling">
         <div className="gap-4 grid sm:grid-cols-1 md:grid-cols-2 mt-3">
           {list.map((item, index) => (
-             <Card
-             key={index}
-             className="bg-white/20 backdrop-blur-md border border-gray-300 shadow-xl w-full"
-             isPressable
-             onPress={() => console.log("item pressed")}
-           >
-             <CardBody className="p-3">
-               
-               <Image
-                 shadow="sm"
-                 width="100%"
-                 alt={item.title}
-                 className="object-cover h-[140px]"
-                 src={item.img}
-               />
+            <Card
+            key={index}
+            className="bg-white/20 backdrop-blur-md border border-gray-300 shadow-xl w-full"
+            isPressable
+            onPress={() => console.log("item pressed")}
+          >
+            <CardBody className="p-3">
+              
+              <Image
+                shadow="sm"
+                width="100%"
+                alt={item.title}
+                className="object-cover h-[140px]"
+                src={item.img}
+              />
+              <div>
               <div className="flex justify-between items-center">
-                      <User
-                        name={item.sellerName}
-                        description="Verified Seller"
-                        avatarProps={{
-                          src: "https://www.gravatar.com/avatar/?d=mp",
-                          size: "xs",
-                        }}
-                        className="my-3"
-                        classNames={{
-                          name: "text-white",
-                          description: "text-yellow-400 text-xs",
-                        }}
-                      />
-                      <div className="flex flex-col ">
-                        <div className="text-yellow-300 flex space-x-1 ml-1.5 justify-end w-28" >
-                          {[...Array(item.rating)].map((_, i) => (
-                            <svg
-                              key={i}
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="currentColor"
-                              viewBox="0 0 16 16"
-                              className="h-4 w-4"
-                            >
-                              <path d="M3.612 15.443c-.396.198-.773-.149-.697-.592l.83-4.73L.173 6.765c-.329-.32-.158-.888.283-.95l4.898-.696L7.538.792c.197-.4.73-.4.927 0l2.184 4.327 4.898.696c.441.062.612.63.283.95l-3.573 3.356.83 4.73c.076.443-.301.79-.696.592L8 13.187l-4.389 2.256z" />
-                            </svg>
-                          ))}
-                        </div>
-                        <span className="text-white/60 text-xs mt-1.5 ml-1.5 text-end w-28">{item.stock} in stock</span>
-                        </div>
-                      
-               <p className="text-white/80 text-sm">
-                 {item.shortDescription || "No description available"}
-               </p>
-               </div>
-             </CardBody>
-             <CardFooter className="justify-between w-full py-2">
-              <div className="flex justify-between items-center w-full">
-                <div className="flex flex-col">
-                  <b className="text-white truncate text-start">{item.title}</b>
-                  <p className="text-white/80 text-sm text-start">{item.price}</p>
+              <User
+                name={item.sellerName}
+                description="Verified Seller"
+                avatarProps={{
+                  src: "https://www.gravatar.com/avatar/?d=mp",
+                  size: "xs",
+                }}
+                className="my-3"
+                classNames={{
+                  name: "text-white",
+                  description: "text-yellow-400 text-xs",
+                }}
+              />
+              <div className="flex flex-col ">
+                <div className="text-yellow-300 flex space-x-1 ml-1.5 justify-end w-28" >
+                  {[...Array(item.rating)].map((_, i) => (
+                    <svg
+                      key={i}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                      className="h-4 w-4"
+                    >
+                      <path d="M3.612 15.443c-.396.198-.773-.149-.697-.592l.83-4.73L.173 6.765c-.329-.32-.158-.888.283-.95l4.898-.696L7.538.792c.197-.4.73-.4.927 0l2.184 4.327 4.898.696c.441.062.612.63.283.95l-3.573 3.356.83 4.73c.076.443-.301.79-.696.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                  ))}
                 </div>
-                <Button color="primary" className="w-28" aria-label={`Buy ${item.title}`}>
-                  Buy
-                </Button>
+                <span className="text-white/60 text-xs mt-1.5 ml-1.5 text-end w-28">{item.stock} in stock</span>
+                </div>
               </div>
-            </CardFooter>
 
-           </Card>
+              <p className="text-white/80 text-sm">
+                {item.shortDescription || "No description available"}
+              </p>
+              </div>
+            </CardBody>
+            <CardFooter className="justify-between w-full py-2">
+            <div className="flex justify-between items-center w-full">
+              <div className="flex flex-col">
+                <b className="text-white truncate text-start">{item.title}</b>
+                <p className="text-white/80 text-sm text-start">{item.price}</p>
+              </div>
+              <Button color="primary" className="w-28" aria-label={`Buy ${item.title}`}>
+                Buy
+              </Button>
+            </div>
+          </CardFooter>
+
+          </Card>
           ))}
         </div>
         </Tab>
