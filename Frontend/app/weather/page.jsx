@@ -315,7 +315,7 @@ const DroughtWarningChart = () => {
                 Warning
               </div>
               <div className="text-sm font-medium w-3/4">
-                Soil pH levels in Field E are below the optimal range for current crops.
+                Increased cyclone risk expected; prepare for severe weather conditions.
               </div>
             </div>
           </div>
@@ -340,7 +340,7 @@ const DroughtWarningChart = () => {
                 Rec 1
               </div>
               <div className="text-sm font-medium w-3/4">
-                Apply pest control measures in soybean crops.
+                Implement flood mitigation strategies, such as constructing levees and improving drainage systems, to address the high flood risk.
               </div>
             </div>
   
@@ -349,7 +349,7 @@ const DroughtWarningChart = () => {
                 Rec 2
               </div>
               <div className="text-sm font-medium w-3/4">
-                Adjust soil pH levels in Field E to improve crop health.
+                Secure outdoor items and reinforce structures to mitigate cyclone damage.
               </div>
             </div>
   
@@ -358,7 +358,7 @@ const DroughtWarningChart = () => {
                 Rec 3
               </div>
               <div className="text-sm font-medium w-3/4">
-                Implement soil treatment to raise pH levels in Field E.
+              Clear drainage systems to minimize flood risk and prevent water accumulation.
               </div>
             </div>
           </div>
@@ -387,7 +387,7 @@ const NaturalDisasterRisks = () => {
           >
             <span className="text-white/95 font-medium">Flood Risk</span>
             <div className="flex gap-2 justify-center items-center">
-            <span className="text-blue-400 font-semibold">Moderate</span>
+            <span className="text-blue-400 font-semibold">High</span>
             <i className='bx bxs-info-circle text-white/85'></i>
             </div>
           </div>
