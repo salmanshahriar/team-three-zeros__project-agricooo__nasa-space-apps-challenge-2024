@@ -306,7 +306,7 @@ const DroughtWarningChart = () => {
                 Warning
               </div>
               <div className="text-sm font-medium w-3/4">
-                Potential pest infestation detected in soybean crops.
+               Increased cyclone risk expected; prepare for severe weather conditions.
               </div>
             </div>
   
@@ -315,7 +315,7 @@ const DroughtWarningChart = () => {
                 Warning
               </div>
               <div className="text-sm font-medium w-3/4">
-                Increased cyclone risk expected; prepare for severe weather conditions.
+                Potential flood risk in the area due to heavy rainfall.
               </div>
             </div>
           </div>
